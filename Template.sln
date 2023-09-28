@@ -28,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB.SQL", "DB.SQL", "{5833B8
 		C:\Users\amuttathu\Desktop\TemplateDB_SchemaWithData.sql = C:\Users\amuttathu\Desktop\TemplateDB_SchemaWithData.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsService", "WindowsService", "{ED7E5804-33B9-442E-9A6C-7FBDF9951962}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Systel.Notification", "Systel.Notification\Systel.Notification.csproj", "{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,10 @@ Global
 		{30B10DD1-A7AC-4384-A06A-981778869FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30B10DD1-A7AC-4384-A06A-981778869FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30B10DD1-A7AC-4384-A06A-981778869FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +77,7 @@ Global
 		{A37DC403-450C-45F6-BAC4-FC02BFB9C011} = {683D8F9A-C671-4D97-B365-F399618D13E1}
 		{DAE20111-563B-4125-B8D8-8B6C3E5A3942} = {9D92B67C-CE2D-40D7-A07B-530A7A52C9F8}
 		{30B10DD1-A7AC-4384-A06A-981778869FFD} = {81C30EAE-E8A0-4BDE-9194-A063ED4A3446}
+		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364} = {ED7E5804-33B9-442E-9A6C-7FBDF9951962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9A672EC-6F81-450D-9DDA-21713C7B26C6}
