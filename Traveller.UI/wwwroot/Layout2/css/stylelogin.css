@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap');
+
+html, body {height: 100%}
+body {font-family: 'Montserrat', sans-serif; font-size: 14px; color: #303E3D}
+.img-responsive {max-width: 100%}
+a {text-decoration: none !important}
+ul, li {list-style-type: none}
+:focus {outline: none}
+
+:root {  --dark-gray-col : #303E3D;  --amber-col : #F89C00;  --primary-col : #0A70A9;}
+.font-l {font-weight: 400 !important}
+.font-r {font-weight: 500 !important}
+.font-sb {font-weight: 600 !important}
+.font-b {font-weight: 800 !important}
+
+.btn-primary {background-color: var(--primary-col); color: white; border-color: var(--primary-col);}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {background-color: #0A70A9 !important; border-color: #0A70A9 !important;}
+
+.login_container {background: url(../images/login_bg.jpg) no-repeat top right; background-size: cover; height: 100%; position: relative;}
+.login_block {text-align: center}
+.login_block .logo {height: 70px;}
+.login_block .login_hd {font-size: 20px;}
+.login_block .forgot_pass {color: rgba(255, 255, 255, 0.50); display: block;}
+.login_block .forgot_pass:hover {color: rgba(255, 255, 255, 1);}
+

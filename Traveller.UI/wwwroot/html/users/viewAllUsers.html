@@ -47,68 +47,70 @@
 
         <div id="userCreationForm" style="display:none;">
           <!-- User creation and update form -->
-          <form class="form-row">
+            <form class="form-row">
 
-            <div class="col-md-6 d-flex flex-column">
-              <label for="profilePic" class="label font-sb mb-1">Profile Picture</label>
-              <img id="previewImg" class="mb-2" style="width: 150px" alt="">
-              <input type="text" class="form-control" id="profileImagePath" style="display: none;">
-              <input type="file" id="profilePic">
-            </div>
+                <div class="col-md-6 d-flex flex-column">
+                    <label for="profilePic" class="label font-sb mb-1">Profile Picture</label>
+                    <img id="previewImg" class="mb-2" style="width: 150px" alt="">
+                    <input type="text" class="form-control" id="profileImagePath" style="display: none;">
+                    <input type="file" id="profilePic">
+                </div>
 
-            <div style="display: none;">
-              <input type="number" id="UserID">
-            </div>
+                <div style="display: none;">
+                    <input type="number" id="UserID">
+                </div>
 
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="UserFirstname" class="label font-sb mb-1">Firstname</label>
-                <input type="text" class="form-control" onchange="UserMaster.previewName()" id="UserFirstname">
-              </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="UserFirstname" class="label font-sb mb-1">Firstname</label>
+                        <input type="text" class="form-control" onchange="UserMaster.previewName()" id="UserFirstname">
+                    </div>
 
-              <div class="mb-3">
-                <label for="UserMiddlename" class="label font-sb mb-1">Middlename</label>
-                <input type="text" class="form-control" onchange="UserMaster.previewName()" id="UserMiddlename">
-              </div>
+                    <div class="mb-3">
+                        <label for="UserMiddlename" class="label font-sb mb-1">Middlename</label>
+                        <input type="text" class="form-control" onchange="UserMaster.previewName()" id="UserMiddlename">
+                    </div>
 
-              <div class="mb-3">
-                <label for="UserLastname" class="label font-sb mb-1">Lastname</label>
-                <input type="text" class="form-control" onchange="UserMaster.previewName()" id="UserLastname">
-              </div>
-            </div>
+                    <div class="mb-3">
+                        <label for="UserLastname" class="label font-sb mb-1">Lastname</label>
+                        <input type="text" class="form-control" onchange="UserMaster.previewName()" id="UserLastname">
+                    </div>
+                </div>
 
-            <div class="col-md-6">
-              <label for="UserEmail" class="label font-sb mb-1">Email address</label>
-              <input type="email" class="form-control" id="UserEmail">
-            </div>
-
-
-            <div class="col-md-6 mb-3">
-              <label for="UserMobile" class="label font-sb mb-1">Mobile</label>
-              <input type="number" class="form-control" id="UserMobile">
-            </div>
+                <div class="col-md-6">
+                    <label for="UserEmail" class="label font-sb mb-1">Email address</label>
+                    <input type="email" class="form-control" id="UserEmail">
+                </div>
 
 
+                <div class="col-md-6 mb-3">
+                    <label for="UserMobile" class="label font-sb mb-1">Mobile</label>
+                    <input type="number" class="form-control" id="UserMobile">
+                </div>
 
-            <div class="col-md-6 mb-3">
-              <label for="UserDOB" class="label font-sb mb-1">DOB</label>
-              <input type="date" class="form-control" id="UserDOB">
-            </div>
 
-            <div class="col-md-6">
-              <label for="UserDesignation" class="label font-sb mb-1">Designation</label>
-              <select class="form-control" name="UserDesignation" id="UserDesignation">
-                <option value="User">User</option>
-                <option value="Supervisor">Supervisor</option>
-                <option value="Admin">Admin</option>
-            </div>
 
-            <div class="col-md-6">
-              <input type="checkbox" name="isActive" id="isUserActive">
-              <label for="isUserActive" class="label font-sb mb-1">IsActive</label>
-            </div>
+                <div class="col-md-6 mb-3">
+                    <label for="UserDOB" class="label font-sb mb-1">DOB</label>
+                    <input type="date" class="form-control" id="UserDOB">
+                </div>
 
-          </form>
+                <div class="col-md-6">
+                    <label for="UserDesignation" class="label font-sb mb-1">Designation</label>
+                    <select class="form-control" name="UserDesignation" id="UserDesignation">
+                        <option value="User">User</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Admin">Admin</option>
+                </div>
+
+            
+
+                <div class="col-md-6">
+                    <input type="checkbox" name="isActive" id="isUserActive">
+                    <label for="isUserActive" class="label font-sb mb-1">IsActive</label>
+                </div>
+
+            </form>
           <!-- User creation and update form ends -->
           <hr>
 
