@@ -1,30 +1,32 @@
-﻿using Application.DTOs.PushNotification;
-using Application.Interfaces;
-using Application.Interfaces.PushNotification;
-using Infrastructure.Persistance.Services.PushNotification;
-using Systel.Notification.Common;
+﻿using Systel.Notification.Common;
 using System.Net.Mail;
 using System.Net;
-using System.Data.SqlClient;
 using System.Data;
-using Infrastructure;
-using Dapper;
-using System.Text.RegularExpressions;
-using System.IO;
-using CrystalDecisions.CrystalReports;
 using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
-using CrystalDecisions.Web;
-using CrystalDecisions.Windows.Forms;
+using Systel.Notification.Model;
+using Systel.Notification.Interface;
+using Systel.Notification.Service;
 
-namespace Systel.Notification
+namespace Systel.Notification.BAL
 {
-    public class PushNotification 
+    public class PushNotification
     {
         protected readonly EncryptDecryptService encryptDecryptService = new EncryptDecryptService();
         private EmailConfigurationList _emailConfig;
 
-        
+        private readonly ILogger<PushNotification> _logger;
+        private readonly WorkerOptions options;
+        private readonly IPushNotification pushNotification;
+        private readonly IEmailConfiguration emailConfiguration;
+        public PushNotification(ILogger<PushNotification> logger, WorkerOptions options, IPushNotification pushNotification, IEmailConfiguration emailConfiguration)
+        {
+            _logger = logger;
+            this.options = options;
+            this.pushNotification = pushNotification;
+            this.emailConfiguration = emailConfiguration;
+        }
+
+
         public void ProcessNotification()
         {
 
@@ -32,7 +34,7 @@ namespace Systel.Notification
             //string EncPwd = encryptDecryptService.EncryptValue("wpuk oulb fbck cowl");
 
             //Get configuration details to send respective type of notification
-            
+
             GetConfiguration();
 
             //Get Notification List
@@ -48,12 +50,12 @@ namespace Systel.Notification
         }
         public void GetConfiguration()
         {
-            
+
 
             EncryptDecryptService encryptDecryptService = new EncryptDecryptService();
 
             //Get Email Configuration 
-            IEmailConfiguration emailConfiguration = new EmailConfigurationService();
+            //IEmailConfiguration emailConfiguration = new EmailConfigurationService(,options);
             _emailConfig = emailConfiguration.GetEmailConfigDetails();
 
             foreach (EmailConfigurationDTO emailConfigurationDTO in _emailConfig.EmailConfigList)
@@ -64,7 +66,7 @@ namespace Systel.Notification
         }
         public PushNotificationList GetNotificationList(PushNotificationList pushNotificationList)
         {
-            IPushNotification pushNotification = new PushNotificationService();
+            //IPushNotification pushNotification = new PushNotificationService();
             pushNotificationList = pushNotification.GetPushNotifications();
             return pushNotificationList;
         }
@@ -139,7 +141,7 @@ namespace Systel.Notification
                 typNotificationMaster.Rows.Add(newRow);
             }
 
-            IPushNotification pushNotification = new PushNotificationService();
+            //IPushNotification pushNotification = new PushNotificationService();
             pushNotification.UpdatePushNotifications(typNotificationMaster);
         }
 

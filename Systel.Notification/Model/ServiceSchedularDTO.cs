@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs.PushNotification
+namespace Systel.Notification.Model
 {
-    public class ServiceMasterDTO
+    public class ServiceSchedularDTO
     {
+        public int MapperId { get; set; }
         public int ServiceId { get; set; }
-        public string IName { get; set; }
-        public string ICode { get; set; }
-        public string IDesc { get; set; }
-        public int DataFetchType { get; set; }
-        public string DataFetchProcess { get; set; }
+        public int SchedularId { get; set; }
+        public DateTime LastExecutionTime { get; set; }
+        public DateTime NextExecutionTime { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public string CreatedBy { get; set; }
@@ -23,9 +22,8 @@ namespace Application.DTOs.PushNotification
         public int ActionUser { get; set; }
 
     }
-    public class ServiceMasterList
+    public class ServiceSchedularList
     {
-        public IEnumerable<ServiceMasterDTO> ServicemasterList { get; set; }
+        public IEnumerable<ServiceSchedularDTO> ServiceschedularList { get; set; }
     }
-
 }

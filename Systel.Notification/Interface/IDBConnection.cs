@@ -1,11 +1,11 @@
-﻿using Application.DTOs.PushNotification;
+﻿using Systel.Notification.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces.PushNotification
+namespace Systel.Notification.Interface
 {
     public interface IDBConnection
     {

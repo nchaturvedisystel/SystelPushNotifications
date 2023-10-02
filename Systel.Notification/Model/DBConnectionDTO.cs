@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs.PushNotification
+namespace Systel.Notification.Model
 {
     public class DBConnectionDTO
     {
@@ -27,5 +27,4 @@ namespace Application.DTOs.PushNotification
     {
         public IEnumerable<DBConnectionDTO> DBConnList { get; set; }
     }
-
 }

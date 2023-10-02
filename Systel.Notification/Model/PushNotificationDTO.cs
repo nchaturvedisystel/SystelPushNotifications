@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs.PushNotification
+namespace Systel.Notification.Model
 {
-   
     public class PushNotificationDTO
     {
 
@@ -22,7 +21,7 @@ namespace Application.DTOs.PushNotification
         public int IsDeleted { get; set; }
         public string Remarks { get; set; }
         public DateTime ScheduledDate { get; set; }
-        public string AttachmentPath { get; set;}
+        public string AttachmentPath { get; set; }
 
     }
 
@@ -30,5 +29,4 @@ namespace Application.DTOs.PushNotification
     {
         public IEnumerable<PushNotificationDTO> NotificationList { get; set; }
     }
-
 }
