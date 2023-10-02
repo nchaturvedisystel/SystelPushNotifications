@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Amazon.S3.Model;
+using Systel.Notification.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,18 +12,32 @@ namespace Systel.Notification.Model
     public class ServiceMasterDTO
     {
         public int ServiceId { get; set; }
-        public string IName { get; set; }
-        public string ICode { get; set; }
-        public string IDesc { get; set; }
-        public int DataFetchType { get; set; }
-        public string DataFetchProcess { get; set; }
-        public int IsActive { get; set; }
-        public int IsDeleted { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime ModifiedOn { get; set; }
-        public int ActionUser { get; set; }
+        public string Title { get; set; }
+        public string SDesc { get; set; }
+        public string AlertType { get; set; }
+        public int HasAttachment { get; set; }
+        public string AttachmentType { get; set; }
+        public string AttachmentPath { get; set; }
+        public string DataSourceType { get; set; }
+        public string DataSourceDef { get; set; }
+        public string PostSendDataSourceType { get; set; }
+        public string PostSendDataSourceDef { get; set; }
+        public string EmailTo { get; set; }
+        public string CCTo { get; set; }
+        public string BccTo { get; set; }
+        public string ASubject { get; set; }
+        public string ABody { get; set; }
+        public int MappperId { get; set; }
+        public int SchedularId { get; set; }
+        public int FrequencyInMinutes { get; set; }
+        public string SchedularType { get; set; }
+        public int DBConnId { get; set; }
+        public string ConnName { get; set; }
+        public string ServerName { get; set; }
+        public string UserName { get; set; }
+        public string Passwrd { get; set; }
+        public string DBName { get; set; }
+        public string ServiceVariables { get; set; }
 
     }
     public class ServiceMasterList
