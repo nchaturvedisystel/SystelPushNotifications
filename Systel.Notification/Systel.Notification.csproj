@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure.Persistance\Infrastructure.Persistance.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DAL\" />
-  </ItemGroup>
 </Project>
