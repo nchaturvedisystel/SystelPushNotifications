@@ -18,6 +18,7 @@ namespace Systel.Notification.Model
         public int HasAttachment { get; set; }
         public string AttachmentType { get; set; }
         public string AttachmentPath { get; set; }
+        public string AttachmentFileType { get; set; }
         public string DataSourceType { get; set; }
         public string DataSourceDef { get; set; }
         public string PostSendDataSourceType { get; set; }

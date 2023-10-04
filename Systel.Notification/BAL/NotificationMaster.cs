@@ -1,13 +1,9 @@
 ﻿using Amazon.Runtime.Internal.Transform;
+using CrystalDecisions.CrystalReports.Engine;
 using Systel.Notification.Common;
 using Systel.Notification.Interface;
 using Systel.Notification.Model;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Systel.Notification.BAL
 {
@@ -92,6 +88,13 @@ namespace Systel.Notification.BAL
                 pushNotificationDTO.Remarks = "";
                 pushNotificationDTO.ScheduledDate = DateTime.Now;
                 pushNotificationDTO.AttachmentPath = "";
+                if(serviceMasterDTO.HasAttachment == 1)
+                {
+                    if(serviceMasterDTO.AttachmentType.Trim() == "CrystalReport")
+                    {
+                        pushNotificationDTO.AttachmentPath = GenerateAttachmentGetPath(serviceMasterDTO);
+                    }
+                }
 
                 //Insert into Push Notification
             }
@@ -105,6 +108,44 @@ namespace Systel.Notification.BAL
                 Content = Content.Replace(oldValue, newValue);
             }
             return Content;
+        }
+        public string GenerateAttachmentGetPath(ServiceMasterDTO serviceMasterDTO)
+        {
+            string AttachmentPath = "";
+            if(serviceMasterDTO.AttachmentFileType == "PDF")
+            {
+                AttachmentPath = GenratePdfFromCrystalReport(serviceMasterDTO);
+            }
+            return AttachmentPath;
+        }
+        public string GenratePdfFromCrystalReport(ServiceMasterDTO serviceMasterDTO)
+        {
+            ReportDocument rpt = new ReportDocument();
+            rpt.Load(serviceMasterDTO.AttachmentPath);
+
+            DataSet dataSet = new DataSet();
+            rpt.SetDataSource(dataSet);
+            // Assign Paramters after set datasource
+            rpt.SetParameterValue("DocKey", "60241");
+
+            //ExportOptions rptExportOption;
+            //DiskFileDestinationOptions rptFileDestOption = new DiskFileDestinationOptions();
+            //PdfRtfWordFormatOptions rptFormatOption = new PdfRtfWordFormatOptions();
+            //string reportFileName = options.ServiceDocPath+ serviceMasterDTO.ServiceId + @"\SampleReport.pdf";
+            //rptFileDestOption.DiskFileName = reportFileName;
+            //rptExportOption = rpt.ExportOptions;
+            //{
+            //    rptExportOption.ExportDestinationType = ExportDestinationType.DiskFile;
+            //    //if we want to generate the report as PDF, change the ExportFormatType as "ExportFormatType.PortableDocFormat"
+            //    //if we want to generate the report as Excel, change the ExportFormatType as "ExportFormatType.Excel"
+            //    rptExportOption.ExportFormatType = ExportFormatType.PortableDocFormat;
+            //    rptExportOption.ExportDestinationOptions = rptFileDestOption;
+            //    rptExportOption.ExportFormatOptions = rptFormatOption;
+            //}
+
+            rpt.Export();
+
+            return "";
         }
     }
 }

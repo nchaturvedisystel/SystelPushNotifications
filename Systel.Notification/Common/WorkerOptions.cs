@@ -11,5 +11,6 @@ namespace Systel.Notification.Common
         public int ServiceFrequencyInMins { get; set; }
         public string AppKeyPath { get; set; }
         public string DBConn { get; set; }
+        public string ServiceDocPath { get; set; }
     }
 }
