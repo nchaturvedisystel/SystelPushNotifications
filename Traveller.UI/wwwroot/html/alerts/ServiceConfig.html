@@ -1,1 +1,216 @@
-﻿Service Configuration Page
+﻿<!--Service Configuration Page-->
+
+<div class="d-flex align-items-center justify-content-between my-3" style="border-bottom:1px solid #CDD5E9">
+    <div class="main-heading">Service Configuration List</div>
+    <button type="button" class="btn btn-primary btn-sm" onclick="Service.CreateNew()">Create New</button>
+</div>
+
+<div>
+    <table id="example" class="table table-bordered com_table" style="width: 100%;">
+        <thead>
+            <tr class="text-dark">
+                <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
+                <th scope="col">Title</th>
+                <th scope="col">AlertType</th>
+                <th scope="col">AttachmentType</th>
+                <th scope="col">Active</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="TemplateListBody">
+            <tr>
+                <td colspan="7">
+                    <font style="color:red;">No Records found..</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="ServiceModal" tabindex="-1" role="dialog" aria-labelledby="ServiceModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="min-width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ServiceModalLabel">Create New Service Configuration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Service.LoadAll()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ServiceModalBody">
+
+                <div id="ServiceCreationForm">
+
+                    <form class="form-row" >
+
+
+                        <div style="display: none;">
+                            <input type="number" id="ServiceId">
+                        </div>
+
+                        <div class="col-md-4">
+
+
+                            <div class="mb-3">
+                                <label for="Title" class="label font-sb mb-1">Title</label>
+                                <input type="text" class="form-control" id="Title">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ServiceDesc" class="label font-sb mb-1">Service Desc</label>
+                                <input type="text" class="form-control" id="ServiceDesc">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="AlertType" class="label font-sb mb-1">AlertType</label>
+                                <input type="text" class="form-control" o id="AlertType">
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="checkbox" name="isActive" id="HasAttachment">
+                                <label for="HasAttachment" class="label font-sb mb-1">HasAttachment</label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="AttachmentType" class="label font-sb mb-1">AttachmentType</label>
+                                <input type="text" class="form-control" o id="AttachmentType">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="AttachmentPath" class="label font-sb mb-1">AttachmentPath</label>
+                                <input type="text" class="form-control" o id="AttachmentPath">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="AttachmentFileType" class="label font-sb mb-1">AttachmentFileType</label>
+                                <input type="text" class="form-control" o id="AttachmentFileType">
+                            </div>
+                            <div class="mb-3">
+                                <label for="OutputFileName" class="label font-sb mb-1">OutputFileName</label>
+                                <input type="text" class="form-control" o id="OutputFileName">
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-4">
+
+
+
+
+                            <div class="mb-3">
+                                <label for="DataSourceType" class="label font-sb mb-1">DataSourceType</label>
+                                <input type="text" class="form-control" o id="DataSourceType">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="DataSourceDef" class="label font-sb mb-1">DataSourceDef</label>
+                                <!--<input type="text" class="form-control" o id="DataSourceDef">-->
+                                <textarea id="DataSourceDef" class="form-control" name="DataSourceDef" rows="5" cols="60" style="resize:none"></textarea>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="PostSendDataSourceType" class="label font-sb mb-1">PostSendDataSourceType</label>
+                                <input type="text" class="form-control" o id="PostSendDataSourceType">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="PostSendDataSourceDef" class="label font-sb mb-1">PostSendDataSourceDef</label>
+                                <!--<input type="text" class="form-control" o id="PostSendDataSourceDef">-->
+                                <textarea id="PostSendDataSourceDef" class="form-control" name="PostSendDataSourceDef" rows="5" cols="60" style="resize:none"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="EmailTo" class="label font-sb mb-1">EmailTo</label>
+                                <input type="text" class="form-control" id="EmailTo">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="CCTo" class="label font-sb mb-1">CCTo</label>
+                                <input type="text" class="form-control" id="CCTo">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="BccTo" class="label font-sb mb-1">BccTo</label>
+                                <input type="text" class="form-control" id="BccTo">
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                           
+
+                            <div class="mb-3">
+                                <label for="ASubject" class="label font-sb mb-1">ASubject</label>
+                                <input type="text" class="form-control" id="ASubject">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ABody" class="label font-sb mb-1">ABody</label>
+                                <!--input type="text" class="form-control" id="ABody">-->
+                                <textarea id="ABody" class="form-control" name="ABody" rows="3" cols="50" style="resize:none"></textarea>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="DBConnid" class="label font-sb mb-1">DBConn Name</label>
+                                <!--<input type="text" class="form-control" id="DBConnid">-->
+                                <select class="form-control form-control-sm" name="DBConnid" id="DBConnid">...</select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="AlertConfigId" class="label font-sb mb-1">Configuration Name</label>
+                                <!--<input type="text" class="form-control" id="AlertConfigId">-->
+                                <select class="form-control form-control-sm" name="AlertConfigId" id="AlertConfigId">...</select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="SchedularId" class="label font-sb mb-1">Schedular Name</label>
+                                <!--<input type="text" class="form-control" id="SchedularId">-->
+                                <select class="form-control form-control-sm" name="SchedularId" id="SchedularId">...</select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="LastExecutedOn" class="label font-sb mb-1">LastExecutedOn</label>
+                                <input type="text" class="form-control" id="LastExecutedOn">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="NextExecutionTime" class="label font-sb mb-1">NextExecutionTime</label>
+                                <input type="text" class="form-control" id="NextExecutionTime">
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="checkbox" name="isActive" id="isUserActive">
+                                <label for="isUserActive" class="label font-sb mb-1">IsActive</label>
+                            </div>
+
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+                <div>
+                    <p style="color:red; display:none;" id="error-message" class="ml-2"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="modalCloseButton"
+                            onclick="Service.CloseModal()">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modalSaveButton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

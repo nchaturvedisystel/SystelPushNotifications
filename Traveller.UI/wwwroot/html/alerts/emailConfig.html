@@ -1,1 +1,131 @@
-﻿Email Configuration Page
+﻿<!--Email Configuration Page-->
+
+<div class="d-flex align-items-center justify-content-between my-3" style="border-bottom:1px solid #CDD5E9">
+    <div class="main-heading">Email Configuration List</div>
+    <button type="button" class="btn btn-primary btn-sm" onclick="EmailConfig.CreateNew()">Create New</button>
+</div>
+
+<div>
+    <table id="example" class="table table-bordered com_table" style="width: 100%;">
+        <thead>
+            <tr class="text-dark">
+                <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
+                <th scope="col">Connection Name</th>
+                <th scope="col">Desc</th>
+                <th scope="col">Host</th>
+                <th scope="col">Port</th>
+                <th scope="col">From</th>
+                <!--<th scope="col">Password</th>-->
+                <th scope="col">EnableSsl</th>
+                <th scope="col">IsBodyHtml</th>
+                <th scope="col">Active</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="TemplateListBody">
+            <tr>
+                <td colspan="7">
+                    <font style="color:red;">No Records found..</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="EmailConfigModal" tabindex="-1" role="dialog" aria-labelledby="EmailConfigModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EmailConfigModalLabel">Create New Email Configuration </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="EmailConfig.LoadAll()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="EmailConfigModalBody">
+
+                <div id="EmailConfigCreationForm">
+
+                    <form class="form-row">
+
+
+                        <div style="display: none;">
+                            <input type="number" id="EmailConfigId">
+                        </div>
+
+                        <div class="col-md-6">
+
+
+                            <div class="mb-3">
+                                <label for="IName" class="label font-sb mb-1">Connection Name</label>
+                                <input type="text" class="form-control" id="IName">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="IDesc" class="label font-sb mb-1">Description</label>
+                                <!--<input type="text" class="form-control" o id="IDesc">-->
+                                <textarea id="IDesc" class="form-control" name="IDesc" rows="3" cols="50" style="resize:none"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="IHost" class="label font-sb mb-1">Host</label>
+                                <input type="text" class="form-control" id="IHost">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="IPort" class="label font-sb mb-1">Port</label>
+                                <input type="text" class="form-control" id="IPort">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="IFrom" class="label font-sb mb-1">From</label>
+                                <input type="text" class="form-control" id="IFrom">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="IPassword" class="label font-sb mb-1">Password</label>
+                            <input type="text" class="form-control" id="IPassword">
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <input type="checkbox" name="IEnableSsl" id="IEnableSsl">
+                            <label for="IEnableSsl" class="label font-sb mb-1">EnableSsl</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="checkbox" name="IsBodyHtml" id="IsBodyHtml">
+                            <label for="IsBodyHtml" class="label font-sb mb-1">IsBodyHtml</label>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <input type="checkbox" name="isActive" id="isUserActive">
+                            <label for="isUserActive" class="label font-sb mb-1">IsActive</label>
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+                <div>
+                    <p style="color:red; display:none;" id="error-message" class="ml-2"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="modalCloseButton"
+                            onclick="EmailConfig.CloseModal()">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modalSaveButton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
