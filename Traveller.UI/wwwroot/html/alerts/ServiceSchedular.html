@@ -1,0 +1,135 @@
+﻿<!--Service Schedular Page-->
+<div class="d-flex align-items-center justify-content-between my-3" style="border-bottom:1px solid #CDD5E9">
+    <div class="main-heading">Service Schedular List</div>
+    <button type="button" class="btn btn-primary btn-sm" onclick="ServiceSchedular.CreateNew()">Create New</button>
+</div>
+
+<div>
+    <table id="example" class="table table-bordered com_table" style="width: 100%;">
+        <thead>
+            <tr class="text-dark">
+                <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
+                <th scope="col">Service Name</th>
+                <th scope="col">Schedular Name</th>
+                <th scope="col">LastExecutionTime</th>
+                <th scope="col">NextExecutionTime</th>
+                <th scope="col">StartsFrom</th>
+                <th scope="col">EndsOn</th>
+                <th scope="col">DailyStartOn</th>
+                    <th scope="col">DailyEndsOn</th>
+                <th scope="col">Active</th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody id="TemplateListBody">
+            <tr>
+                <td colspan="10">
+                    <font style="color:red;">No Records found..</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="ServiceSchedularModal" tabindex="-1" role="dialog" aria-labelledby="ServiceSchedularModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="min-width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ServiceSchedularModalLabel">Create New Service Schedular</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#ServiceSchedularModalBody">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ServiceSchedularModalBody">
+
+                <div id="ServiceSchedularCreationForm">
+
+                    <form class="form-row">
+
+
+                        <div style="display: none;">
+                            <input type="number" id="MappperId">
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label for="ServiceId" class="label font-sb mb-1">Service Name</label>
+                                <select class="form-control form-control-sm" name="ServiceId" id="ServiceId">...</select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="SchedularId" class="label font-sb mb-1">Schedular Name</label>
+                                <select class="form-control form-control-sm" name="SchedularId" id="SchedularId">...</select>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="LastExecutionTime" class="label font-sb mb-1">LastExecutionTime</label>
+                                <input type="datetime-local" class="form-control" id="LastExecutionTime">
+                            </div>
+
+                           
+                            <div class="mb-3">
+                                <label for="NextExecutionTime" class="label font-sb mb-1">NextExecutionTime</label>
+                                <input type="datetime-local" class="form-control" id="NextExecutionTime">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label for="StartsFrom" class="label font-sb mb-1">StartsFrom</label>
+                                <input type="datetime-local" class="form-control" id="StartsFrom">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="EndsOn" class="label font-sb mb-1">EndsOn</label>
+                                <input type="datetime-local" class="form-control" id="EndsOn">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="DailyStartOn" class="label font-sb mb-1">DailyStartOn</label>
+                                <input type="time" class="form-control" id="DailyStartOn">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="DailyEndsOn" class="label font-sb mb-1">DailyEndsOn</label>
+                                <input type="time" class="form-control" id="DailyEndsOn">
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <input type="checkbox" name="isActive" id="isUserActive">
+                                <label for="isUserActive" class="label font-sb mb-1">IsActive</label>
+                            </div>
+
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+                <div>
+                    <p style="color:red; display:none;" id="error-message" class="ml-2"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="modalCloseButton"
+                            onclick="ServiceSchedular.CloseModal()">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modalSaveButton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -13,8 +13,15 @@ ul, li {list-style-type: none}
 .font-sb {font-weight: 600 !important}
 .font-b {font-weight: 800 !important}
 
-.btn-primary {background-color: var(--orange-col); color: white; border-color: var(--orange-col);}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {background-color: #bf3900 !important; border-color: #bf3900 !important;}
+.btn-primary {
+    background-color: #0A70A9;
+    color: white;
+    border-color: #0A70A9;
+}
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+        background-color: #0A70A9 !important;
+        border-color: #0A70A9 !important;
+    }
 .btn-outline-secondary {border-color: var(--dark-gray-col); color: var(--dark-gray-col);}
 .btn-outline-secondary:hover {background-color: var(--dark-gray-col); color: white; border-color: var(--dark-gray-col);}
 

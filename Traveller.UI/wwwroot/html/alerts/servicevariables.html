@@ -1,0 +1,97 @@
+﻿<!--Service Variables Page-->
+<div class="d-flex align-items-center justify-content-between my-3" style="border-bottom:1px solid #CDD5E9">
+    <div class="main-heading">Service Variables List</div>
+    <button type="button" class="btn btn-primary btn-sm" onclick="ServiceVariables.CreateNew()">Create New</button>
+</div>
+
+<div>
+    <table id="example" class="table table-bordered com_table" style="width: 100%;">
+        <thead>
+            <tr class="text-dark">
+                <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
+                <th scope="col">Service Name</th>
+                <th scope="col">VarInstance</th>
+                <th scope="col">VarValue</th>
+                <th scope="col">VarType</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="TemplateListBody">
+            <tr>
+                <td colspan="7">
+                    <font style="color:red;">No Records found..</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="ServiceVariablesModal" tabindex="-1" role="dialog" aria-labelledby="ServiceVariablesModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="min-width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ServiceVariablesModalLabel">Create New Service Variables</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#ServiceVariablesModalBody">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ServiceVariablesModalBody">
+
+                <div id="ServiceVariablesCreationForm">
+
+                    <form class="form-row">
+
+
+                        <div style="display: none;">
+                            <input type="number" id="VariableId">
+                        </div>
+
+                        <div class="col-md-6">
+
+
+                            <div class="mb-3">
+                                <label for="ServiceId" class="label font-sb mb-1">Service Name</label>
+                                <select class="form-control form-control-sm" name="ServiceId" id="ServiceId">...</select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="VarInstance" class="label font-sb mb-1">VarInstance</label>
+                                <input type="text" class="form-control"  id="VarInstance">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="VarValue" class="label font-sb mb-1">VarValue</label>
+                                <input type="text" class="form-control"  id="VarValue">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="VarType" class="label font-sb mb-1">VarType</label>
+                                <input type="text" class="form-control"  id="VarType">
+                            </div>
+
+                        </div>
+      
+
+                    </form>
+
+
+                </div>
+                <div>
+                    <p style="color:red; display:none;" id="error-message" class="ml-2"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="modalCloseButton"
+                            onclick="ServiceVariables.CloseModal()">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modalSaveButton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

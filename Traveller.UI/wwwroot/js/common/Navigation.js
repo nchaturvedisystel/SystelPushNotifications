@@ -105,6 +105,28 @@ Navigation.CallPageLoad = function (MenuCode) {
         Dashboard.BasepageOnReady();
     }
 
+    else if (MenuCode == "DBANN") {
+        DBConnection.CreateDBConnectionOnReady();
+    }
+    else if (MenuCode == "SRANN") {
+        Schedular.CreateSchedularOnReady();
+    }
+    else if (MenuCode == "ECANN") {
+        EmailConfig.CreateEmailConfigOnReady();
+    }
+
+    else if (MenuCode == "SCANN") {
+        Service.CreateServiceOnReady();
+    }
+
+    else if (MenuCode == "SVANN") {
+        ServiceVariables.CreateServiceVariablesOnReady();
+    }
+
+    else if (MenuCode == "SSANN") {
+        ServiceSchedular.CreateServiceSchedularOnReady();
+    }
+
 }
 
 Navigation.TrackTime = function (PreviousMenuCode, RequestedMenuCode, PageLandingTime) {

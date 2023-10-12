@@ -9,16 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\alerts\servicemaster.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Pages\Shared\_Layout2.cshtml.css" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\html\traveler\WorkItemDetail.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\alerts\servicemaster.js" />
     <_ContentIncludedByDefault Remove="wwwroot\Layout2\images\bubbles_bk_bg.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="Pages\Shared\_Layout2.cshtml.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\alerts\servicemaster.js" />
   </ItemGroup>
 
   <ItemGroup>

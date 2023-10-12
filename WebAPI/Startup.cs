@@ -1,10 +1,12 @@
 using Application.Interfaces;
 using Application.Interfaces.Admin;
 using Application.Interfaces.Common;
+using Application.Interfaces.PushNotification;
 using Application.Interfaces.User;
 using Infrastructure.Persistance.Services;
 using Infrastructure.Persistance.Services.Admin;
 using Infrastructure.Persistance.Services.Common;
+using Infrastructure.Persistance.Services.PushNotification;
 using Infrastructure.Persistance.Services.Traveler;
 using Infrastructure.Persistance.Services.User;
 using Microsoft.AspNetCore.Authorization;
@@ -60,6 +62,14 @@ namespace WebAPI
 
             services.AddTransient<IWorkCenter, WorkCenterService>();
 
+            //Added by Anuprabha for Push Notification
+
+            services.AddTransient<IDBConnection, DBConnectionService>();
+            services.AddTransient<ISchedularMaster, SchedularMasterService>();
+            services.AddTransient<IEmailConfig, EmailConfigService>();
+            services.AddTransient<IServiceMaster, ServiceMasterService>();
+            services.AddTransient<IAlertsServiceVariables, AlertsServiceVariablesService>();
+            services.AddTransient<IServiceSchedular, ServiceSchedularService>();
 
             //For Directory Browsing, comment out for Prod Release
             services.AddDirectoryBrowser();
