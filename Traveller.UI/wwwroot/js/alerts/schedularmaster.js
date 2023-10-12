@@ -56,9 +56,29 @@ Schedular.ValidateAndCreateSchedular = function () {
     Schedular.SchedularType = document.getElementById("SchedularType").value;
     Schedular.IsActive = 1;
 
-    if (Schedular.IName.trim() === '' || Schedular.ICode.trim() === '' || Schedular.IDesc.trim() === '' || Schedular.FrequencyInMinutes.trim() === '' || Schedular.SchedularType.trim() === '') {
+    if (Schedular.IName.trim() === '') {
         // Display error message
-        document.getElementById('error-message').innerText = 'All are mandatory fields.';
+        document.getElementById('error-message').innerText = 'Please Provide Schedular Name !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (Schedular.ICode.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Schedular Code !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (Schedular.IDesc.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Description !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (Schedular.FrequencyInMinutes.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Frequency In Minutes !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (Schedular.SchedularType.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Schedular Type !';
         document.getElementById('error-message').style.display = 'block';
     }
     else {
@@ -84,6 +104,9 @@ function SchedularCRUD_OnSuccessCallBack(data) {
             Schedular.BindSchedularList(data);
         else if (Navigation.MenuCode == "SCANN")
             Service.SchedularList = data;
+
+        else if (Navigation.MenuCode == "SSANN")
+            ServiceSchedular.SchedularList = data;
     }
     //Schedular.ClearSchedularCRUDForm();
 
@@ -161,9 +184,11 @@ function UpdateSchedular_OnSuccesscallback(response) {
     if (response.isActive === 1) {
 
         Toast.create("Success", "Schedular Active", TOAST_STATUS.SUCCESS, 1500);
+        
     } else {
         Toast.create("Success", "Schedular Inactive", TOAST_STATUS.WARNING, 1500);
     }
+    Schedular.LoadAll();
 }
 
 function UpdateSchedular_OnErrorCallBack(data) {
@@ -218,13 +243,53 @@ Schedular.ValidateAndUpdateSchedular = function (dbconn) {
     dbconn.schedularType = document.getElementById('SchedularType').value;
     dbconn.schedularId = document.getElementById('SchedularId').value;
     dbconn.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
-    Ajax.AuthPost("Schedular/GetSchedular", dbconn, SchedularCRUD_OnSuccessCallBack, SchedularCRUD_OnErrorCallBack);
+    //Ajax.AuthPost("Schedular/GetSchedular", dbconn, SchedularCRUD_OnSuccessCallBack, SchedularCRUD_OnErrorCallBack);
+
+
+    if (dbconn.iName.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Schedular Name !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (dbconn.iCode.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Schedular Code !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (dbconn.iDesc.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Description !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (dbconn.frequencyInMinutes.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Frequency In Minutes !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (dbconn.schedularType.trim() === '') {
+        // Display error message
+        document.getElementById('error-message').innerText = 'Please Provide Schedular Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else {
+        // Hide error message if fields are not blank
+        document.getElementById('error-message').style.display = 'none';
+
+        // Perform AJAX request
+        Ajax.AuthPost("Schedular/GetSchedular", dbconn, SchedularCRUD_OnSuccessCallBack, SchedularCRUD_OnErrorCallBack);
+
+    }
+
+
 }
 //#endregion -- Update User Schedular
 
 //#endregion -- Schedular
 
+Schedular.CloseModal = function () {
+    $('#SchedularModal').modal('hide');
 
+}
 
 
 

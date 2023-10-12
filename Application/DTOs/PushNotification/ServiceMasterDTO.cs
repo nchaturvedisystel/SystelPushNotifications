@@ -27,7 +27,7 @@ namespace Application.DTOs.PushNotification
         public string BccTo { get; set; }
         public string ASubject { get; set; }
         public string ABody { get; set; }
-        public int DBConnid { get; set; }
+        public int DBConnId { get; set; }
         public int AlertConfigId { get; set; }
         public int SchedularId { get; set; }
         public DateTime LastExecutedOn { get; set; }
@@ -39,6 +39,10 @@ namespace Application.DTOs.PushNotification
         public string ModifiedBy { get; set; }
         public DateTime ModifiedOn { get; set; }
         public int ActionUser { get; set; }
+        public string SchedularName { get; set; }
+        public string ConnName { get; set; }
+        public string EmailConfigName { get; set; }
+        
     }
 
     public class ServiceMasterList

@@ -37,11 +37,11 @@
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="EmailConfigModal" tabindex="-1" role="dialog" aria-labelledby="EmailConfigModalLabel"
      aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="min-width:900px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="EmailConfigModalLabel">Create New Email Configuration </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="EmailConfig.LoadAll()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#EmailConfigModalBody">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -66,7 +66,7 @@
 
                             <div class="mb-3">
                                 <label for="IDesc" class="label font-sb mb-1">Description</label>
-                                <!--<input type="text" class="form-control" o id="IDesc">-->
+                                <!--<input type="text" class="form-control"  id="IDesc">-->
                                 <textarea id="IDesc" class="form-control" name="IDesc" rows="3" cols="50" style="resize:none"></textarea>
                             </div>
 
@@ -81,8 +81,9 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="IFrom" class="label font-sb mb-1">From</label>
-                                <input type="text" class="form-control" id="IFrom">
+                                <label for="IFrom" class="label font-sb mb-1">From(Email ID)</label>
+                                <input type="email" class="form-control" id="IFrom">
+
                             </div>
 
                         </div>

@@ -14,6 +14,7 @@ EmailConfig.IsActive = 0;
 EmailConfig.ActionUser = User.UserId;
 EmailConfig.IsDeleted = 0;
 
+const regex_pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 //#region -- EmailConfig
 EmailConfig.CreateEmailConfigOnReady = function () {
@@ -71,18 +72,44 @@ EmailConfig.ValidateAndCreateEmailConfig = function () {
     EmailConfig.IEnableSsl = false;
     EmailConfig.IsBodyHtml = true;
 
-    if (EmailConfig.IName.trim() === '' || EmailConfig.IHost.trim() === '' || EmailConfig.IPort.trim() === '' || EmailConfig.IFrom.trim() === '' || EmailConfig.IPassword.trim() === '') {
-        // Display error message
-        document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    if (EmailConfig.IName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Email Configuration Name !';
         document.getElementById('error-message').style.display = 'block';
     }
+
+    else if ( EmailConfig.IHost.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Host !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (EmailConfig.IPort.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Port !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (EmailConfig.IFrom.trim() === '')
+    {
+        
+        //console.log(regex_pattern.test(EmailConfig.IFrom));
+        document.getElementById('error-message').innerText = 'Please Provide From (Email ID)!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (!regex_pattern.test(EmailConfig.IFrom)) {
+        document.getElementById('error-message').innerText = 'Please Provide valid From (Email ID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (EmailConfig.IPassword.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Password !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
     else {
         // Hide error message if fields are not blank
         document.getElementById('error-message').style.display = 'none';
-
         // Perform AJAX request
         Ajax.AuthPost("EmailConfig/GetEmailConfig", EmailConfig, EmailConfigCRUD_OnSuccessCallBack, EmailConfigCRUD_OnErrorCallBack);
-
     }
 
 }
@@ -190,6 +217,7 @@ function UpdateEmailConfig_OnSuccesscallback(response) {
     } else {
         Toast.create("Success", "Email Config Inactive", TOAST_STATUS.WARNING, 1500);
     }
+    EmailConfig.LoadAll();
 }
 
 function UpdateEmailConfig_OnErrorCallBack(data) {
@@ -252,16 +280,51 @@ EmailConfig.ValidateAndUpdateEmailConfig = function (dbconn) {
     dbconn.isBodyHtml = document.getElementById('IsBodyHtml').checked ? true : false;
 
 
-    if (dbconn.iName.trim() === '' || dbconn.iHost.trim() === '' || dbconn.iPort.trim() === '' || dbconn.iFrom.trim() === '') {
-        document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    //if (dbconn.iName.trim() === '' || dbconn.iHost.trim() === '' || dbconn.iPort.trim() === '' || dbconn.iFrom.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else {
+    //    document.getElementById('error-message').style.display = 'none';
+    //    Ajax.AuthPost("EmailConfig/GetEmailConfig", dbconn, EmailConfigCRUD_OnSuccessCallBack, EmailConfigCRUD_OnErrorCallBack);
+
+    //}
+
+
+    if (dbconn.iName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Email Configuration Name !';
         document.getElementById('error-message').style.display = 'block';
     }
-    else {
-        document.getElementById('error-message').style.display = 'none';
-        Ajax.AuthPost("EmailConfig/GetEmailConfig", dbconn, EmailConfigCRUD_OnSuccessCallBack, EmailConfigCRUD_OnErrorCallBack);
 
+    else if (dbconn.iHost.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Host !';
+        document.getElementById('error-message').style.display = 'block';
     }
+
+    else if (dbconn.iPort.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Port !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (dbconn.iFrom.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide From !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else {
+        // Hide error message if fields are not blank
+        document.getElementById('error-message').style.display = 'none';
+        // Perform AJAX request
+        Ajax.AuthPost("EmailConfig/GetEmailConfig", dbconn, EmailConfigCRUD_OnSuccessCallBack, EmailConfigCRUD_OnErrorCallBack);
+    }
+
+
     
+}
+
+EmailConfig.CloseModal = function () {
+    $('#EmailConfigModal').modal('hide');
+
 }
 //#endregion -- Update User EmailConfig
 

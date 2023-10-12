@@ -56,7 +56,7 @@ namespace Infrastructure.Persistance.Services.PushNotification
                     BccTo = serviceMasterDTO.BccTo,
                     ASubject = serviceMasterDTO.ASubject,
                     ABody = serviceMasterDTO.ABody,
-                    DBConnid = serviceMasterDTO.DBConnid,
+                    DBConnid = serviceMasterDTO.DBConnId,
                     AlertConfigId = serviceMasterDTO.AlertConfigId,
                     SchedularId = serviceMasterDTO.SchedularId,
                     LastExecutedOn = serviceMasterDTO.LastExecutedOn,
@@ -82,7 +82,7 @@ namespace Infrastructure.Persistance.Services.PushNotification
                 {
                     ActionUser = serviceMasterDTO.ActionUser,
                     IsActive = serviceMasterDTO.IsActive,
-                    SchedularId = serviceMasterDTO.ServiceId
+                    ServiceId = serviceMasterDTO.ServiceId
                 }, commandType: CommandType.StoredProcedure);
             }
             return response;

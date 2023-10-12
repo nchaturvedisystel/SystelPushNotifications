@@ -119,6 +119,14 @@ Navigation.CallPageLoad = function (MenuCode) {
         Service.CreateServiceOnReady();
     }
 
+    else if (MenuCode == "SVANN") {
+        ServiceVariables.CreateServiceVariablesOnReady();
+    }
+
+    else if (MenuCode == "SSANN") {
+        ServiceSchedular.CreateServiceSchedularOnReady();
+    }
+
 }
 
 Navigation.TrackTime = function (PreviousMenuCode, RequestedMenuCode, PageLandingTime) {

@@ -58,16 +58,34 @@ DBConnection.ValidateAndCreateDBConnection = function () {
     DBConnection.DBName = document.getElementById("DBName").value;
     DBConnection.IsActive = 1;
 
-    if (DBConnection.ConnName.trim() === '' || DBConnection.ServerName.trim() === '' || DBConnection.UserName.trim() === '' || DBConnection.Passwrd.trim() === '' || DBConnection.DBName.trim() === '') {
-        // Display error message
-        document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    if (DBConnection.ConnName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Connection Name!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (DBConnection.ServerName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Server Name!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (DBConnection.UserName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide User Name!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (DBConnection.DBName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide DB Name!';
+        document.getElementById('error-message').style.display = 'block';
+    } 
+
+    else if (DBConnection.Passwrd.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Password!';
         document.getElementById('error-message').style.display = 'block';
     }
 
     else {
         // Hide error message if fields are not blank
         document.getElementById('error-message').style.display = 'none';
-
         // Perform AJAX request
         Ajax.AuthPost("DBConnection/GetDBConnection", DBConnection, DBConnectionCRUD_OnSuccessCallBack, DBConnectionCRUD_OnErrorCallBack);
 
@@ -76,6 +94,7 @@ DBConnection.ValidateAndCreateDBConnection = function () {
 }
 
 //#endregion -- Create DBConnection
+
 
 //#region -- Show DBConnection
 function DBConnectionCRUD_OnSuccessCallBack(data) {
@@ -167,6 +186,7 @@ DBConnection.DBConnectionStatusUpdate = function (sender, data) {
         } else {
             Toast.create("Success", "DB Connection Inactive", TOAST_STATUS.WARNING, 1500);
         }
+        DBConnection.LoadAll();
     }
 
     function UpdateDBConnection_OnErrorCallBack(data) {
@@ -221,13 +241,42 @@ DBConnection.ValidateAndUpdateDBConnection = function (dbconn) {
     dbconn.dbConnId = document.getElementById('DBConnId').value;
     dbconn.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
 
-    if (dbconn.connName.trim() === '' || dbconn.serverName.trim() === '' || dbconn.userName.trim() === '' || dbconn.dbName.trim() === '') {
-        document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    //if (dbconn.connName.trim() === '' || dbconn.serverName.trim() === '' || dbconn.userName.trim() === '' || dbconn.dbName.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+
+    //else {
+    //    document.getElementById('error-message').style.display = 'none';
+    //    Ajax.AuthPost("DBConnection/GetDBConnection", dbconn, DBConnectionCRUD_OnSuccessCallBack, DBConnectionCRUD_OnErrorCallBack);
+
+    //}
+
+
+    if (dbconn.connName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Connection Name!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (dbconn.serverName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Server Name!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (dbconn.userName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide User Name!';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (dbconn.dbName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide DB Name!';
         document.getElementById('error-message').style.display = 'block';
     }
 
     else {
+        // Hide error message if fields are not blank
         document.getElementById('error-message').style.display = 'none';
+        // Perform AJAX request
         Ajax.AuthPost("DBConnection/GetDBConnection", dbconn, DBConnectionCRUD_OnSuccessCallBack, DBConnectionCRUD_OnErrorCallBack);
 
     }
@@ -235,12 +284,14 @@ DBConnection.ValidateAndUpdateDBConnection = function (dbconn) {
 }
 
 
-
-
-
 //#endregion -- Update User DBConnection
 
 //#endregion -- DBConnection
+
+DBConnection.CloseModal = function () {
+    $('#DBConnectionModal').modal('hide');
+
+}
 
 
 

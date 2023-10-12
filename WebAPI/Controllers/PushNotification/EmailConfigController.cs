@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace WebAPI.Controllers.PushNotification
 {
     [Route("EmailConfig")]
-    //[ApiController]
+    //[AuthorizeUser]
     public class EmailConfigController : BaseApiController
     {
         APISettings _settings;

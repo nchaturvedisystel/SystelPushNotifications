@@ -18,10 +18,10 @@ Service.CCTo = "";
 Service.BccTo = "";
 Service.ASubject = "";
 Service.ABody = "";
-Service.DBConnid = 0;
+Service.DBConnId = 0;
 Service.AlertConfigId = 0;
 Service.SchedularId = 0;
-Service.LastExecutedOn = new Date();
+Service.LastExecutedOn =  new Date();
 Service.NextExecutionTime = new Date();
 Service.IsActive = 0;
 Service.IsDeleted = 0;
@@ -30,6 +30,7 @@ Service.DBConnectionList = {};
 Service.EmailConfigList = {};
 Service.SchedularList = {};
 
+const regex_pattern_Service = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 //#region -- Service
 Service.CreateServiceOnReady = function () {
@@ -59,11 +60,11 @@ Service.CreateNew = function () {
 
 
 Service.BindDBConnectionDropDown = function () {
-    var select = document.getElementById("DBConnid");
+    var select = document.getElementById("DBConnId");
     var data = Service.DBConnectionList;
     select.innerHTML = "";
     for (var i = 0; i < data.length; i++) {
-        var optionHtml = '<option value="DBConnectionSelectOption_' + data[i].dBConnId + '" id="DBConnectionSelectOption_' + data[i].dBConnId + '" customData="' + encodeURIComponent(JSON.stringify(data[i])) + '">' + data[i].connName + '</option>';
+        var optionHtml = '<option value="DBConnectionSelectOption_' + data[i].dbConnId + '" id="DBConnectionSelectOption_' + data[i].dbConnId + '" customData="' + encodeURIComponent(JSON.stringify(data[i])) + '">' + data[i].connName + '</option>';
         select.innerHTML = select.innerHTML + optionHtml;
     }
 
@@ -112,9 +113,9 @@ Service.ClearServiceCRUDForm = function () {
     document.getElementById('BccTo').value = "";
     document.getElementById('ASubject').value = "";
     document.getElementById('ABody').value = "";
-    document.getElementById('DBConnid').value = "";
-    document.getElementById('AlertConfigId').value = "";
-    document.getElementById('SchedularId').value = "";
+    //document.getElementById('DBConnid').value = "";
+    //document.getElementById('AlertConfigId').value = "";
+    //document.getElementById('SchedularId').value = "";
     document.getElementById('LastExecutedOn').value = new Date();
     document.getElementById('NextExecutionTime').value = new Date();
     document.getElementById('isUserActive').checked = true;
@@ -137,9 +138,9 @@ Service.ClearServiceCRUDForm = function () {
     Service.BccTo = "";
     Service.ASubject = "";
     Service.ABody = "";
-    Service.DBConnid = 0;
-    Service.AlertConfigId = 0;
-    Service.SchedularId = 0;
+    //Service.DBConnid = 0;
+    //Service.AlertConfigId = 0;
+    //Service.SchedularId = 0;
     Service.LastExecutedOn = new Date();
     Service.NextExecutionTime = new Date();
     Service.IsActive = 1;
@@ -148,61 +149,93 @@ Service.ClearServiceCRUDForm = function () {
 
 Service.ValidateAndCreateService = function () {
 
-    var dbConnidSelect = document.getElementById("DBConnid");
+
+    var NewService = {};
+
+
+    var dbConnidSelect = document.getElementById("DBConnId");
     var alertConfigIdSelect = document.getElementById("AlertConfigId");
     var schedularIdSelect = document.getElementById("SchedularId");
 
+    NewService.ActionUser = User.UserId;
+    NewService.Title = document.getElementById('Title').value;
+    NewService.SDesc = document.getElementById('ServiceDesc').value ;
+    NewService.AlertType = document.getElementById('AlertType').value;
+    NewService.HasAttachment = 1;
+    NewService.AttachmentType = document.getElementById('AttachmentType').value;
+    NewService.AttachmentPath = document.getElementById('AttachmentPath').value;
+    NewService.AttachmentFileType = document.getElementById('AttachmentFileType').value;
+    NewService.OutputFileName = document.getElementById('OutputFileName').value;
+    NewService.DataSourceType = document.getElementById('DataSourceType').value;
+    NewService.DataSourceDef = document.getElementById('DataSourceDef').value;
+    NewService.PostSendDataSourceType = document.getElementById('PostSendDataSourceType').value;
+    NewService.PostSendDataSourceDef = document.getElementById('PostSendDataSourceDef').value;
+    NewService.EmailTo = document.getElementById('EmailTo').value;
+    NewService.CCTo = document.getElementById('CCTo').value;
+    NewService.BccTo = document.getElementById('BccTo').value;
+    NewService.ASubject = document.getElementById('ASubject').value;
+    NewService.ABody = document.getElementById('ABody').value;
 
-    Service.ActionUser = User.UserId;
-
-    Service.Title = document.getElementById('Title').value;
-    Service.SDesc = document.getElementById('ServiceDesc').value ;
-    Service.AlertType = document.getElementById('AlertType').value;
-    Service.HasAttachment = 1;
-    Service.AttachmentType = document.getElementById('AttachmentType').value;
-    Service.AttachmentPath = document.getElementById('AttachmentPath').value;
-    Service.AttachmentFileType = document.getElementById('AttachmentFileType').value;
-    Service.OutputFileName = document.getElementById('OutputFileName').value;
-    Service.DataSourceType = document.getElementById('DataSourceType').value;
-    Service.DataSourceDef = document.getElementById('DataSourceDef').value;
-    Service.PostSendDataSourceType = document.getElementById('PostSendDataSourceType').value;
-    Service.PostSendDataSourceDef = document.getElementById('PostSendDataSourceDef').value;
-    Service.EmailTo = document.getElementById('EmailTo').value;
-    Service.CCTo = document.getElementById('CCTo').value;
-    Service.BccTo = document.getElementById('BccTo').value;
-    Service.ASubject = document.getElementById('ASubject').value;
-    Service.ABody = document.getElementById('ABody').value;
-
-
-    Service.DBConnid = JSON.parse(decodeURIComponent(dbConnidSelect.options[dbConnidSelect.selectedIndex].getAttribute("customData"))).dBConnid;
-    Service.AlertConfigId = JSON.parse(decodeURIComponent(alertConfigIdSelect.options[alertConfigIdSelect.selectedIndex].getAttribute("customData"))).emailConfigId;
-    Service.SchedularId = JSON.parse(decodeURIComponent(schedularIdSelect.options[schedularIdSelect.selectedIndex].getAttribute("customData"))).schedularId;
+    NewService.DBConnId = JSON.parse(decodeURIComponent(dbConnidSelect.options[dbConnidSelect.selectedIndex].getAttribute("customData"))).dbConnId;
+    NewService.AlertConfigId = JSON.parse(decodeURIComponent(alertConfigIdSelect.options[alertConfigIdSelect.selectedIndex].getAttribute("customData"))).emailConfigId;
+    NewService.SchedularId = JSON.parse(decodeURIComponent(schedularIdSelect.options[schedularIdSelect.selectedIndex].getAttribute("customData"))).schedularId;
 
     //Service.DBConnid = document.getElementById('DBConnid').value;
     //Service.AlertConfigId = document.getElementById('AlertConfigId').value;
     //Service.SchedularId = document.getElementById('SchedularId').value;
 
-    Service.LastExecutedOn = new Date(document.getElementById("LastExecutedOn").value);
-    Service.LastExecutedOn = new Date(document.getElementById("NextExecutionTime").value);
+    //Service.LastExecutedOn = new Date(document.getElementById("LastExecutedOn").value);
+    //Service.NextExecutionTime = new Date(document.getElementById("NextExecutionTime").value);
 
-    Service.IsActive = 1;
+    NewService.LastExecutedOn = document.getElementById("LastExecutedOn").value;
+    NewService.NextExecutionTime = document.getElementById("NextExecutionTime").value;
+
+    NewService.IsActive = 1;
 
 
-    if (Service.Title.trim() === '' || Service.SDesc.trim() === '' || Service.AlertType.trim() === '' || Service.AttachmentType.trim() === ''
-        || Service.AttachmentPath.trim() === '' || Service.AttachmentFileType.trim() === '' || Service.OutputFileName.trim() === '' || Service.DataSourceType.trim() === ''
-        || Service.DataSourceDef.trim() === '' || Service.PostSendDataSourceType.trim() === '' || Service.PostSendDataSourceDef.trim() === '' || Service.EmailTo.trim() === ''
-        || Service.DBConnid.trim() === 0 || Service.AlertConfigId.trim() === 0 || Service.SchedularId.trim() === 0  ) {
-        // Display error message
-        document.getElementById('error-message').innerText = 'All are mandatory fields.';
-        document.getElementById('error-message').style.display = 'block';
+    // Perform validation
+    var ValidationMsg = " Please provide ";
+    ValidationMsg += (NewService.Title.trim() === '') ? " Title," : '';
+    ValidationMsg += (NewService.SDesc.trim() === '') ? " Desc," : '';
+    ValidationMsg += (NewService.AlertType.trim() === '') ? " AlertType," : '';
+    ValidationMsg += (NewService.AttachmentType.trim() === '') ? " AttachmentType," : '';
+    ValidationMsg += (NewService.AttachmentPath.trim() === '') ? " AttachmentPath," : '';
+    ValidationMsg += (NewService.AttachmentFileType.trim() === '') ? " AttachmentFileType," : '';
+    ValidationMsg += (NewService.OutputFileName.trim() === '') ? " OutputFileName," : '';
+    ValidationMsg += (NewService.DataSourceType.trim() === '') ? " DataSourceType," : '';
+    ValidationMsg += (NewService.DataSourceDef.trim() === '') ? " DataSourceDef," : '';
+    ValidationMsg += (NewService.PostSendDataSourceType.trim() === '') ? " PostSendDataSourceType," : '';
+    ValidationMsg += (NewService.PostSendDataSourceDef.trim() === '') ? " PostSendDataSourceDef," : '';
+    ValidationMsg += (NewService.EmailTo.trim() === '') ? " EmailTo," : '';
+    ValidationMsg += (NewService.CCTo.trim() === '') ? " CCTo," : '';
+    ValidationMsg += (NewService.ASubject.trim() === '') ? " Subject," : '';
+    ValidationMsg += (NewService.ABody.trim() === '') ? " Body," : '';
+    ValidationMsg += (NewService.LastExecutedOn.trim() === '') ? " LastExecutedOn," : '';
+    ValidationMsg += (NewService.NextExecutionTime.trim() === '') ? " NextExecutionTime," : '';
+
+    if (ValidationMsg.trim() != "Please provide") {
+        alert(ValidationMsg);
     }
     else {
-        // Hide error message if fields are not blank
-        document.getElementById('error-message').style.display = 'none';
-        // Perform AJAX request
-        Ajax.AuthPost("Service/GetService", Service, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
-
+        Ajax.AuthPost("Service/GetService", NewService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
     }
+
+
+    //if (Service.Title.trim() === '' || Service.SDesc.trim() === '' || Service.AlertType.trim() === '' || Service.AttachmentType.trim() === ''
+    //    || Service.AttachmentPath.trim() === '' || Service.AttachmentFileType.trim() === '' || Service.OutputFileName.trim() === '' || Service.DataSourceType.trim() === ''
+    //    || Service.DataSourceDef.trim() === '' || Service.PostSendDataSourceType.trim() === '' || Service.PostSendDataSourceDef.trim() === '' || Service.EmailTo.trim() === ''
+    //    || Service.LastExecutedOn.trim() === '' || Service.NextExecutionTime.trim() === '') {
+    //    // Display error message
+    //    document.getElementById('error-message').innerText = 'All are mandatory fields.';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else {
+    //    // Hide error message if fields are not blank
+    //    document.getElementById('error-message').style.display = 'none';
+    //    // Perform AJAX request
+    //    Ajax.AuthPost("Service/GetService", Service, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+
+    //}
 
 }
 
@@ -212,10 +245,23 @@ Service.ValidateAndCreateService = function () {
 function ServiceCRUD_OnSuccessCallBack(data) {
     $('#ServiceModal').modal('hide');
     console.log(data);
+    //if (data && data.servicemasterList && data.servicemasterList.length > 0) {
+    //    data = data.servicemasterList;
+    //    Service.BindServiceList(data);
+    //}
+
     if (data && data.servicemasterList && data.servicemasterList.length > 0) {
         data = data.servicemasterList;
-        Service.BindServiceList(data);
+
+        if (Navigation.MenuCode == "SCANN")
+            Service.BindServiceList(data);
+        else if (Navigation.MenuCode == "SVANN")
+            ServiceVariables.ServiceList = data;
+        else if (Navigation.MenuCode == "SSANN")
+            ServiceSchedular.ServiceList = data;
     }
+
+
 }
 
 function ServiceCRUD_OnErrorCallBack(error) {
@@ -233,6 +279,11 @@ Service.BindServiceList = function (data) {
             var RowHtml = ('<tr>'
                 + '                <td class="dtr-control sorting_1" style="border-left: 5px solid #' + Util.WCColors[i] + ';">' + SrNo + '</td>'
                 + '                <td>' + data[i].title + '</td>'
+
+                + '                <td>' + data[i].schedularName + '</td>'
+                + '                <td>' + data[i].connName + '</td>'
+                + '                <td>' + data[i].emailConfigName + '</td>'
+
                 + '                <td>' + data[i].alertType + '</td>'
                 + '                <td>' + data[i].attachmentType + '</td>'
                 + '                <td>'
@@ -282,6 +333,7 @@ Service.ServiceStatusUpdate = function (sender, data) {
     dbConnData.actionUser = User.UserId;
 
     Ajax.AuthPost("Service/UpdateStatusService", dbConnData, UpdateService_OnSuccesscallback, UpdateService_OnErrorCallBack);
+  
 
 }
 function UpdateService_OnSuccesscallback(response) {
@@ -291,6 +343,8 @@ function UpdateService_OnSuccesscallback(response) {
     } else {
         Toast.create("Success", "Service Inactive", TOAST_STATUS.WARNING, 1500);
     }
+    Service.LoadAll();
+
 }
 
 function UpdateService_OnErrorCallBack(data) {
@@ -301,7 +355,7 @@ function UpdateService_OnErrorCallBack(data) {
 //#region -- Delete User Service
 Service.Delete = function (dbconn) {
     dbconn = JSON.parse(decodeURIComponent(dbconn));
-    var Title = 'Are you sure, you want to delete ' + dbconn.iName + ' ?';
+    var Title = 'Are you sure, you want to delete ' + dbconn.title + ' ?';
     Util.DeleteConfirm(dbconn, Title, DeleteService);
 }
 function DeleteService(dbconn) {
@@ -317,13 +371,11 @@ function DeleteService(dbconn) {
 Service.SetServiceCRUDForm = function (dbconn) {
 
 
-
     document.getElementById('ServiceId').value = dbconn.serviceId;
     document.getElementById('Title').value = dbconn.title;
-    document.getElementById('ServiceDesc').value = dbconn.serviceDesc;
+    document.getElementById('ServiceDesc').value = dbconn.sDesc;
     document.getElementById('AlertType').value = dbconn.alertType;
     document.getElementById('HasAttachment').checked = dbconn.hasAttachment;
-    document.getElementById('ServiceDesc').value = dbconn.serviceDesc;
     document.getElementById('AttachmentType').value = dbconn.attachmentType;
     document.getElementById('AttachmentPath').value = dbconn.attachmentPath;
     document.getElementById('AttachmentFileType').value = dbconn.attachmentFileType;
@@ -333,22 +385,22 @@ Service.SetServiceCRUDForm = function (dbconn) {
     document.getElementById('PostSendDataSourceType').value = dbconn.postSendDataSourceType;
     document.getElementById('PostSendDataSourceDef').value = dbconn.postSendDataSourceDef;
     document.getElementById('EmailTo').value = dbconn.emailTo;
-    document.getElementById('CCTo').value = dbconn.cCTo;
+    document.getElementById('CCTo').value = dbconn.ccTo;
     document.getElementById('BccTo').value = dbconn.bccTo;
     document.getElementById('ASubject').value = dbconn.aSubject;
     document.getElementById('ABody').value = dbconn.aBody;
 
-    document.getElementById('DBConnid').value = ("DBConnectionSelectOption_" + data.dBConnid);
-    document.getElementById('AlertConfigId').value = ("EmailConfigSelectOption_" + data.emailConfigId);
-    document.getElementById('SchedularId').value = ("SchedularSelectOption_" + data.schedularId);
+    document.getElementById('DBConnId').value = ("DBConnectionSelectOption_" + dbconn.dbConnId);
+    document.getElementById('AlertConfigId').value = ("EmailConfigSelectOption_" + dbconn.alertConfigId);
+    document.getElementById('SchedularId').value = ("SchedularSelectOption_" + dbconn.schedularId);
 
     //document.getElementById('DBConnid').value = dbconn.dBConnid;
     //document.getElementById('AlertConfigId').value = dbconn.alertConfigId;
     //document.getElementById('SchedularId').value = dbconn.schedularId;
 
-    document.getElementById('LastExecutedOn').value = dbconn.lastExecutedOn;
-    document.getElementById('NextExecutionTime').value = dbconn.nextExecutionTime;
-    document.getElementById('isUserActive').checked = dbconn.isActive === 1;
+    document.getElementById('LastExecutedOn').value = dbconn.lastExecutedOn;//.split("T")[0];
+    document.getElementById('NextExecutionTime').value = dbconn.nextExecutionTime;//.split("T")[0];
+    document.getElementById('isUserActive').checked = dbconn.isActive;
 
 };
 Service.Update = function (dbconn) {
@@ -366,51 +418,84 @@ Service.Update = function (dbconn) {
 
 Service.ValidateAndUpdateService = function (dbconn) {
 
-    var dbConnidSelect = document.getElementById("DBConnid");
+    var UpdateService = {};
+
+    var dbConnidSelect = document.getElementById("DBConnId");
     var alertConfigIdSelect = document.getElementById("AlertConfigId");
     var schedularIdSelect = document.getElementById("SchedularId");
 
+    UpdateService.ActionUser = User.UserId;
 
-    dbconn.ActionUser = User.UserId;
+    UpdateService.title = document.getElementById('Title').value ;
+    UpdateService.sDesc = document.getElementById('ServiceDesc').value;
+    UpdateService.alertType = document.getElementById('AlertType').value;
+    UpdateService.hasAttachment = document.getElementById('HasAttachment').checked ? 1 : 0;
+    UpdateService.attachmentType = document.getElementById('AttachmentType').value;
+    UpdateService.attachmentPath = document.getElementById('AttachmentPath').value;
+    UpdateService.attachmentFileType = document.getElementById('AttachmentFileType').value;
+    UpdateService.outputFileName = document.getElementById('OutputFileName').value;
+    UpdateService.dataSourceType = document.getElementById('DataSourceType').value;
+    UpdateService.dataSourceDef = document.getElementById('DataSourceDef').value;
+    UpdateService.postSendDataSourceType = document.getElementById('PostSendDataSourceType').value;
+    UpdateService.postSendDataSourceDef = document.getElementById('PostSendDataSourceDef').value;
+    UpdateService.emailTo = document.getElementById('EmailTo').value;
+    UpdateService.cCTo = document.getElementById('CCTo').value;
+    UpdateService.bccTo = document.getElementById('BccTo').value;
+    UpdateService.aSubject = document.getElementById('ASubject').value;
+    UpdateService.aBody = document.getElementById('ABody').value;
 
-    dbconn.title = document.getElementById('Title').value ;
-    dbconn.serviceDesc = document.getElementById('ServiceDesc').value;
-    dbconn.alertType = document.getElementById('AlertType').value;
-    dbconn.hasAttachment = document.getElementById('HasAttachment').checked ? true : false;
-    dbconn.serviceDesc = document.getElementById('ServiceDesc').value;
-    dbconn.attachmentType = document.getElementById('AttachmentType').value;
-    dbconn.attachmentPath = document.getElementById('AttachmentPath').value;
-    dbconn.attachmentFileType = document.getElementById('AttachmentFileType').value;
-    dbconn.outputFileName = document.getElementById('OutputFileName').value;
-    dbconn.dataSourceType = document.getElementById('DataSourceType').value;
-    dbconn.dataSourceDef = document.getElementById('DataSourceDef').value;
-    dbconn.postSendDataSourceType = document.getElementById('PostSendDataSourceType').value;
-    dbconn.postSendDataSourceDef = document.getElementById('PostSendDataSourceDef').value;
-    dbconn.emailTo = document.getElementById('EmailTo').value;
-    dbconn.cCTo = document.getElementById('CCTo').value;
-    dbconn.bccTo = document.getElementById('BccTo').value;
-    dbconn.aSubject = document.getElementById('ASubject').value;
-    dbconn.aBody = document.getElementById('ABody').value;
+    UpdateService.dbConnId = JSON.parse(decodeURIComponent(dbConnidSelect.options[dbConnidSelect.selectedIndex].getAttribute("customData"))).dbConnId;
+    UpdateService.alertConfigId = JSON.parse(decodeURIComponent(alertConfigIdSelect.options[alertConfigIdSelect.selectedIndex].getAttribute("customData"))).emailConfigId;
+    UpdateService.schedularId = JSON.parse(decodeURIComponent(schedularIdSelect.options[schedularIdSelect.selectedIndex].getAttribute("customData"))).schedularId;
 
-    dbconn.UserGroupId = JSON.parse(decodeURIComponent(dbConnidSelect.options[dbConnidSelect.selectedIndex].getAttribute("customData"))).dBConnid;
-    dbconn.UserGroupId = JSON.parse(decodeURIComponent(alertConfigIdSelect.options[alertConfigIdSelect.selectedIndex].getAttribute("customData"))).emailConfigId;
-    dbconn.UserGroupId = JSON.parse(decodeURIComponent(schedularIdSelect.options[schedularIdSelect.selectedIndex].getAttribute("customData"))).schedularId;
+    //UpdateService.dBConnId = document.getElementById('DBConnId').value;
+    //UpdateService.alertConfigId  = document.getElementById('AlertConfigId').value;
+    //UpdateService.schedularId  = document.getElementById('SchedularId').value;
 
-    //dbconn.dBConnid = document.getElementById('DBConnid').value;
-    //dbconn.alertConfigId  = document.getElementById('AlertConfigId').value;
-    //dbconn.schedularId  = document.getElementById('SchedularId').value;
+    UpdateService.lastExecutedOn = document.getElementById('LastExecutedOn').value;
+    UpdateService.nextExecutionTime = document.getElementById('NextExecutionTime').value;
 
-    dbconn.lastExecutedOn = document.getElementById('LastExecutedOn').value;
-    dbconn.nextExecutionTime = document.getElementById('NextExecutionTime').value;
-    dbconn.serviceId = document.getElementById('ServiceId').value;
-    dbconn.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
-    Ajax.AuthPost("Service/GetService", dbconn, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+    UpdateService.serviceId = document.getElementById('ServiceId').value;
+    UpdateService.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
+
+
+    // Perform validation
+    var ValidationMsg = " Please provide ";
+    ValidationMsg += (UpdateService.title.trim() === '') ? " Title," : '';
+    ValidationMsg += (UpdateService.sDesc.trim() === '') ? " Desc," : '';
+    ValidationMsg += (UpdateService.alertType.trim() === '') ? " AlertType," : '';
+    ValidationMsg += (UpdateService.attachmentType.trim() === '') ? " AttachmentType," : '';
+    ValidationMsg += (UpdateService.attachmentPath.trim() === '') ? " AttachmentPath," : '';
+    ValidationMsg += (UpdateService.attachmentFileType.trim() === '') ? " AttachmentFileType," : '';
+    ValidationMsg += (UpdateService.outputFileName.trim() === '') ? " OutputFileName," : '';
+    ValidationMsg += (UpdateService.dataSourceType.trim() === '') ? " DataSourceType," : '';
+    ValidationMsg += (UpdateService.dataSourceDef.trim() === '') ? " DataSourceDef," : '';
+    ValidationMsg += (UpdateService.postSendDataSourceType.trim() === '') ? " PostSendDataSourceType," : '';
+    ValidationMsg += (UpdateService.postSendDataSourceDef.trim() === '') ? " PostSendDataSourceDef," : '';
+    ValidationMsg += (UpdateService.emailTo.trim() === '') ? " EmailTo," : '';
+    ValidationMsg += (UpdateService.cCTo.trim() === '') ? " CCTo," : '';
+    ValidationMsg += (UpdateService.aSubject.trim() === '') ? " Subject," : '';
+    ValidationMsg += (UpdateService.aBody.trim() === '') ? " Body," : '';
+    ValidationMsg += (UpdateService.lastExecutedOn.trim() === '') ? " LastExecutedOn," : '';
+    ValidationMsg += (UpdateService.nextExecutionTime.trim() === '') ? " NextExecutionTime," : '';
+
+    if (ValidationMsg.trim() != "Please provide") {
+        alert(ValidationMsg);
+    }
+    else {
+        Ajax.AuthPost("Service/GetService", UpdateService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+    }
+
+    //Ajax.AuthPost("Service/GetService", dbconn, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
 }
 //#endregion -- Update User Service
 
 //#endregion -- Service
 
 
+Service.CloseModal = function () {
+    $('#ServiceModal').modal('hide');
 
+}
 
 

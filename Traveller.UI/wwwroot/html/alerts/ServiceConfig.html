@@ -10,7 +10,10 @@
         <thead>
             <tr class="text-dark">
                 <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
-                <th scope="col">Title</th>
+                <th scope="col">ServiceConfig Name</th>
+                <th scope="col">Schedular Name</th>
+                <th scope="col">Conn Name</th>
+                <th scope="col">EmailConfig Name</th>
                 <th scope="col">AlertType</th>
                 <th scope="col">AttachmentType</th>
                 <th scope="col">Active</th>
@@ -36,7 +39,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ServiceModalLabel">Create New Service Configuration</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Service.LoadAll()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#ServiceModalBody">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -66,7 +69,7 @@
 
                             <div class="mb-3">
                                 <label for="AlertType" class="label font-sb mb-1">AlertType</label>
-                                <input type="text" class="form-control" o id="AlertType">
+                                <input type="text" class="form-control"  id="AlertType">
                             </div>
 
                             <div class="mb-3">
@@ -76,48 +79,46 @@
 
                             <div class="mb-3">
                                 <label for="AttachmentType" class="label font-sb mb-1">AttachmentType</label>
-                                <input type="text" class="form-control" o id="AttachmentType">
+                                <input type="text" class="form-control"  id="AttachmentType">
                             </div>
 
                             <div class="mb-3">
                                 <label for="AttachmentPath" class="label font-sb mb-1">AttachmentPath</label>
-                                <input type="text" class="form-control" o id="AttachmentPath">
+                                <!--<input type="text" class="form-control"  id="AttachmentPath">-->
+                                <textarea id="AttachmentPath" class="form-control" name="AttachmentPath" rows="3" cols="50" style="resize:none"></textarea>
+
                             </div>
 
                             <div class="mb-3">
                                 <label for="AttachmentFileType" class="label font-sb mb-1">AttachmentFileType</label>
-                                <input type="text" class="form-control" o id="AttachmentFileType">
+                                <input type="text" class="form-control"  id="AttachmentFileType">
                             </div>
                             <div class="mb-3">
                                 <label for="OutputFileName" class="label font-sb mb-1">OutputFileName</label>
-                                <input type="text" class="form-control" o id="OutputFileName">
+                                <input type="text" class="form-control"  id="OutputFileName">
                             </div>
-
 
 
                         </div>
 
                         <div class="col-md-4">
 
-
-
-
                             <div class="mb-3">
                                 <label for="DataSourceType" class="label font-sb mb-1">DataSourceType</label>
-                                <input type="text" class="form-control" o id="DataSourceType">
+                                <input type="text" class="form-control"  id="DataSourceType">
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="DataSourceDef" class="label font-sb mb-1">DataSourceDef</label>
-                                <!--<input type="text" class="form-control" o id="DataSourceDef">-->
+                                <!--<input type="text" class="form-control"  id="DataSourceDef">-->
                                 <textarea id="DataSourceDef" class="form-control" name="DataSourceDef" rows="5" cols="60" style="resize:none"></textarea>
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="PostSendDataSourceType" class="label font-sb mb-1">PostSendDataSourceType</label>
-                                <input type="text" class="form-control" o id="PostSendDataSourceType">
+                                <input type="text" class="form-control"  id="PostSendDataSourceType">
                             </div>
 
                             <div class="mb-3">
@@ -140,13 +141,10 @@
                                 <input type="text" class="form-control" id="BccTo">
                             </div>
 
-
                         </div>
 
                         <div class="col-md-4">
-
-                           
-
+                         
                             <div class="mb-3">
                                 <label for="ASubject" class="label font-sb mb-1">ASubject</label>
                                 <input type="text" class="form-control" id="ASubject">
@@ -160,9 +158,9 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="DBConnid" class="label font-sb mb-1">DBConn Name</label>
+                                <label for="DBConnId" class="label font-sb mb-1">DBConn Name</label>
                                 <!--<input type="text" class="form-control" id="DBConnid">-->
-                                <select class="form-control form-control-sm" name="DBConnid" id="DBConnid">...</select>
+                                <select class="form-control form-control-sm" name="DBConnId" id="DBConnId">...</select>
                             </div>
 
                             <div class="mb-3">
@@ -179,12 +177,15 @@
 
                             <div class="mb-3">
                                 <label for="LastExecutedOn" class="label font-sb mb-1">LastExecutedOn</label>
-                                <input type="text" class="form-control" id="LastExecutedOn">
+                                <!--<input type="text" class="form-control" id="LastExecutedOn">-->
+                                <input type="datetime-local" class="form-control" id="LastExecutedOn">
+
                             </div>
 
                             <div class="mb-3">
                                 <label for="NextExecutionTime" class="label font-sb mb-1">NextExecutionTime</label>
-                                <input type="text" class="form-control" id="NextExecutionTime">
+                                <!--<input type="text" class="form-control" id="NextExecutionTime">-->
+                                <input type="datetime-local" class="form-control" id="NextExecutionTime">
                             </div>
 
                             <div class="mb-3">

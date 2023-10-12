@@ -68,6 +68,8 @@ namespace WebAPI
             services.AddTransient<ISchedularMaster, SchedularMasterService>();
             services.AddTransient<IEmailConfig, EmailConfigService>();
             services.AddTransient<IServiceMaster, ServiceMasterService>();
+            services.AddTransient<IAlertsServiceVariables, AlertsServiceVariablesService>();
+            services.AddTransient<IServiceSchedular, ServiceSchedularService>();
 
             //For Directory Browsing, comment out for Prod Release
             services.AddDirectoryBrowser();

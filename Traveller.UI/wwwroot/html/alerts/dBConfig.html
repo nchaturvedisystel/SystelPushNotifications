@@ -34,11 +34,11 @@
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="DBConnectionModal" tabindex="-1" role="dialog" aria-labelledby="DBConnectionModalLabel"
      aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="min-width:900px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="DBConnectionModalLabel">Create New DB Connection </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="DBConnection.LoadAll()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#DBConnectionModalBody">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -57,13 +57,13 @@
 
 
                             <div class="mb-3">
-                                <label for="DBConnName" class="label font-sb mb-1">Connection Name</label>
-                                <input type="text" class="form-control" id="ConnName">
+                                <label for="ConnName" class="label font-sb mb-1">Connection Name</label>
+                                <input type="text" class="form-control" id="ConnName" >
                             </div>
 
                             <div class="mb-3">
                                 <label for="ServerName" class="label font-sb mb-1">Server Name</label>
-                                <input type="text" class="form-control" o id="ServerName">
+                                <input type="text" class="form-control"  id="ServerName">
                             </div>
 
                             <div class="mb-3">

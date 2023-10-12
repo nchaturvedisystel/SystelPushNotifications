@@ -33,11 +33,11 @@
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="SchedularModal" tabindex="-1" role="dialog" aria-labelledby="SchedularModalLabel"
      aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="min-width:900px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="SchedularModalLabel">Create New Schedular Configuration</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Schedular.LoadAll()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#SchedularModalBody">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -62,7 +62,7 @@
 
                             <div class="mb-3">
                                 <label for="SchedularCode" class="label font-sb mb-1">Schedular Code</label>
-                                <input type="text" class="form-control" o id="SchedularCode">
+                                <input type="text" class="form-control"  id="SchedularCode">
                             </div>
 
                             <div class="mb-3">
