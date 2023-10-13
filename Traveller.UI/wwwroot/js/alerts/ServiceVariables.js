@@ -4,9 +4,9 @@ ServiceVariables.ServiceId = 0;
 ServiceVariables.VarInstance = "";
 ServiceVariables.VarValue = "";
 ServiceVariables.VarType = "";
-//ServiceVariables.IsActive = 0;
-//ServiceVariables.ActionUser = User.UserId;
-//ServiceVariables.IsDeleted = 0;
+ServiceVariables.IsActive = 0;
+ServiceVariables.ActionUser = User.UserId;
+ServiceVariables.IsDeleted = 0;
 
 ServiceVariables.ServiceList = {};
 
@@ -32,7 +32,6 @@ ServiceVariables.CreateNew = function () {
     document.getElementById('modalSaveButton').onclick = ServiceVariables.ValidateAndCreateServiceVariables;
 }
 
-
 ServiceVariables.BindServiceIdDropDown = function () {
     var select = document.getElementById("ServiceId");
     var data = ServiceVariables.ServiceList;
@@ -44,24 +43,22 @@ ServiceVariables.BindServiceIdDropDown = function () {
 
 }
 
-
 ServiceVariables.ClearServiceVariablesCRUDForm = function () {
 
     document.getElementById('VarValue').value = "";
     document.getElementById('VarInstance').value = "";
     document.getElementById('VarType').value = "";
-    //document.getElementById('isUserActive').checked = true;
+    document.getElementById('isUserActive').checked = true;
     ServiceVariables.VariableId = 0;
     //ServiceVariables.ServiceId = 0;
     ServiceVariables.VarValue = "";
     ServiceVariables.VarInstance = "";
     ServiceVariables.VarType = "";
-    //Schedular.IsActive = 1;
-    //Schedular.IsDeleted = 0;
+    Schedular.IsActive = 1;
+    Schedular.IsDeleted = 0;
 };
 
 ServiceVariables.ValidateAndCreateServiceVariables = function () {
-
 
     var serviceIdSelect = document.getElementById("ServiceId");
 
@@ -72,8 +69,7 @@ ServiceVariables.ValidateAndCreateServiceVariables = function () {
 
     ServiceVariables.ServiceId = JSON.parse(decodeURIComponent(serviceIdSelect.options[serviceIdSelect.selectedIndex].getAttribute("customData"))).serviceId;
 
-    //ServiceVariables.IsActive = 1;
-
+    ServiceVariables.IsActive = 1;
 
     // Perform validation
     //var ValidationMsg = " Please provide ";
@@ -117,11 +113,8 @@ function ServiceVariablesCRUD_OnSuccessCallBack(data) {
     console.log(data);
     if (data && data.alertsserviceVariablesList && data.alertsserviceVariablesList.length > 0) {
         data = data.alertsserviceVariablesList;
-
-        ServiceVariables.BindServiceVariablesList(data);
-       
-    }
-   
+        ServiceVariables.BindServiceVariablesList(data);      
+    }   
 
 }
 
@@ -136,16 +129,17 @@ ServiceVariables.BindServiceVariablesList = function (data) {
         body.innerHTML = "";
         let SrNo = 0;
         for (var i = 0; i < data.length; i++) {
+            console.log(data[i])
             SrNo += 1;
             var RowHtml = ('<tr>'
                 + '                <td class="dtr-control sorting_1" style="border-left: 5px solid #' + Util.WCColors[i] + ';">' + SrNo + '</td>'
                 + '                <td>' + data[i].title + '</td>'
-                + '                <td>' + data[i].varInstance + '</td>'
+                + '                <td>' + data[i].varInstance  + '</td>'
                 + '                <td>' + data[i].varValue + '</td>'
                 + '                <td>' + data[i].varType + '</td>'
-                //+ '                <td>'
-                //+ '                     <input type="checkbox" id="SchedularIsActive"' + (data[i].isActive ? ' checked' : '') + ' onchange="Schedular.SchedularStatusUpdate(this,\'' + encodeURIComponent(JSON.stringify(data[i])) + '\')" >'
-                //+ '                </td>'
+                + '                <td>'
+                + '                     <input type="checkbox" id="ServiceVariableIsActive"' + (data[i].isActive ? ' checked' : '') + ' onchange="ServiceVariables.ServiceVariableStatusUpdate(this,\'' + encodeURIComponent(JSON.stringify(data[i])) + '\')" >'
+                + '                </td>'
                 + '                <td class="text-center">'
                 + '                    <div class="btn-group dots_dropdown">'
                 + '                         <button type="button" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">'
@@ -155,9 +149,9 @@ ServiceVariables.BindServiceVariablesList = function (data) {
                 + '                             <button class="dropdown-item" type="button" onclick="ServiceVariables.Update(\'' + encodeURIComponent(JSON.stringify(data[i])) + '\')">'
                 + '                                 <i class="fa fa-edit"></i> Edit'
                 + '                             </button>'
-                //+ '                             <button class="dropdown-item" type="button" onclick="ServiceVariables.Delete(\'' + encodeURIComponent(JSON.stringify(data[i])) + '\')">'
-                //+ '                                 <i class="far fa-trash-alt"></i> Delete'
-                //+ '                             </button>'
+                + '                             <button class="dropdown-item" type="button" onclick="ServiceVariables.Delete(\'' + encodeURIComponent(JSON.stringify(data[i])) + '\')">'
+                + '                                 <i class="far fa-trash-alt"></i> Delete'
+                + '                             </button>'
                 + '                         </div>'
                 + '                    </div>'
                 + '               </td> '
@@ -182,42 +176,43 @@ ServiceVariables.BindServiceVariablesList = function (data) {
 
 
 
-//ServiceVariables.ServiceVariablesStatusUpdate = function (sender, data) {
-//    data = JSON.parse(decodeURIComponent(data));
-//    let dbConnData = {}
-//    dbConnData.schedularId = data.schedularId;
-//    dbConnData.isActive = sender.checked ? 1 : 0
-//    dbConnData.actionUser = User.UserId;
+ServiceVariables.ServiceVariableStatusUpdate = function (sender, data) {
+    data = JSON.parse(decodeURIComponent(data));
+    let dbConnData = {}
+    dbConnData.variableId = data.variableId;
+    dbConnData.isActive = sender.checked ? 1 : 0
+    dbConnData.actionUser = User.UserId;
 
-//    Ajax.AuthPost("Schedular/UpdateStatusSchedular", dbConnData, UpdateSchedular_OnSuccesscallback, UpdateSchedular_OnErrorCallBack);
+    Ajax.AuthPost("ServiceVariables/UpdateStatusServiceVariables", dbConnData, UpdateServiceVariables_OnSuccesscallback, UpdateServiceVariables_OnErrorCallBack);
 
-//}
-//function UpdateSchedular_OnSuccesscallback(response) {
-//    if (response.isActive === 1) {
+}
+function UpdateServiceVariables_OnSuccesscallback(response) {
+    if (response.isActive === 1) {
 
-//        Toast.create("Success", "Schedular Active", TOAST_STATUS.SUCCESS, 1500);
-//    } else {
-//        Toast.create("Success", "Schedular Inactive", TOAST_STATUS.WARNING, 1500);
-//    }
-//}
+        Toast.create("Success", "ServiceVariable Active", TOAST_STATUS.SUCCESS, 1500);
+    } else {
+        Toast.create("Success", "ServiceVariable  Inactive", TOAST_STATUS.WARNING, 1500);
+    }
+    ServiceVariables.LoadAll();
+}
 
-//function UpdateSchedular_OnErrorCallBack(data) {
-//    Toast.create("Danger", "Some Error occured", TOAST_STATUS.DANGER, 1500);
-//}
+function UpdateServiceVariables_OnErrorCallBack(data) {
+    Toast.create("Danger", "Some Error occured", TOAST_STATUS.DANGER, 1500);
+}
 
 
 //#region -- Delete User Schedular
-//Schedular.Delete = function (dbconn) {
-//    dbconn = JSON.parse(decodeURIComponent(dbconn));
-//    var Title = 'Are you sure, you want to delete ' + dbconn.iName + ' ?';
-//    Util.DeleteConfirm(dbconn, Title, DeleteSchedular);
-//}
-//function DeleteSchedular(dbconn) {
-//    dbconn.IsDeleted = 1;
-//    dbconn.IsActive = 0;
-//    dbconn.actionUser = User.UserId;
-//    Ajax.AuthPost("Schedular/GetSchedular", dbconn, SchedularCRUD_OnSuccessCallBack, SchedularCRUD_OnErrorCallBack);
-//}
+ServiceVariables.Delete = function (dbconn) {
+    dbconn = JSON.parse(decodeURIComponent(dbconn));
+    var Title = 'Are you sure, you want to delete ' + dbconn.title + ' ?';
+    Util.DeleteConfirm(dbconn, Title, DeleteServiceVariables);
+}
+function DeleteServiceVariables(dbconn) {
+    dbconn.IsDeleted = 1;
+    dbconn.IsActive = 0;
+    dbconn.actionUser = User.UserId;
+    Ajax.AuthPost("ServiceVariables/GetServiceVariables", dbconn, ServiceVariablesCRUD_OnSuccessCallBack, ServiceVariablesCRUD_OnErrorCallBack);
+}
 
 //#endregion -- Delete User Schedular
 
@@ -231,7 +226,7 @@ ServiceVariables.SetServiceVariablesCRUDForm = function (dbconn) {
 
     document.getElementById('ServiceId').value = ("ServiceSelectOption_" + dbconn.serviceId);
 
-    //document.getElementById('isUserActive').checked = dbconn.isActive === 1;
+    document.getElementById('isUserActive').checked = dbconn.isActive === 1;
 
 
 };
@@ -258,8 +253,7 @@ ServiceVariables.ValidateAndUpdateServiceVariables = function (dbconn) {
 
     dbconn.serviceId = JSON.parse(decodeURIComponent(dbserviceidSelect.options[dbserviceidSelect.selectedIndex].getAttribute("customData"))).serviceId;
 
-    //dbconn.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
-
+    dbconn.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
 
     // Perform validation
     //var ValidationMsg = " Please provide ";

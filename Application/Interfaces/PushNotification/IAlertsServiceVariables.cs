@@ -10,5 +10,7 @@ namespace Application.Interfaces.PushNotification
     public interface IAlertsServiceVariables
     {
         public Task<AlertsServiceVariablesList> alertsServiceVariablesList(AlertsServiceVariablesDTO alertsServiceVariablesDTO);
+
+        public Task<AlertsServiceVariablesDTO> ServiceVariableStatusUpdate(AlertsServiceVariablesDTO alertsServiceVariablesDTO);
     }
 }

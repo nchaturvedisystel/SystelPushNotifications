@@ -34,5 +34,16 @@ namespace WebAPI.Controllers.PushNotification
 
             return Ok(response);
         }
+
+        [HttpPost("UpdateStatusServiceVariables")]
+        public async Task<IActionResult> UpdateStatusServiceVariables([FromBody] AlertsServiceVariablesDTO alertsServiceVariablesDTO)
+        {
+            AlertsServiceVariablesDTO response = new AlertsServiceVariablesDTO();
+            response = await mediator.Send(new UpdateStatusServiceVariableCommand
+            {
+                alertsServiceVariablesDTO = alertsServiceVariablesDTO
+            });
+            return Ok(response);
+        }
     }
 }

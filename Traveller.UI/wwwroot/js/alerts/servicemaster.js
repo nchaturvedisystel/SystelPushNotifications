@@ -39,6 +39,14 @@ Service.CreateServiceOnReady = function () {
     DBConnection.LoadAll();
     EmailConfig.LoadAll();
     Schedular.LoadAll();
+
+    //ClassicEditor
+    //    .create(document.querySelector('#editor'))
+    //    .catch(error => {
+    //        console.error(error);
+    //    });
+
+
 }
 
 Service.LoadAll = function () {
@@ -194,48 +202,113 @@ Service.ValidateAndCreateService = function () {
 
 
     // Perform validation
-    var ValidationMsg = " Please provide ";
-    ValidationMsg += (NewService.Title.trim() === '') ? " Title," : '';
-    ValidationMsg += (NewService.SDesc.trim() === '') ? " Desc," : '';
-    ValidationMsg += (NewService.AlertType.trim() === '') ? " AlertType," : '';
-    ValidationMsg += (NewService.AttachmentType.trim() === '') ? " AttachmentType," : '';
-    ValidationMsg += (NewService.AttachmentPath.trim() === '') ? " AttachmentPath," : '';
-    ValidationMsg += (NewService.AttachmentFileType.trim() === '') ? " AttachmentFileType," : '';
-    ValidationMsg += (NewService.OutputFileName.trim() === '') ? " OutputFileName," : '';
-    ValidationMsg += (NewService.DataSourceType.trim() === '') ? " DataSourceType," : '';
-    ValidationMsg += (NewService.DataSourceDef.trim() === '') ? " DataSourceDef," : '';
-    ValidationMsg += (NewService.PostSendDataSourceType.trim() === '') ? " PostSendDataSourceType," : '';
-    ValidationMsg += (NewService.PostSendDataSourceDef.trim() === '') ? " PostSendDataSourceDef," : '';
-    ValidationMsg += (NewService.EmailTo.trim() === '') ? " EmailTo," : '';
-    ValidationMsg += (NewService.CCTo.trim() === '') ? " CCTo," : '';
-    ValidationMsg += (NewService.ASubject.trim() === '') ? " Subject," : '';
-    ValidationMsg += (NewService.ABody.trim() === '') ? " Body," : '';
-    ValidationMsg += (NewService.LastExecutedOn.trim() === '') ? " LastExecutedOn," : '';
-    ValidationMsg += (NewService.NextExecutionTime.trim() === '') ? " NextExecutionTime," : '';
+    //var ValidationMsg = " Please provide ";
+    //ValidationMsg += (NewService.Title.trim() === '') ? " Title," : '';
+    //ValidationMsg += (NewService.SDesc.trim() === '') ? " Desc," : '';
+    //ValidationMsg += (NewService.AlertType.trim() === '') ? " AlertType," : '';
+    //ValidationMsg += (NewService.AttachmentType.trim() === '') ? " AttachmentType," : '';
+    //ValidationMsg += (NewService.AttachmentPath.trim() === '') ? " AttachmentPath," : '';
+    //ValidationMsg += (NewService.AttachmentFileType.trim() === '') ? " AttachmentFileType," : '';
+    //ValidationMsg += (NewService.OutputFileName.trim() === '') ? " OutputFileName," : '';
+    //ValidationMsg += (NewService.DataSourceType.trim() === '') ? " DataSourceType," : '';
+    //ValidationMsg += (NewService.DataSourceDef.trim() === '') ? " DataSourceDef," : '';
+    //ValidationMsg += (NewService.PostSendDataSourceType.trim() === '') ? " PostSendDataSourceType," : '';
+    //ValidationMsg += (NewService.PostSendDataSourceDef.trim() === '') ? " PostSendDataSourceDef," : '';
+    //ValidationMsg += (NewService.EmailTo.trim() === '') ? " EmailTo," : '';
+    //ValidationMsg += (NewService.CCTo.trim() === '') ? " CCTo," : '';
+    //ValidationMsg += (NewService.ASubject.trim() === '') ? " Subject," : '';
+    //ValidationMsg += (NewService.ABody.trim() === '') ? " Body," : '';
+    //ValidationMsg += (NewService.LastExecutedOn.trim() === '') ? " LastExecutedOn," : '';
+    //ValidationMsg += (NewService.NextExecutionTime.trim() === '') ? " NextExecutionTime," : '';
 
-    if (ValidationMsg.trim() != "Please provide") {
-        alert(ValidationMsg);
-    }
-    else {
-        Ajax.AuthPost("Service/GetService", NewService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
-    }
-
-
-    //if (Service.Title.trim() === '' || Service.SDesc.trim() === '' || Service.AlertType.trim() === '' || Service.AttachmentType.trim() === ''
-    //    || Service.AttachmentPath.trim() === '' || Service.AttachmentFileType.trim() === '' || Service.OutputFileName.trim() === '' || Service.DataSourceType.trim() === ''
-    //    || Service.DataSourceDef.trim() === '' || Service.PostSendDataSourceType.trim() === '' || Service.PostSendDataSourceDef.trim() === '' || Service.EmailTo.trim() === ''
-    //    || Service.LastExecutedOn.trim() === '' || Service.NextExecutionTime.trim() === '') {
-    //    // Display error message
-    //    document.getElementById('error-message').innerText = 'All are mandatory fields.';
-    //    document.getElementById('error-message').style.display = 'block';
+    //if (ValidationMsg.trim() != "Please provide") {
+    //    alert(ValidationMsg);
     //}
     //else {
-    //    // Hide error message if fields are not blank
-    //    document.getElementById('error-message').style.display = 'none';
-    //    // Perform AJAX request
-    //    Ajax.AuthPost("Service/GetService", Service, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
-
+    //    Ajax.AuthPost("Service/GetService", NewService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
     //}
+
+    //
+    if (NewService.Title.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Service Name !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.SDesc.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Service Description !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.AlertType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Alert Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.AttachmentType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Attachment Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.AttachmentPath.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Attachment Path !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.AttachmentFileType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Attachment FileType !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.OutputFileName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Output FileName !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.DataSourceType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide DataSource Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.DataSourceDef.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide DataSource Def !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.PostSendDataSourceType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Post Send DataSource Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.PostSendDataSourceDef.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Post Send DataSource Def !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (NewService.EmailTo.trim() === '' || (!regex_pattern_Service.test(NewService.EmailTo))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid EmailTo (EmailID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (NewService.CCTo.trim() === '' || (!regex_pattern_Service.test(NewService.CCTo))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid CCTo (EmailID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (NewService.BccTo.trim() != '' && (!regex_pattern_Service.test(NewService.BccTo))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid BccTo (Email ID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (NewService.ASubject.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Email Subject !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.ABody.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Email Body !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.LastExecutedOn.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Last ExecutedOn !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (NewService.NextExecutionTime.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Next ExecutionTime !';
+        document.getElementById('error-message').style.display = 'block';
+    } 
+    else {
+        document.getElementById('error-message').style.display = 'none';
+        Ajax.AuthPost("Service/GetService", NewService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+    }
 
 }
 
@@ -458,35 +531,116 @@ Service.ValidateAndUpdateService = function (dbconn) {
     UpdateService.serviceId = document.getElementById('ServiceId').value;
     UpdateService.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
 
+    if (UpdateService.title.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Service Name !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.sDesc.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Service Description !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.alertType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Alert Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.attachmentType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Attachment Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.attachmentPath.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Attachment Path !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.attachmentFileType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Attachment FileType !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.outputFileName.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Output FileName !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.dataSourceType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide DataSource Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.dataSourceDef.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide DataSource Def !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.postSendDataSourceType.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Post Send DataSource Type !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.postSendDataSourceDef.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Post Send DataSource Def !';
+        document.getElementById('error-message').style.display = 'block';
+    }
 
-    // Perform validation
-    var ValidationMsg = " Please provide ";
-    ValidationMsg += (UpdateService.title.trim() === '') ? " Title," : '';
-    ValidationMsg += (UpdateService.sDesc.trim() === '') ? " Desc," : '';
-    ValidationMsg += (UpdateService.alertType.trim() === '') ? " AlertType," : '';
-    ValidationMsg += (UpdateService.attachmentType.trim() === '') ? " AttachmentType," : '';
-    ValidationMsg += (UpdateService.attachmentPath.trim() === '') ? " AttachmentPath," : '';
-    ValidationMsg += (UpdateService.attachmentFileType.trim() === '') ? " AttachmentFileType," : '';
-    ValidationMsg += (UpdateService.outputFileName.trim() === '') ? " OutputFileName," : '';
-    ValidationMsg += (UpdateService.dataSourceType.trim() === '') ? " DataSourceType," : '';
-    ValidationMsg += (UpdateService.dataSourceDef.trim() === '') ? " DataSourceDef," : '';
-    ValidationMsg += (UpdateService.postSendDataSourceType.trim() === '') ? " PostSendDataSourceType," : '';
-    ValidationMsg += (UpdateService.postSendDataSourceDef.trim() === '') ? " PostSendDataSourceDef," : '';
-    ValidationMsg += (UpdateService.emailTo.trim() === '') ? " EmailTo," : '';
-    ValidationMsg += (UpdateService.cCTo.trim() === '') ? " CCTo," : '';
-    ValidationMsg += (UpdateService.aSubject.trim() === '') ? " Subject," : '';
-    ValidationMsg += (UpdateService.aBody.trim() === '') ? " Body," : '';
-    ValidationMsg += (UpdateService.lastExecutedOn.trim() === '') ? " LastExecutedOn," : '';
-    ValidationMsg += (UpdateService.nextExecutionTime.trim() === '') ? " NextExecutionTime," : '';
+    else if (UpdateService.emailTo.trim() === '' || (!regex_pattern_Service.test(UpdateService.emailTo))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid EmailTo (EmailID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
 
-    if (ValidationMsg.trim() != "Please provide") {
-        alert(ValidationMsg);
+    else if (UpdateService.cCTo.trim() === '' || (!regex_pattern_Service.test(UpdateService.cCTo))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid CCTo (EmailID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (UpdateService.bccTo.trim() != '' && (!regex_pattern_Service.test(UpdateService.bccTo))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid BccTo (Email ID) !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+
+    else if (UpdateService.aSubject.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Email Subject !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.aBody.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Email Body !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.lastExecutedOn.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Last ExecutedOn !';
+        document.getElementById('error-message').style.display = 'block';
+    }
+    else if (UpdateService.nextExecutionTime.trim() === '') {
+        document.getElementById('error-message').innerText = 'Please Provide Next ExecutionTime !';
+        document.getElementById('error-message').style.display = 'block';
     }
     else {
+        document.getElementById('error-message').style.display = 'none';
         Ajax.AuthPost("Service/GetService", UpdateService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
     }
 
-    //Ajax.AuthPost("Service/GetService", dbconn, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+
+    // Perform validation
+    //var ValidationMsg = " Please provide ";
+    //ValidationMsg += (UpdateService.title.trim() === '') ? " Title," : '';
+    //ValidationMsg += (UpdateService.sDesc.trim() === '') ? " Desc," : '';
+    //ValidationMsg += (UpdateService.alertType.trim() === '') ? " AlertType," : '';
+    //ValidationMsg += (UpdateService.attachmentType.trim() === '') ? " AttachmentType," : '';
+    //ValidationMsg += (UpdateService.attachmentPath.trim() === '') ? " AttachmentPath," : '';
+    //ValidationMsg += (UpdateService.attachmentFileType.trim() === '') ? " AttachmentFileType," : '';
+    //ValidationMsg += (UpdateService.outputFileName.trim() === '') ? " OutputFileName," : '';
+    //ValidationMsg += (UpdateService.dataSourceType.trim() === '') ? " DataSourceType," : '';
+    //ValidationMsg += (UpdateService.dataSourceDef.trim() === '') ? " DataSourceDef," : '';
+    //ValidationMsg += (UpdateService.postSendDataSourceType.trim() === '') ? " PostSendDataSourceType," : '';
+    //ValidationMsg += (UpdateService.postSendDataSourceDef.trim() === '') ? " PostSendDataSourceDef," : '';
+    //ValidationMsg += (UpdateService.emailTo.trim() === '') ? " EmailTo," : '';
+    //ValidationMsg += (UpdateService.cCTo.trim() === '') ? " CCTo," : '';
+    //ValidationMsg += (UpdateService.aSubject.trim() === '') ? " Subject," : '';
+    //ValidationMsg += (UpdateService.aBody.trim() === '') ? " Body," : '';
+    //ValidationMsg += (UpdateService.lastExecutedOn.trim() === '') ? " LastExecutedOn," : '';
+    //ValidationMsg += (UpdateService.nextExecutionTime.trim() === '') ? " NextExecutionTime," : '';
+
+    //if (ValidationMsg.trim() != "Please provide") {
+    //    alert(ValidationMsg);
+    //}
+    //else {
+    //    Ajax.AuthPost("Service/GetService", UpdateService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+    //}
+
+
 }
 //#endregion -- Update User Service
 
@@ -497,5 +651,7 @@ Service.CloseModal = function () {
     $('#ServiceModal').modal('hide');
 
 }
+
+
 
 

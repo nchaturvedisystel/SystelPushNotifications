@@ -1,0 +1,41 @@
+﻿<!--<link rel="stylesheet" href="../richtexteditor/runtime/richtexteditor_preview.css" />
+<link rel="stylesheet" href="../richtexteditor/rte_theme_default.css" />
+<script type="text/javascript" src="../richtexteditor/rte.js"></script>
+<script type="text/javascript" src='../richtexteditor/plugins/all_plugins.js'></script>
+
+<input name="htmlcode" id="inp_htmlcode" type="hidden" />
+<div id="div_editor1" class="richtexteditor" style="width: 960px; margin: 0 auto;"></div>
+
+<script>
+    var editor1 = new RichTextEditor(document.getElementById("div_editor1"));
+    editor1.attachEvent("change", function () {
+        document.getElementById("inp_htmlcode").value = editor1.getHTMLCode();
+    });
+</script>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CKEditor Example</title>
+    <script src="../../js/ckeditor.js"></script>
+</head>
+<body>
+    <h1>CKEditor Example</h1>
+    <textarea id="editor"></textarea>
+    <button onclick="getEditorContent()">Get Content</button>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+
+        function getEditorContent() {
+            const editor = ClassicEditor.instances[0];
+            const content = editor.getData();
+            alert(content);
+        }
+    </script>
+</body>
+</html>
+
+

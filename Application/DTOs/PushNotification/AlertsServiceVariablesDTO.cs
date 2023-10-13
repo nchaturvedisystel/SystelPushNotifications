@@ -14,6 +14,14 @@ namespace Application.DTOs.PushNotification
         public string VarValue { get; set; }
         public string VarType { get; set; }
         public string Title { get; set; }
+        public int IsActive { get; set; }
+        public int ActionUser { get; set; }
+        public int IsDeleted { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime ModifiedOn { get; set; }
+
     }
 
     public class AlertsServiceVariablesList

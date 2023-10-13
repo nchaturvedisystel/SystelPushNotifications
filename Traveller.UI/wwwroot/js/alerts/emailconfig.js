@@ -87,16 +87,8 @@ EmailConfig.ValidateAndCreateEmailConfig = function () {
         document.getElementById('error-message').style.display = 'block';
     }
 
-    else if (EmailConfig.IFrom.trim() === '')
-    {
-        
-        //console.log(regex_pattern.test(EmailConfig.IFrom));
-        document.getElementById('error-message').innerText = 'Please Provide From (Email ID)!';
-        document.getElementById('error-message').style.display = 'block';
-    }
-
-    else if (!regex_pattern.test(EmailConfig.IFrom)) {
-        document.getElementById('error-message').innerText = 'Please Provide valid From (Email ID) !';
+    else if (EmailConfig.IFrom.trim() === '' || (!regex_pattern.test(EmailConfig.IFrom))) {
+        document.getElementById('error-message').innerText = 'Please Provide valid From (EmailID) !';
         document.getElementById('error-message').style.display = 'block';
     }
 
