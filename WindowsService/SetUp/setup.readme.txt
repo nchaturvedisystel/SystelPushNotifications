@@ -1,0 +1,31 @@
+﻿Step 1
+
+Create Database "Notification"
+Run Query "1_CreateStructureWithData.sql"
+Run Query "1_CreateStructureWithData.sql" after configuration changes as per client
+------------------------------------------------------------------------------------------------------------------
+Step 2
+
+Copy Paste Dll files from Software Data folder (D:\SharedData\CrystalReports\FilesToBeInstalledOnClientMachine) to Client Machine
+Run the exe "vcredist_x64"
+Run the setup "CRforVS6413SP32_0-80007712"
+------------------------------------------------------------------------------------------------------------------
+Step 3
+
+Copy Paste the release code on Client PC
+------------------------------------------------------------------------------------------------------------------
+Step 4
+
+Get AppKey as per client data connection
+------------------------------------------------------------------------------------------------------------------
+Step 5
+
+Create folder in root directory "ClientData"
+Create folder in root directory "EmailNotification"
+------------------------------------------------------------------------------------------------------------------
+Step 6
+
+Change the application.exe.config
+Change "AppKeyPath"
+Change "ServiceDocPath" to "EmailNotification" folder
+------------------------------------------------------------------------------------------------------------------
