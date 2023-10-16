@@ -93,9 +93,9 @@ namespace Systel.Notification.BAL
             if (File.Exists(pushNotificationDTO.AttachmentPath))
             {
                 mailMessage.Attachments.Add(new Attachment(pushNotificationDTO.AttachmentPath));
-
                 //Send Multiple files
-                //string[] FileName = new string[] { pushNotificationDTO.AttachmentPath, pushNotificationDTO.AttachmentPath };
+                //string[] FileName = new string[] {
+                //pushNotificationDTO.AttachmentPath, pushNotificationDTO.AttachmentPath };
                 //foreach (string File in FileName)
                 //{
                 //    Attachment atch = new Attachment(File);

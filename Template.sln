@@ -25,12 +25,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traveller.UI", "Traveller.U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB.SQL", "DB.SQL", "{5833B812-8FA4-4C8A-B8DF-F2C4872DB764}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\amuttathu\Desktop\TemplateDB_SchemaWithData.sql = C:\Users\amuttathu\Desktop\TemplateDB_SchemaWithData.sql
+		..\..\..\..\amuttathu\Desktop\TemplateDB_SchemaWithData.sql = ..\..\..\..\amuttathu\Desktop\TemplateDB_SchemaWithData.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsService", "WindowsService", "{ED7E5804-33B9-442E-9A6C-7FBDF9951962}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Systel.Notification", "Systel.Notification\Systel.Notification.csproj", "{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotification", "..\..\..\CBIT\PushNotification\PushNotification\PushNotification.csproj", "{F6B3BA44-4679-4D52-B928-1F990E74A525}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0814DA32-996B-46FB-B8AF-B2C7E6C5F364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B3BA44-4679-4D52-B928-1F990E74A525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B3BA44-4679-4D52-B928-1F990E74A525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B3BA44-4679-4D52-B928-1F990E74A525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B3BA44-4679-4D52-B928-1F990E74A525}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
