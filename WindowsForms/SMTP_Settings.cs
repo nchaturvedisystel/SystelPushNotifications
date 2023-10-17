@@ -28,7 +28,7 @@ namespace PushNotification
 
         private void SMTPApply_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void SMTPCancel_Click(object sender, EventArgs e)

@@ -83,6 +83,7 @@
             ServerText.Name = "ServerText";
             ServerText.Size = new Size(164, 23);
             ServerText.TabIndex = 4;
+            ServerText.TextChanged += ServerText_TextChanged;
             // 
             // UsernameText
             // 
