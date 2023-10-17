@@ -12,10 +12,7 @@ namespace PushNotification
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Login());
-            Application.Run(new SMTP_Settings());  
-            Application.Run(new Rule()); 
-            
-            
+            //Application.Run(new Rule());     
         }
     }
 }

@@ -28,15 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             SMTPServer = new Label();
-            printDocument1 = new System.Drawing.Printing.PrintDocument();
-            printDocument2 = new System.Drawing.Printing.PrintDocument();
             SMTPPort = new Label();
             SMTPUsername = new Label();
             SMTPPass = new Label();
             textBox1 = new TextBox();
-            notifyIcon1 = new NotifyIcon(components);
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
@@ -90,11 +86,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(197, 23);
             textBox1.TabIndex = 4;
-            // 
-            // notifyIcon1
-            // 
-            notifyIcon1.Text = "notifyIcon1";
-            notifyIcon1.Visible = true;
             // 
             // textBox2
             // 
@@ -205,13 +196,10 @@
         #endregion
 
         private Label SMTPServer;
-        private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Drawing.Printing.PrintDocument printDocument2;
         private Label SMTPPort;
         private Label SMTPUsername;
         private Label SMTPPass;
         private TextBox textBox1;
-        private NotifyIcon notifyIcon1;
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
