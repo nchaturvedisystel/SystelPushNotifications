@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PushNotification.Model
 {
-    public class DBConfigConnection
+    public class DBConfigConnectionDTO
     {
         public string ConnectionName { get; set; }
         public string ServerName { get; set; }
@@ -16,6 +16,6 @@ namespace PushNotification.Model
     }
     public class ConfigConnectionList
     {
-        public IEnumerable<DBConfigConnection> list { get; set; }
+        public IEnumerable<DBConfigConnectionDTO> list { get; set; }
     }
 }

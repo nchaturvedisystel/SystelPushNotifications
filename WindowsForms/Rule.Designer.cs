@@ -170,6 +170,7 @@
             DBConfig.TabIndex = 1;
             DBConfig.Text = "DBConfig";
             DBConfig.UseVisualStyleBackColor = true;
+            DBConfig.Click += DBConfig_Click;
             // 
             // DBConfigPassword
             // 
@@ -216,6 +217,7 @@
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(265, 26);
             textBox6.TabIndex = 15;
+            textBox6.TextChanged += textBox6_TextChanged;
             // 
             // IsActiveCheckBox
             // 
@@ -488,8 +490,9 @@
             // ASMBody
             // 
             ASMBody.Location = new Point(132, 349);
+            ASMBody.Multiline = true;
             ASMBody.Name = "ASMBody";
-            ASMBody.Size = new Size(167, 23);
+            ASMBody.Size = new Size(167, 72);
             ASMBody.TabIndex = 28;
             // 
             // label11

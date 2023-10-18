@@ -162,5 +162,15 @@ namespace PushNotification
             dateTimePicker6.Format = DateTimePickerFormat.Custom;
             dateTimePicker6.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
         }
+
+        private void DBConfig_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

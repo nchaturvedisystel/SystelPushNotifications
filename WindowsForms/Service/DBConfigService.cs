@@ -8,8 +8,9 @@ using PushNotification.Model;
 using PushNotification.Interface;
 namespace PushNotification.Service
 {
-    public class DBConfig
+    public class DBConfigService 
     {
-        public List<DBConfigConnection> DBConfigs = new List<DBConfigConnection>();
+       
     }
 }
+ 
