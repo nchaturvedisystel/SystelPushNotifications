@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             ServerLabel = new Label();
             UsernameLabel = new Label();
             PasswordLabel = new Label();
@@ -38,6 +39,8 @@
             DBText = new TextBox();
             OKButton = new Button();
             CancelButton = new Button();
+            dBConfigConnectionBindingSource = new BindingSource(components);
+            ((System.ComponentModel.ISupportInitialize)dBConfigConnectionBindingSource).BeginInit();
             SuspendLayout();
             // 
             // ServerLabel
@@ -130,12 +133,16 @@
             CancelButton.UseVisualStyleBackColor = true;
             CancelButton.Click += CancelButton_Click;
             // 
+            // dBConfigConnectionBindingSource
+            // 
+            dBConfigConnectionBindingSource.DataSource = typeof(Model.DBConfigConnectionDTO);
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CausesValidation = false;
-            ClientSize = new Size(355, 220);
+            ClientSize = new Size(371, 216);
             Controls.Add(CancelButton);
             Controls.Add(OKButton);
             Controls.Add(DBText);
@@ -151,6 +158,7 @@
             Text = "Login";
             TransparencyKey = Color.FromArgb(128, 255, 255);
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dBConfigConnectionBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,5 +175,6 @@
         private TextBox DBText;
         private Button OKButton;
         private Button CancelButton;
+        private BindingSource dBConfigConnectionBindingSource;
     }
 }

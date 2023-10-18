@@ -24,7 +24,7 @@ namespace PushNotification
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void OKButton_Click(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace PushNotification
             string password = PassText.Text;
             string DB = DBText.Text;
             //if (Server == "INMUM-GP-005,49172" && Username == "full" && password == "123456" && DB == "PushNotification")
-            if(Server=="123456")
+            if (Server == "123456")
             {
                 Rule rule = new Rule();
                 rule.Show();
@@ -49,7 +49,12 @@ namespace PushNotification
 
         private void ServerText_TextChanged(object sender, EventArgs e)
         {
-        
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
