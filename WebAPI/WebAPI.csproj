@@ -45,6 +45,10 @@
      </None>
    </ItemGroup>
 
+   <ItemGroup>
+     <Folder Include="Client\Files\Alerts\ReportFile\" />
+   </ItemGroup>
+
 
 
 </Project>

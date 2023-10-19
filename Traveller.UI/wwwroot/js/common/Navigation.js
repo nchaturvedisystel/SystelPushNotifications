@@ -63,7 +63,7 @@ Navigation.CallPageLoad = function (MenuCode) {
         UserGroup.CreateGroupOnReady();
     }
     else if (MenuCode == "USR") {
-        UserDashboard.CreateUserDashboardOnReady();
+       UserDashboard.CreateUserDashboardOnReady();
     }
     else if (MenuCode == "USRL") {
         UserMaster.CreateUserMasterOnReady();
@@ -98,12 +98,12 @@ Navigation.CallPageLoad = function (MenuCode) {
     else if (MenuCode == "URAD") {
         WorkItem.GetTravelerDetail();
     }
-    else if (MenuCode == "ADM") {
-        Admin.BasepageOnReady();
-    }
-    else if (MenuCode == "DB") {
-        Dashboard.BasepageOnReady();
-    }
+    //else if (MenuCode == "ADM") {
+    //    Admin.BasepageOnReady();
+    //}
+    //else if (MenuCode == "DB") {
+    //    Dashboard.BasepageOnReady();
+    //}
 
     else if (MenuCode == "DBANN") {
         DBConnection.CreateDBConnectionOnReady();

@@ -30,8 +30,8 @@ namespace Application.DTOs.PushNotification
         public int DBConnId { get; set; }
         public int AlertConfigId { get; set; }
         public int SchedularId { get; set; }
-        public DateTime LastExecutedOn { get; set; }
-        public DateTime NextExecutionTime { get; set; }
+        public DateTime? LastExecutedOn { get; set; }
+        public DateTime? NextExecutionTime { get; set; }
         public int IsActive { get; set; }
         public int IsDeleted { get; set; }
         public string CreatedBy { get; set; }
@@ -41,8 +41,9 @@ namespace Application.DTOs.PushNotification
         public int ActionUser { get; set; }
         public string SchedularName { get; set; }
         public string ConnName { get; set; }
-        public string EmailConfigName { get; set; }
-        
+        public string EmailConfigName { get; set; }        
+        public string AttachmentBase64 { get; set; }
+        public string WebRootPath { get; set; }
     }
 
     public class ServiceMasterList
