@@ -98,3 +98,41 @@ VALUES
 '2023-10-02 12:00:00.003', '2023-10-25 13:55:20.793', '00:00:00.003', '23:59:59.997',1,0)
 
 
+
+
+
+/*
+('KDPL-Outgoing Payment','','Email',1, 'CrystalReport', 'D:\Setup\OtherSetupsDoNotDelete\Notifications\EmailNotification\eInvoice-Triplicate-View.rpt',
+'PDF', 'KDPL-Outgoing PaymentInvoice_[%1].pdf', 'Query', 
+
+'SELECT Top 1(T0.DocEntry),T0.DocNum,T0.CardCode, isnull(T1."E_Mail",''noreply@khemanigroup.com'') AS ''Email'' FROM OVPM T0 
+LEFT JOIN OCRD T1 ON T0."CardCode"=T1."CardCode"
+LEFT JOIN JDT1 T2 ON T0."TransId"=T2."TransId"
+WHERE T2."U_BankDate" IS NOT NULL AND T0.DocType IN (''C'',''S'')
+AND T0."U_EmailSent"=''N''',
+
+'Query', 
+
+'UPDATE OINV SET U_EmailSent = ''Y'' WHERE DocEntry=''[%0]''',
+
+'<Email>,noreply@khemanigroup.com','','','KDPL Sales Invoice-[%1]',
+'This email is not monitered. Please contact on santosh@khemanigroup.com or sandip@khemanigroup.com in case of query.',
+1, 1, 1, '2023-09-27 11:58:35.083',	NULL, 1, 0, 'SYSTEM','2023-09-27 11:58:35.083',NULL, '2023-09-27 11:58:35.083')
+*/
+
+/*
+('KDPL-AR Credit-Item','','Email',1, 'CrystalReport', 'D:\Setup\OtherSetupsDoNotDelete\Notifications\EmailNotification\AR Credit-GST-Service-KDPL.rpt',
+'PDF', 'KDPL-AR Credit-Item_[%1].pdf', 'Query', 
+
+'SELECT Top 1(T0.DocEntry),T0.DocNum,T0.CardCode,T0.CardName,ISNULL(T1."E_Mail",''noreply@khemanigroup.com'') AS ''Email'' FROM ORIN T0 LEFT JOIN OCRD T1 ON T0."CardCode"=T1."CardCode"
+WHERE T0."U_EmailSent"=''N'' AND T0."DocType"=''I'' AND T0.DocCur=''INR''',
+
+
+'Query', 
+
+'UPDATE OINV SET U_EmailSent = ''Y'' WHERE DocEntry=''[%0]''',
+
+'<Email>,noreply@khemanigroup.com','','','KDPL-AR Credit-Item-[%1]',
+'This email is not monitered. Please contact on santosh@khemanigroup.com or sandip@khemanigroup.com in case of query.',
+1, 1, 1, '2023-09-27 11:58:35.083',	NULL, 1, 0, 'SYSTEM','2023-09-27 11:58:35.083',NULL, '2023-09-27 11:58:35.083')
+*/

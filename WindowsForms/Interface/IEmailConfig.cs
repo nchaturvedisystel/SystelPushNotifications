@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PushNotification.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace PushNotification.Interface
 {
-    internal class IEmailConfig
+    public interface IEmailConfig
     {
+        void InsertEmailConfig(EmailConfigDTO emailConfig);
     }
 }
