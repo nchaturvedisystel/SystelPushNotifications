@@ -11,10 +11,11 @@ namespace PushNotification.Model
         public string ConnectionName { get; set; }
         public string Description { get; set; }
         public string Host { get; set; }
-        public int Port { get; set; }
+        public string Port { get; set; }
         public string From { get; set; }
         public string Password { get; set; }
         public string status { get; set; }
 
     }
+
 }
