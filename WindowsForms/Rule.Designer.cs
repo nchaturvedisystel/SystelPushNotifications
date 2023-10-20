@@ -42,12 +42,13 @@
             DBConfigServer = new Label();
             DBConfigConn = new Label();
             EmailConfig = new TabPage();
+            EmailConfirm = new Button();
             IsUnActRadio = new RadioButton();
             IsActiveRadio = new RadioButton();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
+            PassConfig = new TextBox();
+            FromConfig = new TextBox();
+            PortConfig = new TextBox();
+            HostConf = new TextBox();
             EConfigPort = new Label();
             DescText = new TextBox();
             TitleText = new TextBox();
@@ -58,6 +59,11 @@
             RuleDesc = new Label();
             RuleTitle = new Label();
             AlertServiceMaster = new TabPage();
+            button1 = new Button();
+            textBox1 = new TextBox();
+            label14 = new Label();
+            comboBox4 = new ComboBox();
+            label13 = new Label();
             ASMDatasourceDef = new TextBox();
             label12 = new Label();
             ASMBody = new TextBox();
@@ -83,18 +89,20 @@
             ASMTitle = new ComboBox();
             label1 = new Label();
             SConfigClose = new TabPage();
+            button2 = new Button();
             SConfigType = new ComboBox();
             SchedulerIsActive = new CheckBox();
-            textBox11 = new TextBox();
+            SchedularFreq = new TextBox();
             FrequencyInMinutes = new Label();
             SchedularType = new Label();
             SchedularDesc = new Label();
             SchedularCode = new Label();
-            EmailSubjectTxtBox = new TextBox();
-            EmailCcTxtBox = new TextBox();
+            SchedularDescText = new TextBox();
+            SchedularCodeTxt = new TextBox();
             SchedulerName = new TextBox();
             SchedularName = new Label();
             ServiceVariables = new TabPage();
+            button5 = new Button();
             comboBox1 = new ComboBox();
             textBox14 = new TextBox();
             textBox13 = new TextBox();
@@ -104,6 +112,7 @@
             VarInstance = new Label();
             ServiceName = new Label();
             ServiceScheduler = new TabPage();
+            button6 = new Button();
             dateTimePicker6 = new DateTimePicker();
             dateTimePicker5 = new DateTimePicker();
             SchedularIsAct = new CheckBox();
@@ -273,12 +282,13 @@
             // EmailConfig
             // 
             EmailConfig.AccessibleName = "";
+            EmailConfig.Controls.Add(EmailConfirm);
             EmailConfig.Controls.Add(IsUnActRadio);
             EmailConfig.Controls.Add(IsActiveRadio);
-            EmailConfig.Controls.Add(textBox5);
-            EmailConfig.Controls.Add(textBox4);
-            EmailConfig.Controls.Add(textBox3);
-            EmailConfig.Controls.Add(textBox2);
+            EmailConfig.Controls.Add(PassConfig);
+            EmailConfig.Controls.Add(FromConfig);
+            EmailConfig.Controls.Add(PortConfig);
+            EmailConfig.Controls.Add(HostConf);
             EmailConfig.Controls.Add(EConfigPort);
             EmailConfig.Controls.Add(DescText);
             EmailConfig.Controls.Add(TitleText);
@@ -296,6 +306,16 @@
             EmailConfig.Text = "EmailConfig";
             EmailConfig.UseVisualStyleBackColor = true;
             EmailConfig.Click += EmailConfig_Click;
+            // 
+            // EmailConfirm
+            // 
+            EmailConfirm.Location = new Point(7, 379);
+            EmailConfirm.Name = "EmailConfirm";
+            EmailConfirm.Size = new Size(75, 23);
+            EmailConfirm.TabIndex = 24;
+            EmailConfirm.Text = "Confirm";
+            EmailConfirm.UseVisualStyleBackColor = true;
+            EmailConfirm.Click += EmailConfirm_Click;
             // 
             // IsUnActRadio
             // 
@@ -321,33 +341,36 @@
             IsActiveRadio.Text = "Active";
             IsActiveRadio.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // PassConfig
             // 
-            textBox5.Location = new Point(140, 304);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(191, 23);
-            textBox5.TabIndex = 21;
+            PassConfig.Location = new Point(140, 304);
+            PassConfig.Name = "PassConfig";
+            PassConfig.Size = new Size(191, 23);
+            PassConfig.TabIndex = 21;
+            PassConfig.TextChanged += PassConfig_TextChanged;
             // 
-            // textBox4
+            // FromConfig
             // 
-            textBox4.Location = new Point(140, 246);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(191, 23);
-            textBox4.TabIndex = 20;
+            FromConfig.Location = new Point(140, 275);
+            FromConfig.Name = "FromConfig";
+            FromConfig.Size = new Size(191, 23);
+            FromConfig.TabIndex = 20;
+            FromConfig.TextChanged += PortConfig_TextChanged;
             // 
-            // textBox3
+            // PortConfig
             // 
-            textBox3.Location = new Point(140, 275);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(191, 23);
-            textBox3.TabIndex = 19;
+            PortConfig.Location = new Point(140, 246);
+            PortConfig.Name = "PortConfig";
+            PortConfig.Size = new Size(191, 23);
+            PortConfig.TabIndex = 19;
+            PortConfig.TextChanged += EmailFrom_TextChanged;
             // 
-            // textBox2
+            // HostConf
             // 
-            textBox2.Location = new Point(140, 217);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(191, 23);
-            textBox2.TabIndex = 18;
+            HostConf.Location = new Point(140, 217);
+            HostConf.Name = "HostConf";
+            HostConf.Size = new Size(191, 23);
+            HostConf.TabIndex = 18;
             // 
             // EConfigPort
             // 
@@ -438,6 +461,11 @@
             // 
             // AlertServiceMaster
             // 
+            AlertServiceMaster.Controls.Add(button1);
+            AlertServiceMaster.Controls.Add(textBox1);
+            AlertServiceMaster.Controls.Add(label14);
+            AlertServiceMaster.Controls.Add(comboBox4);
+            AlertServiceMaster.Controls.Add(label13);
             AlertServiceMaster.Controls.Add(ASMDatasourceDef);
             AlertServiceMaster.Controls.Add(label12);
             AlertServiceMaster.Controls.Add(ASMBody);
@@ -468,6 +496,54 @@
             AlertServiceMaster.TabIndex = 6;
             AlertServiceMaster.Text = "AlertServiceMaster";
             AlertServiceMaster.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(565, 398);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 38;
+            button1.Text = "Confirm";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(448, 82);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(192, 68);
+            textBox1.TabIndex = 37;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.Location = new Point(323, 82);
+            label14.Name = "label14";
+            label14.Size = new Size(99, 18);
+            label14.TabIndex = 36;
+            label14.Text = "SendData Def :";
+            // 
+            // comboBox4
+            // 
+            comboBox4.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Items.AddRange(new object[] { "Crystal Report", "SQL Queries" });
+            comboBox4.Location = new Point(448, 16);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(167, 23);
+            comboBox4.TabIndex = 35;
+            comboBox4.Text = "SQL Queries";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Location = new Point(323, 16);
+            label13.Name = "label13";
+            label13.Size = new Size(119, 18);
+            label13.TabIndex = 34;
+            label13.Text = "SendData Source :";
             // 
             // ASMDatasourceDef
             // 
@@ -699,15 +775,16 @@
             // 
             // SConfigClose
             // 
+            SConfigClose.Controls.Add(button2);
             SConfigClose.Controls.Add(SConfigType);
             SConfigClose.Controls.Add(SchedulerIsActive);
-            SConfigClose.Controls.Add(textBox11);
+            SConfigClose.Controls.Add(SchedularFreq);
             SConfigClose.Controls.Add(FrequencyInMinutes);
             SConfigClose.Controls.Add(SchedularType);
             SConfigClose.Controls.Add(SchedularDesc);
             SConfigClose.Controls.Add(SchedularCode);
-            SConfigClose.Controls.Add(EmailSubjectTxtBox);
-            SConfigClose.Controls.Add(EmailCcTxtBox);
+            SConfigClose.Controls.Add(SchedularDescText);
+            SConfigClose.Controls.Add(SchedularCodeTxt);
             SConfigClose.Controls.Add(SchedulerName);
             SConfigClose.Controls.Add(SchedularName);
             SConfigClose.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -720,6 +797,16 @@
             SConfigClose.UseVisualStyleBackColor = true;
             SConfigClose.Click += SConfigClose_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(26, 401);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 29;
+            button2.Text = "Confirm";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
+            // 
             // SConfigType
             // 
             SConfigType.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
@@ -730,6 +817,7 @@
             SConfigType.Size = new Size(251, 26);
             SConfigType.TabIndex = 28;
             SConfigType.Text = "Recurring";
+            SConfigType.SelectedIndexChanged += SConfigType_SelectedIndexChanged;
             // 
             // SchedulerIsActive
             // 
@@ -742,12 +830,12 @@
             SchedulerIsActive.Text = "Active";
             SchedulerIsActive.UseVisualStyleBackColor = true;
             // 
-            // textBox11
+            // SchedularFreq
             // 
-            textBox11.Location = new Point(175, 236);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(251, 26);
-            textBox11.TabIndex = 22;
+            SchedularFreq.Location = new Point(175, 236);
+            SchedularFreq.Name = "SchedularFreq";
+            SchedularFreq.Size = new Size(251, 26);
+            SchedularFreq.TabIndex = 22;
             // 
             // FrequencyInMinutes
             // 
@@ -789,20 +877,21 @@
             SchedularCode.TabIndex = 5;
             SchedularCode.Text = "Schedular Code";
             // 
-            // EmailSubjectTxtBox
+            // SchedularDescText
             // 
-            EmailSubjectTxtBox.Location = new Point(175, 104);
-            EmailSubjectTxtBox.Multiline = true;
-            EmailSubjectTxtBox.Name = "EmailSubjectTxtBox";
-            EmailSubjectTxtBox.Size = new Size(251, 70);
-            EmailSubjectTxtBox.TabIndex = 4;
+            SchedularDescText.Location = new Point(175, 104);
+            SchedularDescText.Multiline = true;
+            SchedularDescText.Name = "SchedularDescText";
+            SchedularDescText.Size = new Size(251, 70);
+            SchedularDescText.TabIndex = 4;
             // 
-            // EmailCcTxtBox
+            // SchedularCodeTxt
             // 
-            EmailCcTxtBox.Location = new Point(175, 72);
-            EmailCcTxtBox.Name = "EmailCcTxtBox";
-            EmailCcTxtBox.Size = new Size(251, 26);
-            EmailCcTxtBox.TabIndex = 2;
+            SchedularCodeTxt.ForeColor = SystemColors.Window;
+            SchedularCodeTxt.Location = new Point(175, 72);
+            SchedularCodeTxt.Name = "SchedularCodeTxt";
+            SchedularCodeTxt.Size = new Size(251, 26);
+            SchedularCodeTxt.TabIndex = 2;
             // 
             // SchedulerName
             // 
@@ -824,6 +913,7 @@
             // 
             // ServiceVariables
             // 
+            ServiceVariables.Controls.Add(button5);
             ServiceVariables.Controls.Add(comboBox1);
             ServiceVariables.Controls.Add(textBox14);
             ServiceVariables.Controls.Add(textBox13);
@@ -839,6 +929,15 @@
             ServiceVariables.TabIndex = 4;
             ServiceVariables.Text = "ServiceVariables";
             ServiceVariables.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(6, 356);
+            button5.Name = "button5";
+            button5.Size = new Size(75, 23);
+            button5.TabIndex = 25;
+            button5.Text = "Confirm";
+            button5.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -913,6 +1012,7 @@
             // 
             // ServiceScheduler
             // 
+            ServiceScheduler.Controls.Add(button6);
             ServiceScheduler.Controls.Add(dateTimePicker6);
             ServiceScheduler.Controls.Add(dateTimePicker5);
             ServiceScheduler.Controls.Add(SchedularIsAct);
@@ -938,6 +1038,15 @@
             ServiceScheduler.Text = "ServiceSchedular";
             ServiceScheduler.UseVisualStyleBackColor = true;
             ServiceScheduler.Click += ServiceScheduler_Click;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(382, 395);
+            button6.Name = "button6";
+            button6.Size = new Size(75, 23);
+            button6.TabIndex = 30;
+            button6.Text = "Confirm";
+            button6.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker6
             // 
@@ -1136,6 +1245,7 @@
             Controls.Add(RuleDBConfig);
             Name = "Rule";
             Text = "Rule";
+            Load += Rule_Load;
             RuleDBConfig.ResumeLayout(false);
             DBConfig.ResumeLayout(false);
             DBConfig.PerformLayout();
@@ -1178,16 +1288,16 @@
         private Label SchedularType;
         private Label SchedularDesc;
         private Label SchedularCode;
-        private TextBox EmailSubjectTxtBox;
-        private TextBox EmailCcTxtBox;
+        private TextBox SchedularDescText;
+        private TextBox SchedularCodeTxt;
         private TextBox SchedulerName;
         private Label SchedularName;
         private Label FrequencyInMinutes;
         private Label EConfigPort;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox PassConfig;
+        private TextBox FromConfig;
+        private TextBox PortConfig;
+        private TextBox HostConf;
         private RadioButton IsUnActRadio;
         private RadioButton IsActiveRadio;
         private TextBox textBox9;
@@ -1196,7 +1306,7 @@
         private TextBox textBox6;
         private TextBox textBox10;
         private Label DBConfigPassword;
-        private TextBox textBox11;
+        private TextBox SchedularFreq;
         private CheckBox SchedulerIsActive;
         private ComboBox comboBox1;
         private TextBox textBox14;
@@ -1252,5 +1362,14 @@
         private Button button3;
         private Button button4;
         private OpenFileDialog openFileDialog1;
+        private TextBox textBox1;
+        private Label label14;
+        private ComboBox comboBox4;
+        private Label label13;
+        private Button EmailConfirm;
+        private Button button1;
+        private Button button2;
+        private Button button5;
+        private Button button6;
     }
 }

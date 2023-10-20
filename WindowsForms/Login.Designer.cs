@@ -94,6 +94,7 @@
             UsernameText.Name = "UsernameText";
             UsernameText.Size = new Size(164, 23);
             UsernameText.TabIndex = 5;
+            UsernameText.TextChanged += UsernameText_TextChanged;
             // 
             // PassText
             // 
@@ -104,6 +105,7 @@
             PassText.Size = new Size(164, 23);
             PassText.TabIndex = 6;
             PassText.UseSystemPasswordChar = true;
+            PassText.TextChanged += PassText_TextChanged;
             // 
             // DBText
             // 
@@ -111,6 +113,7 @@
             DBText.Name = "DBText";
             DBText.Size = new Size(164, 23);
             DBText.TabIndex = 7;
+            DBText.TextChanged += DBText_TextChanged;
             // 
             // OKButton
             // 
