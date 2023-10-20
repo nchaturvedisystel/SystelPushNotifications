@@ -226,7 +226,7 @@ namespace PushNotification
                
             };
         }
-
+        //This is a comment
         private void SConfigType_SelectedIndexChanged(object sender, EventArgs e)
         {
             SConfigType.DataSource = Enum.GetValues(typeof(SchedularType));
