@@ -36,6 +36,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whatsapp", "Whatsapp\Whatsa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "WindowsService\NotificationService.csproj", "{13AE3E4A-35CD-45F9-9AB4-B142EF8E900A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsForms", "WindowsForms", "{0B8457B4-8B95-4CEB-8A0D-474CE61CB4E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotification", "WindowsForms\PushNotification.csproj", "{7FC71A8D-1098-480A-B6C2-B4D2ED5F38E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,10 @@ Global
 		{13AE3E4A-35CD-45F9-9AB4-B142EF8E900A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13AE3E4A-35CD-45F9-9AB4-B142EF8E900A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13AE3E4A-35CD-45F9-9AB4-B142EF8E900A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC71A8D-1098-480A-B6C2-B4D2ED5F38E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC71A8D-1098-480A-B6C2-B4D2ED5F38E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC71A8D-1098-480A-B6C2-B4D2ED5F38E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC71A8D-1098-480A-B6C2-B4D2ED5F38E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +95,7 @@ Global
 		{30B10DD1-A7AC-4384-A06A-981778869FFD} = {81C30EAE-E8A0-4BDE-9194-A063ED4A3446}
 		{23CB490B-C0E1-4D8F-A3C2-E35B9BAF101C} = {9653EAF1-B9BE-410C-AD04-F23789783E59}
 		{13AE3E4A-35CD-45F9-9AB4-B142EF8E900A} = {ED7E5804-33B9-442E-9A6C-7FBDF9951962}
+		{7FC71A8D-1098-480A-B6C2-B4D2ED5F38E9} = {0B8457B4-8B95-4CEB-8A0D-474CE61CB4E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9A672EC-6F81-450D-9DDA-21713C7B26C6}
