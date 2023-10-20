@@ -11,8 +11,8 @@ namespace Application.DTOs.PushNotification
         public int MappperId { get; set; }
         public int ServiceId { get; set; }
         public int SchedularId { get; set; }
-        public DateTime LastExecutionTime { get; set; }
-        public DateTime NextExecutionTime { get; set; }
+        public DateTime? LastExecutionTime { get; set; }
+        public DateTime? NextExecutionTime { get; set; }
         public DateTime StartsFrom { get; set; }
         public DateTime EndsOn { get; set; }
         public string DailyStartOn { get; set; }

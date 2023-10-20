@@ -128,7 +128,7 @@ Schedular.BindSchedularList = function (data) {
                 + '                <td class="dtr-control sorting_1" style="border-left: 5px solid #' + Util.WCColors[i] + ';">' + SrNo + '</td>'
                 + '                <td>' + data[i].iName + '</td>'
                 + '                <td>' + data[i].iCode + '</td>'
-                + '                <td>' + data[i].iDesc + '</td>'
+/*                + '                <td>' + data[i].iDesc + '</td>'*/
                 + '                <td>' + data[i].frequencyInMinutes + '</td>'
                 + '                <td>' + data[i].schedularType + '</td>'
                 + '                <td>'

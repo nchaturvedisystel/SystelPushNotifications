@@ -71,6 +71,8 @@ namespace WebAPI
             services.AddTransient<IAlertsServiceVariables, AlertsServiceVariablesService>();
             services.AddTransient<IServiceSchedular, ServiceSchedularService>();
 
+            services.AddTransient<IWhatsAppConfig, WhatsAppConfigService>();
+
             //For Directory Browsing, comment out for Prod Release
             services.AddDirectoryBrowser();
         }

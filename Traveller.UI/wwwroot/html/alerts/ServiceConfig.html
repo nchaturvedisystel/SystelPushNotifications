@@ -1,5 +1,8 @@
 ﻿<!--Service Configuration Page-->
 
+
+
+
 <div class="d-flex align-items-center justify-content-between my-3" style="border-bottom:1px solid #CDD5E9">
     <div class="main-heading">Service Configuration List</div>
     <button type="button" class="btn btn-primary btn-sm" onclick="Service.CreateNew()">Create New</button>
@@ -12,7 +15,7 @@
                 <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
                 <th scope="col">ServiceConfig Name</th>
                 <th scope="col">Schedular Name</th>
-                <th scope="col">Conn Name</th>
+                <th scope="col">Connection Name</th>
                 <th scope="col">EmailConfig Name</th>
                 <th scope="col">AlertType</th>
                 <th scope="col">AttachmentType</th>
@@ -47,7 +50,7 @@
 
                 <div id="ServiceCreationForm">
 
-                    <form class="form-row">
+                    <form class="form-row" id="formService">
 
 
                         <div style="display: none;">
@@ -69,35 +72,69 @@
 
                             <div class="mb-3">
                                 <label for="AlertType" class="label font-sb mb-1">AlertType</label>
-                                <input type="text" class="form-control" id="AlertType">
+                                <!--<input type="text" class="form-control" id="AlertType">-->
+
+                                <select class="form-control" name="AlertType" id="AlertType">
+                                    <option value="Email" selected="selected">Email</option>
+                                    <option value="SMS">SMS</option>
+                                    <option value="Whatsapp">Whatsapp</option>
+                                </select>
+
+
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="AttachmentType" class="label font-sb mb-1">AttachmentType</label>
-                                <input type="text" class="form-control" id="AttachmentType">
+                                <!--<input type="text" class="form-control" id="AttachmentType">-->
+
+                                <select class="form-control" name="AttachmentType" id="AttachmentType">
+                                    <option value="CrystalReport" selected="selected">CrystalReport</option>
+                                    <option value="SQLQuery">SQLQuery</option>
+                                </select>
+
+
                             </div>
+
+
+                          
 
                             <div class="mb-3">
                                 <label for="AttachmentPath" class="label font-sb mb-1">AttachmentPath</label>
-                                <!--<input type="text" class="form-control"  id="AttachmentPath">-->
-                                <textarea id="AttachmentPath" class="form-control" name="AttachmentPath" rows="2" cols="50" style="resize:none"></textarea>
+                                <!--<input type="text" class="form-control"  id="AttachmentPath"> accept=".pdf,.PDF"-->
+                                <input type="file" id="attachmentPathFile" name="attachmentPathFile" onchange="Service.showFileName()">
+
+
+                                <textarea id="AttachmentPath" class="form-control" name="AttachmentPath" rows="3" cols="50" style="resize:none"></textarea>
+
+
+                                <!--<form action="/upload" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="file" id="fileInput">
+                                    <button type="submit">Upload File</button>
+                                </form>-->
+
+
 
                             </div>
 
                             <div class="mb-3">
                                 <label for="AttachmentFileType" class="label font-sb mb-1">AttachmentFileType</label>
-                                <input type="text" class="form-control" id="AttachmentFileType">
+                                <!--<input type="text" class="form-control" id="AttachmentFileType">-->
+
+
+                                <select class="form-control" name="AttachmentFileType" id="AttachmentFileType">
+                                    <option value="PDF" selected="selected">PDF</option>
+                                    <option value="CSV">CSV</option>
+                                    <option value="EXCEL">EXCEL</option>
+                                    <option value="TXT">TXT</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="OutputFileName" class="label font-sb mb-1">OutputFileName</label>
                                 <input type="text" class="form-control" id="OutputFileName">
                             </div>
 
-                            <div class="mb-3">
-                                <label for="DataSourceType" class="label font-sb mb-1">DataSourceType</label>
-                                <input type="text" class="form-control" id="DataSourceType">
-                            </div>
+
 
 
                         </div>
@@ -105,9 +142,21 @@
                         <div class="col-md-4">
 
                             <div class="mb-3">
+                                <label for="DataSourceType" class="label font-sb mb-1">DataSourceType</label>
+                                <!--<input type="text" class="form-control" id="DataSourceType">-->
+
+
+                                <select class="form-control" name="DataSourceType" id="DataSourceType">
+                                    <option value="Query" selected="selected">Query</option>
+                                </select>
+
+
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="DataSourceDef" class="label font-sb mb-1">DataSourceDef</label>
                                 <!--<input type="text" class="form-control"  id="DataSourceDef">-->
-                                <textarea id="DataSourceDef" class="form-control" name="DataSourceDef" rows="5" cols="60" style="resize:none"></textarea>
+                                <textarea id="DataSourceDef" class="form-control" name="DataSourceDef" rows="6" cols="60" style="resize:none"></textarea>
 
                                 <!--<textarea id="editor"></textarea>-->
 
@@ -116,14 +165,26 @@
 
                             <div class="mb-3">
                                 <label for="PostSendDataSourceType" class="label font-sb mb-1">PostSendDataSourceType</label>
-                                <input type="text" class="form-control" id="PostSendDataSourceType">
+                                <!--<input type="text" class="form-control" id="PostSendDataSourceType">-->
+
+
+                                <select class="form-control" name="PostSendDataSourceType" id="PostSendDataSourceType">
+                                    <option value="Query" selected="selected">Query</option>
+                                </select>
+
+
                             </div>
 
                             <div class="mb-3">
                                 <label for="PostSendDataSourceDef" class="label font-sb mb-1">PostSendDataSourceDef</label>
                                 <!--<input type="text" class="form-control" o id="PostSendDataSourceDef">-->
-                                <textarea id="PostSendDataSourceDef" class="form-control" name="PostSendDataSourceDef" rows="4" cols="60" style="resize:none"></textarea>
+                                <textarea id="PostSendDataSourceDef" class="form-control" name="PostSendDataSourceDef" rows="5" cols="60" style="resize:none"></textarea>
                             </div>
+
+
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="EmailTo" class="label font-sb mb-1">EmailTo</label>
                                 <input type="text" class="form-control" id="EmailTo">
@@ -139,9 +200,6 @@
                                 <input type="text" class="form-control" id="BccTo">
                             </div>
 
-                        </div>
-
-                        <div class="col-md-4">
 
                             <div class="mb-3">
                                 <label for="ASubject" class="label font-sb mb-1">Subject</label>
@@ -151,7 +209,7 @@
                             <div class="mb-3">
                                 <label for="ABody" class="label font-sb mb-1">Body</label>
                                 <!--input type="text" class="form-control" id="ABody">-->
-                                <textarea id="ABody" class="form-control" name="ABody" rows="3" cols="50" style="resize:none"></textarea>
+                                <textarea id="ABody" class="form-control" name="ABody" rows="5" cols="50" style="resize:none"></textarea>
 
                             </div>
 
@@ -173,18 +231,18 @@
                                 <select class="form-control form-control-sm" name="SchedularId" id="SchedularId">...</select>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="LastExecutedOn" class="label font-sb mb-1">LastExecutedOn</label>
-                                <!--<input type="text" class="form-control" id="LastExecutedOn">-->
-                                <input type="datetime-local" class="form-control" id="LastExecutedOn">
+                            <!--<div class="mb-3">
+        <label for="LastExecutedOn" class="label font-sb mb-1">LastExecutedOn</label>-->
+                            <!--<input type="text" class="form-control" id="LastExecutedOn">-->
+                            <!--<input type="datetime-local" class="form-control" id="LastExecutedOn">
 
-                            </div>
+    </div>
 
-                            <div class="mb-3">
-                                <label for="NextExecutionTime" class="label font-sb mb-1">NextExecutionTime</label>
-                                <!--<input type="text" class="form-control" id="NextExecutionTime">-->
-                                <input type="datetime-local" class="form-control" id="NextExecutionTime">
-                            </div>
+    <div class="mb-3">
+        <label for="NextExecutionTime" class="label font-sb mb-1">NextExecutionTime</label>-->
+                            <!--<input type="text" class="form-control" id="NextExecutionTime">-->
+                            <!--<input type="datetime-local" class="form-control" id="NextExecutionTime">
+    </div>-->
 
                             <div class="mb-3">
                                 <input type="checkbox" name="isActive" id="isUserActive">

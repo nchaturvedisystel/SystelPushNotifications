@@ -10,6 +10,7 @@ Admin.PartItemList = {};
 
 //#region Base Page
 Admin.BasepageOnReady = function () {
+
     Admin.LoadAll();
     //PartMaster.LoadAll();
 }

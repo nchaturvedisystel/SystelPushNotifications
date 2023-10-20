@@ -220,11 +220,7 @@
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Service1.Designer.cs">
-      <DependentUpon>Service1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EmailConfigurationService.cs" />
     <Compile Include="Service\NotificationMasterService.cs" />
     <Compile Include="Service\PushNotificationService.cs" />
@@ -242,6 +238,9 @@
   <ItemGroup>
     <Content Include="SetUp\1_CreateStructureWithData.sql" />
     <Content Include="SetUp\2_SetUpConfiguration.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

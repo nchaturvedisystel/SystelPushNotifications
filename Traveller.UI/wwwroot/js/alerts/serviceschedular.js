@@ -2,8 +2,8 @@ ServiceSchedular = new Object();
 ServiceSchedular.MappperId = 0;
 ServiceSchedular.ServiceId = 0;
 ServiceSchedular.SchedularId = 0;
-ServiceSchedular.LastExecutionTime = new Date();
-ServiceSchedular.NextExecutionTime = new Date();
+//ServiceSchedular.LastExecutionTime = new Date();
+//ServiceSchedular.NextExecutionTime = new Date();
 ServiceSchedular.StartsFrom = new Date();
 ServiceSchedular.EndsOn = new Date();
 ServiceSchedular.DailyStartOn = "";
@@ -62,16 +62,16 @@ ServiceSchedular.BindServiceIdDropDown = function () {
 
 ServiceSchedular.ClearServiceSchedularCRUDForm = function () {
 
-    document.getElementById('LastExecutionTime').value = new Date();
-    document.getElementById('NextExecutionTime').value = new Date();
+    //document.getElementById('LastExecutionTime').value = new Date();
+    //document.getElementById('NextExecutionTime').value = new Date();
     document.getElementById('StartsFrom').value = new Date();
     document.getElementById('EndsOn').value = new Date();
     document.getElementById('DailyStartOn').value = "";
     document.getElementById('DailyEndsOn').value = "";
     document.getElementById('isUserActive').checked = true;
     ServiceSchedular.MappperId = 0;
-    ServiceSchedular.LastExecutedOn = new Date();
-    ServiceSchedular.NextExecutionTime = new Date();
+    //ServiceSchedular.LastExecutedOn = new Date();
+    //ServiceSchedular.NextExecutionTime = new Date();
     ServiceSchedular.StartsFrom = new Date();
     ServiceSchedular.EndsOn = new Date();
     ServiceSchedular.DailyStartOn = "";
@@ -87,8 +87,8 @@ ServiceSchedular.ValidateAndCreateServiceSchedular = function () {
 
     ServiceSchedular.ActionUser = User.UserId;
 
-    ServiceSchedular.LastExecutionTime = document.getElementById("LastExecutionTime").value;
-    ServiceSchedular.NextExecutionTime = document.getElementById("NextExecutionTime").value;
+   //ServiceSchedular.LastExecutionTime = document.getElementById("LastExecutionTime").value;
+   //ServiceSchedular.NextExecutionTime = document.getElementById("NextExecutionTime").value;
     ServiceSchedular.StartsFrom = document.getElementById("StartsFrom").value;
     ServiceSchedular.EndsOn = document.getElementById("EndsOn").value;
     ServiceSchedular.DailyStartOn = document.getElementById("DailyStartOn").value;
@@ -113,17 +113,19 @@ ServiceSchedular.ValidateAndCreateServiceSchedular = function () {
     //}
 
 
-    if (ServiceSchedular.LastExecutionTime.trim() === '') {
-        // Display error message
-        document.getElementById('error-message').innerText = 'Please Provide LastExecutionTime !';
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else if (ServiceSchedular.NextExecutionTime.trim() === '') {
-        // Display error message
-        document.getElementById('error-message').innerText = 'Please Provide NextExecutionTime !';
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else if (ServiceSchedular.StartsFrom.trim() === '') {
+    //if (ServiceSchedular.LastExecutionTime.trim() === '') {
+    //    // Display error message
+    //    document.getElementById('error-message').innerText = 'Please Provide LastExecutionTime !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else if (ServiceSchedular.NextExecutionTime.trim() === '') {
+    //    // Display error message
+    //    document.getElementById('error-message').innerText = 'Please Provide NextExecutionTime !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else 
+
+    if (ServiceSchedular.StartsFrom.trim() === '') {
         // Display error message
         document.getElementById('error-message').innerText = 'Please Provide StartsFrom !';
         document.getElementById('error-message').style.display = 'block';
@@ -276,8 +278,8 @@ ServiceSchedular.SetServiceSchedularCRUDForm = function (dbconn) {
 
     document.getElementById('MappperId').value = dbconn.mappperId;
 
-    document.getElementById('LastExecutionTime').value = dbconn.lastExecutionTime;//.split("T")[0];
-    document.getElementById('NextExecutionTime').value = dbconn.nextExecutionTime;//.split("T")[0];
+    //document.getElementById('LastExecutionTime').value = dbconn.lastExecutionTime;//.split("T")[0];
+    //document.getElementById('NextExecutionTime').value = dbconn.nextExecutionTime;//.split("T")[0];
     document.getElementById('StartsFrom').value = dbconn.startsFrom;//.split("T")[0];
     document.getElementById('EndsOn').value = dbconn.endsOn;//.split("T")[0];
     document.getElementById('DailyStartOn').value = dbconn.dailyStartOn;
@@ -308,8 +310,8 @@ ServiceSchedular.ValidateAndUpdateServiceSchedular = function (dbconn) {
 
     dbconn.ActionUser = User.UserId;
 
-    dbconn.lastExecutionTime = document.getElementById('LastExecutionTime').value;
-    dbconn.nextExecutionTime = document.getElementById('NextExecutionTime').value;
+    //dbconn.lastExecutionTime = document.getElementById('LastExecutionTime').value;
+    //dbconn.nextExecutionTime = document.getElementById('NextExecutionTime').value;
     dbconn.startsFrom = document.getElementById('StartsFrom').value;
     dbconn.endsOn = document.getElementById('EndsOn').value;
     dbconn.dailyStartOn = document.getElementById('DailyStartOn').value;
@@ -338,17 +340,19 @@ ServiceSchedular.ValidateAndUpdateServiceSchedular = function (dbconn) {
     //}
 
 
-    if (dbconn.lastExecutionTime.trim() === '') {
-        // Display error message
-        document.getElementById('error-message').innerText = 'Please Provide LastExecutionTime !';
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else if (dbconn.nextExecutionTime.trim() === '') {
-        // Display error message
-        document.getElementById('error-message').innerText = 'Please Provide NextExecutionTime !';
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else if (dbconn.startsFrom.trim() === '') {
+    //if (dbconn.lastExecutionTime.trim() === '') {
+    //    // Display error message
+    //    document.getElementById('error-message').innerText = 'Please Provide LastExecutionTime !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else if (dbconn.nextExecutionTime.trim() === '') {
+    //    // Display error message
+    //    document.getElementById('error-message').innerText = 'Please Provide NextExecutionTime !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else
+
+      if (dbconn.startsFrom.trim() === '') {
         // Display error message
         document.getElementById('error-message').innerText = 'Please Provide StartsFrom !';
         document.getElementById('error-message').style.display = 'block';

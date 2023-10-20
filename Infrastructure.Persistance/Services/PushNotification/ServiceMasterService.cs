@@ -12,11 +12,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Application.DTOs.User;
 
 namespace Infrastructure.Persistance.Services.PushNotification
 {
     public class ServiceMasterService : DABase, IServiceMaster
     {
+        APISettings _settings;
         protected readonly EncryptDecryptService encryptDecryptService = new EncryptDecryptService();
         private const string SP_AlertsServiceMaster_CRUD = "AlertsServiceMaster_CRUD";
         private const string SP_AlertsServiceMaster_StatusUpdate = "AlertsServiceMaster_StatusUpdate";
@@ -25,11 +27,25 @@ namespace Infrastructure.Persistance.Services.PushNotification
         public ServiceMasterService(IOptions<ConnectionSettings> connectionSettings, ILogger<ServiceMasterService> logger, IOptions<APISettings> settings) : base(connectionSettings.Value.DBCONN)
         {
             _logger = logger;
+            _settings = settings.Value;
         }
 
         public async Task<ServiceMasterList> GetServiceMasterList(ServiceMasterDTO serviceMasterDTO)
         {
             ServiceMasterList response = new ServiceMasterList();
+
+            var filename = (DateTime.Now).Ticks;
+            var filepath = " ";
+            //Save the file
+            if (!System.String.IsNullOrEmpty(serviceMasterDTO.AttachmentBase64) && serviceMasterDTO.IsDeleted == 0 && serviceMasterDTO.AttachmentBase64.Trim() != "")
+            {
+                string filePath = $"{_settings.UploadPath}\\Alerts\\ReportFile\\{filename}";
+                filepath = Utilities.SaveFileFromBase64(serviceMasterDTO.WebRootPath, filePath, serviceMasterDTO.AttachmentBase64);
+            }
+            else
+            {
+                filepath = serviceMasterDTO.AttachmentPath;
+            }
 
             _logger.LogInformation($" Manage Service Master Credentials ");
 
@@ -44,7 +60,7 @@ namespace Infrastructure.Persistance.Services.PushNotification
                     AlertType = serviceMasterDTO.AlertType,
                     HasAttachment = serviceMasterDTO.HasAttachment,
                     AttachmentType = serviceMasterDTO.AttachmentType,
-                    AttachmentPath = serviceMasterDTO.AttachmentPath,
+                    AttachmentPath = serviceMasterDTO.WebRootPath + "\\" + filepath,
                     AttachmentFileType = serviceMasterDTO.AttachmentFileType,
                     OutputFileName = serviceMasterDTO.OutputFileName,
                     DataSourceType = serviceMasterDTO.DataSourceType,

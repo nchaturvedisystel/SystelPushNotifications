@@ -24,13 +24,21 @@ namespace Infrastructure.Persistance.Services
         }
         public static string SaveFileFromBase64( string webRootPath, string filePath, string base64File)
         {
+
+            string base64Extention = string.Empty;
             var base64Data = base64File.Split(new string[] { ";base64," }, StringSplitOptions.None);
             string base64String = base64Data[1];
-            string base64Extention = Convert.ToString(base64Data[0].Split(new string[] { "/" }, StringSplitOptions.None)[1]);
+
+            if (base64Data[0].Contains("x-rpt"))
+            {
+                base64Data[0] = base64Data[0].Replace("x-rpt", "rpt");
+            }
+
+            base64Extention = Convert.ToString(base64Data[0].Split(new string[] { "/" }, StringSplitOptions.None)[1]);
 
             filePath = $"{filePath}.{base64Extention}";
             string filefullPath = $"{webRootPath}\\{filePath}";
-
+            
             //Deleting file if already exists
             if (File.Exists(filefullPath))
             {

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
+using Application.DTOs.User;
+using Microsoft.AspNetCore.Hosting;
 
 namespace WebAPI.Controllers.PushNotification
 {
@@ -14,14 +16,18 @@ namespace WebAPI.Controllers.PushNotification
     public class ServiceMasterController : BaseApiController
     {
         APISettings _settings;
-        public ServiceMasterController(IOptions<APISettings> settings)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ServiceMasterController(IOptions<APISettings> settings, IWebHostEnvironment webHostEnvironment)
         {
             _settings = settings.Value;
+            _webHostEnvironment = webHostEnvironment;
+            SessionObj.WebRootPath = _webHostEnvironment.ContentRootPath;
         }
 
         [HttpPost("GetService")]
         public async Task<IActionResult> GetServiceMasterList([FromBody] ServiceMasterDTO serviceMasterDTO)
         {
+            serviceMasterDTO.WebRootPath = SessionObj.WebRootPath;
 
             ServiceMasterList response = new ServiceMasterList();
             response = await mediator.Send(new ServiceMasterCommand

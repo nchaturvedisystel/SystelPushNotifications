@@ -21,8 +21,8 @@ Service.ABody = "";
 Service.DBConnId = 0;
 Service.AlertConfigId = 0;
 Service.SchedularId = 0;
-Service.LastExecutedOn =  new Date();
-Service.NextExecutionTime = new Date();
+//Service.LastExecutedOn =  new Date();
+//Service.NextExecutionTime = new Date();
 Service.IsActive = 0;
 Service.IsDeleted = 0;
 Service.ActionUser = User.UserId;
@@ -124,9 +124,11 @@ Service.ClearServiceCRUDForm = function () {
     //document.getElementById('DBConnid').value = "";
     //document.getElementById('AlertConfigId').value = "";
     //document.getElementById('SchedularId').value = "";
-    document.getElementById('LastExecutedOn').value = new Date();
-    document.getElementById('NextExecutionTime').value = new Date();
+    //document.getElementById('LastExecutedOn').value = new Date();
+    //document.getElementById('NextExecutionTime').value = new Date();
     document.getElementById('isUserActive').checked = true;
+
+    document.getElementById('attachmentPathFile').value = ""; 
 
     Service.ServiceId = 0;
     Service.Title = "";
@@ -149,8 +151,8 @@ Service.ClearServiceCRUDForm = function () {
     //Service.DBConnid = 0;
     //Service.AlertConfigId = 0;
     //Service.SchedularId = 0;
-    Service.LastExecutedOn = new Date();
-    Service.NextExecutionTime = new Date();
+    //Service.LastExecutedOn = new Date();
+    //Service.NextExecutionTime = new Date();
     Service.IsActive = 1;
     Service.IsDeleted = 0;
 };
@@ -195,10 +197,11 @@ Service.ValidateAndCreateService = function () {
     //Service.LastExecutedOn = new Date(document.getElementById("LastExecutedOn").value);
     //Service.NextExecutionTime = new Date(document.getElementById("NextExecutionTime").value);
 
-    NewService.LastExecutedOn = document.getElementById("LastExecutedOn").value;
-    NewService.NextExecutionTime = document.getElementById("NextExecutionTime").value;
+    //NewService.LastExecutedOn = document.getElementById("LastExecutedOn").value;
+    //NewService.NextExecutionTime = document.getElementById("NextExecutionTime").value;
 
     NewService.IsActive = 1;
+
 
 
     // Perform validation
@@ -233,10 +236,10 @@ Service.ValidateAndCreateService = function () {
         document.getElementById('error-message').innerText = 'Please Provide Service Name !';
         document.getElementById('error-message').style.display = 'block';
     }
-    else if (NewService.SDesc.trim() === '') {
-        document.getElementById('error-message').innerText = 'Please Provide Service Description !';
-        document.getElementById('error-message').style.display = 'block';
-    }
+    //else if (NewService.SDesc.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'Please Provide Service Description !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
     else if (NewService.AlertType.trim() === '') {
         document.getElementById('error-message').innerText = 'Please Provide Alert Type !';
         document.getElementById('error-message').style.display = 'block';
@@ -279,7 +282,7 @@ Service.ValidateAndCreateService = function () {
         document.getElementById('error-message').style.display = 'block';
     }
 
-    else if (NewService.CCTo.trim() === '' || (!regex_pattern_Service.test(NewService.CCTo))) {
+    else if (NewService.CCTo.trim() != '' && (!regex_pattern_Service.test(NewService.CCTo))) {
         document.getElementById('error-message').innerText = 'Please Provide valid CCTo (EmailID) !';
         document.getElementById('error-message').style.display = 'block';
     }
@@ -297,21 +300,28 @@ Service.ValidateAndCreateService = function () {
         document.getElementById('error-message').innerText = 'Please Provide Email Body !';
         document.getElementById('error-message').style.display = 'block';
     }
-    else if (NewService.LastExecutedOn.trim() === '') {
-        document.getElementById('error-message').innerText = 'Please Provide Last ExecutedOn !';
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else if (NewService.NextExecutionTime.trim() === '') {
-        document.getElementById('error-message').innerText = 'Please Provide Next ExecutionTime !';
-        document.getElementById('error-message').style.display = 'block';
-    } 
+    //else if (NewService.LastExecutedOn.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'Please Provide Last ExecutedOn !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else if (NewService.NextExecutionTime.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'Please Provide Next ExecutionTime !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //} 
     else {
         document.getElementById('error-message').style.display = 'none';
-        Ajax.AuthPost("Service/GetService", NewService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+        Util.ImageEncodeToBase64("attachmentPathFile", CreateSevice, NewService);
+ 
     }
 
 }
 
+
+function CreateSevice(NewService, base64Image) {
+
+    NewService.AttachmentBase64 = base64Image;
+    Ajax.AuthPost("Service/GetService", NewService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+}
 //#endregion -- Create Service
 
 //#region -- Show Service
@@ -471,8 +481,8 @@ Service.SetServiceCRUDForm = function (dbconn) {
     //document.getElementById('AlertConfigId').value = dbconn.alertConfigId;
     //document.getElementById('SchedularId').value = dbconn.schedularId;
 
-    document.getElementById('LastExecutedOn').value = dbconn.lastExecutedOn;//.split("T")[0];
-    document.getElementById('NextExecutionTime').value = dbconn.nextExecutionTime;//.split("T")[0];
+    //document.getElementById('LastExecutedOn').value = dbconn.lastExecutedOn;//.split("T")[0];
+    //document.getElementById('NextExecutionTime').value = dbconn.nextExecutionTime;//.split("T")[0];
     document.getElementById('isUserActive').checked = dbconn.isActive;
 
 };
@@ -525,8 +535,8 @@ Service.ValidateAndUpdateService = function (dbconn) {
     //UpdateService.alertConfigId  = document.getElementById('AlertConfigId').value;
     //UpdateService.schedularId  = document.getElementById('SchedularId').value;
 
-    UpdateService.lastExecutedOn = document.getElementById('LastExecutedOn').value;
-    UpdateService.nextExecutionTime = document.getElementById('NextExecutionTime').value;
+    //UpdateService.lastExecutedOn = document.getElementById('LastExecutedOn').value;
+    //UpdateService.nextExecutionTime = document.getElementById('NextExecutionTime').value;
 
     UpdateService.serviceId = document.getElementById('ServiceId').value;
     UpdateService.isActive = document.getElementById('isUserActive').checked ? 1 : 0;
@@ -535,10 +545,10 @@ Service.ValidateAndUpdateService = function (dbconn) {
         document.getElementById('error-message').innerText = 'Please Provide Service Name !';
         document.getElementById('error-message').style.display = 'block';
     }
-    else if (UpdateService.sDesc.trim() === '') {
-        document.getElementById('error-message').innerText = 'Please Provide Service Description !';
-        document.getElementById('error-message').style.display = 'block';
-    }
+    //else if (UpdateService.sDesc.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'Please Provide Service Description !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
     else if (UpdateService.alertType.trim() === '') {
         document.getElementById('error-message').innerText = 'Please Provide Alert Type !';
         document.getElementById('error-message').style.display = 'block';
@@ -581,7 +591,7 @@ Service.ValidateAndUpdateService = function (dbconn) {
         document.getElementById('error-message').style.display = 'block';
     }
 
-    else if (UpdateService.cCTo.trim() === '' || (!regex_pattern_Service.test(UpdateService.cCTo))) {
+    else if (UpdateService.cCTo.trim() != '' && (!regex_pattern_Service.test(UpdateService.cCTo))) {
         document.getElementById('error-message').innerText = 'Please Provide valid CCTo (EmailID) !';
         document.getElementById('error-message').style.display = 'block';
     }
@@ -599,16 +609,23 @@ Service.ValidateAndUpdateService = function (dbconn) {
         document.getElementById('error-message').innerText = 'Please Provide Email Body !';
         document.getElementById('error-message').style.display = 'block';
     }
-    else if (UpdateService.lastExecutedOn.trim() === '') {
-        document.getElementById('error-message').innerText = 'Please Provide Last ExecutedOn !';
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else if (UpdateService.nextExecutionTime.trim() === '') {
-        document.getElementById('error-message').innerText = 'Please Provide Next ExecutionTime !';
-        document.getElementById('error-message').style.display = 'block';
-    }
+    //else if (UpdateService.lastExecutedOn.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'Please Provide Last ExecutedOn !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
+    //else if (UpdateService.nextExecutionTime.trim() === '') {
+    //    document.getElementById('error-message').innerText = 'Please Provide Next ExecutionTime !';
+    //    document.getElementById('error-message').style.display = 'block';
+    //}
     else {
         document.getElementById('error-message').style.display = 'none';
+        Util.ImageEncodeToBase64("attachmentPathFile", UpdateSeviceMaster, UpdateService);
+        //Ajax.AuthPost("Service/GetService", UpdateService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
+    }
+
+    function UpdateSeviceMaster(UpdateService, base64Image) {
+
+        UpdateService.AttachmentBase64 = base64Image;
         Ajax.AuthPost("Service/GetService", UpdateService, ServiceCRUD_OnSuccessCallBack, ServiceCRUD_OnErrorCallBack);
     }
 
@@ -652,6 +669,41 @@ Service.CloseModal = function () {
 
 }
 
+Service.showFileName = function () {
+    const fileInput = document.getElementById('attachmentPathFile');
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const filename = file.name;           
+            document.getElementById('AttachmentPath').value = fileInput.value;
+            document.getElementById('OutputFileName').value = filename;
+
+            //let formData = new FormData();
+
+            //formData.append("outputfile", fileInput);
+           
+            //fetch('/upload', { method: "POST", body: formData })
+            //    .then(response => {
+            //        if (!response.ok) {
+            //            throw new Error('Network response was not ok');
+            //        }
+            //        return response.json();
+            //    })
+            //    .then(data => {
+            //        console.log('Upload successful', data);
+            //    })
+            //    .catch(error => {
+            //        console.error('Error:', error);
+            //    });
+
+        }
+
+   
+
+
+
+}
+   
 
 
 
