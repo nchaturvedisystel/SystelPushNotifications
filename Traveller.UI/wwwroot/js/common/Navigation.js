@@ -127,6 +127,11 @@ Navigation.CallPageLoad = function (MenuCode) {
         ServiceSchedular.CreateServiceSchedularOnReady();
     }
 
+    else if (MenuCode == "WAANN") {
+        WhatsAppConfig.CreateWhatsAppConfigOnReady();
+    }
+
+
 }
 
 Navigation.TrackTime = function (PreviousMenuCode, RequestedMenuCode, PageLandingTime) {

@@ -27,7 +27,7 @@ namespace MyFirstService
         Timer timer = new Timer(); // name space(using System.Timers;)
         public Service1()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         protected override void OnStart(string[] args)

@@ -142,7 +142,7 @@ EmailConfig.BindEmailConfigList = function (data) {
             var RowHtml = ('<tr>'
                 + '                <td class="dtr-control sorting_1" style="border-left: 5px solid #' + Util.WCColors[i] + ';">' + SrNo + '</td>'
                 + '                <td>' + data[i].iName + '</td>'
-                + '                <td>' + data[i].iDesc + '</td>'
+/*                + '                <td>' + data[i].iDesc + '</td>'*/
                 + '                <td>' + data[i].iHost + '</td>'
                 + '                <td>' + data[i].iPort + '</td>'
                 + '                <td>' + data[i].iFrom + '</td>'
@@ -203,7 +203,7 @@ EmailConfig.EmailConfigStatusUpdate = function (sender, data) {
 
 }
 function UpdateEmailConfig_OnSuccesscallback(response) {
-    if (response.IsActive === 1) {
+    if (response.isActive === 1) {
 
         Toast.create("Success", "Email Config Active", TOAST_STATUS.SUCCESS, 1500);
     } else {

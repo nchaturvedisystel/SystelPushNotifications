@@ -60,7 +60,7 @@ namespace Infrastructure.Persistance.Services.PushNotification
                     AlertType = serviceMasterDTO.AlertType,
                     HasAttachment = serviceMasterDTO.HasAttachment,
                     AttachmentType = serviceMasterDTO.AttachmentType,
-                    AttachmentPath = filepath,
+                    AttachmentPath = serviceMasterDTO.WebRootPath + "\\" + filepath,
                     AttachmentFileType = serviceMasterDTO.AttachmentFileType,
                     OutputFileName = serviceMasterDTO.OutputFileName,
                     DataSourceType = serviceMasterDTO.DataSourceType,

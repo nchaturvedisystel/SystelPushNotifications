@@ -1,1 +1,117 @@
-﻿Whatsapp Configuration Page
+﻿<!--WhatsApp Configuration Page-->
+
+<div class="d-flex align-items-center justify-content-between my-3" style="border-bottom:1px solid #CDD5E9">
+    <div class="main-heading">WhatsApp Configuration List</div>
+    <button type="button" class="btn btn-primary btn-sm" onclick="WhatsAppConfig.CreateNew()">Create New</button>
+</div>
+
+<div>
+    <table id="example" class="table table-bordered com_table" style="width: 100%;">
+        <thead>
+            <tr class="text-dark">
+                <th style="border-left: 5px solid var(--orange-col);" scope="col">SrNo</th>
+                <th scope="col">WhatsApp Connection Name</th>
+                <!--<th scope="col">Desc</th>-->
+                <th scope="col">WhatsApp URL</th>
+                <!--<th scope="col">WhatsApp AccessToken</th>-->
+                <th scope="col">Message Type</th>
+                <th scope="col">Active</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="TemplateListBody">
+            <tr>
+                <td colspan="7">
+                    <font style="color:red;">No Records found..</font>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="WhatsAppConfigModal" tabindex="-1" role="dialog" aria-labelledby="WhatsAppConfigModalLabel"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="min-width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EmailConfigModalLabel">Create New WhatsApp Configuration </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#WhatsAppConfigModalBody">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="WhatsAppConfigModalBody">
+
+                <div id="WhatsAppConfigCreationForm">
+
+                    <form class="form-row">
+
+
+                        <div style="display: none;">
+                            <input type="number" id="WAConfigId">
+                        </div>
+
+                        <div class="col-md-6">
+
+
+                            <div class="mb-3">
+                                <label for="IName" class="label font-sb mb-1">WhatsApp Connection Name</label>
+                                <input type="text" class="form-control" id="IName">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="IDesc" class="label font-sb mb-1">Description</label>
+                                <textarea id="IDesc" class="form-control" name="IDesc" rows="3" cols="50" style="resize:none"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="WAUrl" class="label font-sb mb-1">WhatsApp URL</label>
+                                <!--<input type="text" class="form-control" id="WAUrl">-->
+                                <textarea id="WAUrl" class="form-control" name="WAUrl" rows="3" cols="50" style="resize:none"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="AccessToken" class="label font-sb mb-1">WhatsApp AccessToken</label>
+                                <!--<input type="text" class="form-control" id="AccessToken">-->
+                                <textarea id="AccessToken" class="form-control" name="AccessToken" rows="6" cols="50" style="resize:none"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="IType" class="label font-sb mb-1">Type</label>
+                                <!--<input type="text" class="form-control" id="IType">-->
+
+                                <select class="form-control" name="IType" id="IType">
+                                    <option value="Template" selected="selected">Template</option>
+                                    <option value="Text">Text</option>
+                                </select>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="checkbox" name="isActive" id="isUserActive">
+                                <label for="isUserActive" class="label font-sb mb-1">IsActive</label>
+                            </div>
+
+                        </div>     
+
+                    </form>
+
+
+                </div>
+                <div>
+                    <p style="color:red; display:none;" id="error-message" class="ml-2"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="modalCloseButton"
+                            onclick="WhatsAppConfig.CloseModal()">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modalSaveButton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
