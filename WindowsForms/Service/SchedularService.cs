@@ -11,7 +11,7 @@ using System.Data;
 
 namespace PushNotification.Service
 {
-    public class SchedularService : IServiceSchedular
+    public class SchedularService : ISchedularConfig
     {
         public void CreateSchedular(SchedularConfig schedularDTO)
         {
