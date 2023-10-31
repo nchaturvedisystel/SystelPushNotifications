@@ -1069,6 +1069,7 @@
             button6.TabIndex = 30;
             button6.Text = "Confirm";
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // dateTimePicker6
             // 

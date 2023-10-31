@@ -158,7 +158,26 @@ namespace PushNotification
 
         public void ServiceScheduler_Click(object sender, EventArgs e)
         {
+            PopulateServiceNameDropdown();
+        }
+        private void PopulateServiceNameDropdown()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT Title FROM AlertServiceMaster";
 
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comboBox2.Items.Add(reader["Title"].ToString());
+                        }
+                    }
+                }
+            }
         }
 
         public void dateTimePicker3_ValueChanged(object sender, EventArgs e)
@@ -230,7 +249,7 @@ namespace PushNotification
         {
             try
             {
-                ServiceSchedularDTO schedularDTO = new ServiceSchedularDTO
+                SchedularConfig schedularDTO = new SchedularConfig
                 {
                     SchedularName = SchedulerName.Text,
                     SchedularCode = SchedularCodeTxt.Text,
@@ -464,9 +483,9 @@ namespace PushNotification
                     command.Parameters.Add(new SqlParameter("@UserName", SqlDbType.VarChar, 100)).Value = UserName.Text;
                     command.Parameters.Add(new SqlParameter("@Passwrd", SqlDbType.VarChar, 200)).Value = Passwrd.Text;
                     command.Parameters.Add(new SqlParameter("@DBName", SqlDbType.VarChar, 100)).Value = DBName.Text;
-                    command.Parameters.AddWithValue("@IsActive", 1); 
-                    command.Parameters.AddWithValue("@IsDeleted", 0); 
-                    command.Parameters.Add(new SqlParameter("@ActionUser", SqlDbType.Int)).Value = 1; 
+                    command.Parameters.AddWithValue("@IsActive", 1);
+                    command.Parameters.AddWithValue("@IsDeleted", 0);
+                    command.Parameters.Add(new SqlParameter("@ActionUser", SqlDbType.Int)).Value = 1;
 
                     command.ExecuteNonQuery();
                     MessageBox.Show(recordId > 0 ? "Data Updated" : "Data Saved");
@@ -517,5 +536,10 @@ namespace PushNotification
                 }
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
         }
     }
+}

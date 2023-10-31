@@ -7,7 +7,7 @@ using PushNotification.Model;
 
 namespace PushNotification.Interface
 {
-    public interface IServiceSchedular
+    public interface ISchedularConfig
     {
         void CreateSchedular(SchedularConfig schedularDTO);
     }

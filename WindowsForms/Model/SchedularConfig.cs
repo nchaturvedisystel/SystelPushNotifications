@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PushNotification.Model
 {
-    public class ServiceSchedularDTO
+    public class SchedularConfig
     {
         public string SchedularName { get; set; }
         public string SchedularCode { get; set; }
