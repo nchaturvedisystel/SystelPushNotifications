@@ -9,6 +9,6 @@ namespace PushNotification.Interface
 {
     public interface IServiceSchedular
     {
-        void ServiceSchedularConfig(ServiceSchedularDTO ServiceSchedular);
+        void CreateSchedular(SchedularConfig schedularDTO);
     }
 }

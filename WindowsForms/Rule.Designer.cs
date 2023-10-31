@@ -28,14 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            RuleDBConfig = new TabControl();
+            AlertServiceMaster = new TabControl();
+            AlertServiceMaster1 = new TabPage();
+            ASMTitle = new TextBox();
+            ASMPostDataSrv = new ComboBox();
+            ASMPostSrcDef = new TextBox();
+            ASMOutputFileName = new TextBox();
+            ASMDatasourceDef = new TextBox();
+            ASMBody = new TextBox();
+            ASMSubject = new TextBox();
+            ASMBcc = new TextBox();
+            ASMCC = new TextBox();
+            ASMEmail = new TextBox();
+            label17 = new Label();
+            label16 = new Label();
+            label15 = new Label();
+            button1 = new Button();
+            label12 = new Label();
+            label11 = new Label();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            ASMOutsource = new ComboBox();
+            label6 = new Label();
+            ASMFileType = new ComboBox();
+            label5 = new Label();
+            ASMBrowse = new Button();
+            label4 = new Label();
+            ASMAttachment = new ComboBox();
+            label3 = new Label();
+            ASMType = new ComboBox();
+            label2 = new Label();
+            label1 = new Label();
             DBConfig = new TabPage();
+            button7 = new Button();
             DBConfigPassword = new Label();
-            textBox10 = new TextBox();
-            textBox9 = new TextBox();
-            textBox8 = new TextBox();
-            textBox7 = new TextBox();
-            textBox6 = new TextBox();
+            Passwrd = new TextBox();
+            DBName = new TextBox();
+            UserName = new TextBox();
+            ServerName = new TextBox();
+            ConName = new TextBox();
             IsActiveCheckBox = new CheckBox();
             DBConfigName = new Label();
             DBConfigUser = new Label();
@@ -58,36 +91,6 @@
             Host = new Label();
             RuleDesc = new Label();
             RuleTitle = new Label();
-            AlertServiceMaster = new TabPage();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            label14 = new Label();
-            comboBox4 = new ComboBox();
-            label13 = new Label();
-            ASMDatasourceDef = new TextBox();
-            label12 = new Label();
-            ASMBody = new TextBox();
-            label11 = new Label();
-            ASMSubject = new TextBox();
-            label10 = new Label();
-            ASMBcc = new TextBox();
-            label9 = new Label();
-            ASMCC = new TextBox();
-            label8 = new Label();
-            ASMEmail = new TextBox();
-            label7 = new Label();
-            ASMOutsource = new ComboBox();
-            label6 = new Label();
-            ASMFileType = new ComboBox();
-            label5 = new Label();
-            ASMBrowse = new Button();
-            label4 = new Label();
-            ASMAttachment = new ComboBox();
-            label3 = new Label();
-            ASMType = new ComboBox();
-            label2 = new Label();
-            ASMTitle = new ComboBox();
-            label1 = new Label();
             SConfigClose = new TabPage();
             button2 = new Button();
             SConfigType = new ComboBox();
@@ -102,15 +105,14 @@
             SchedulerName = new TextBox();
             SchedularName = new Label();
             ServiceVariables = new TabPage();
+            checkBox1 = new CheckBox();
             button5 = new Button();
-            comboBox1 = new ComboBox();
-            textBox14 = new TextBox();
-            textBox13 = new TextBox();
-            textBox12 = new TextBox();
+            VarTypeTextBox = new TextBox();
+            VarValueTextBox = new TextBox();
+            VarInstanceTextBox = new TextBox();
             VarType = new Label();
             VarValue = new Label();
             VarInstance = new Label();
-            ServiceName = new Label();
             ServiceScheduler = new TabPage();
             button6 = new Button();
             dateTimePicker6 = new DateTimePicker();
@@ -133,39 +135,373 @@
             button3 = new Button();
             button4 = new Button();
             openFileDialog1 = new OpenFileDialog();
-            RuleDBConfig.SuspendLayout();
+            fileSystemWatcher1 = new FileSystemWatcher();
+            AlertServiceMaster.SuspendLayout();
+            AlertServiceMaster1.SuspendLayout();
             DBConfig.SuspendLayout();
             EmailConfig.SuspendLayout();
-            AlertServiceMaster.SuspendLayout();
             SConfigClose.SuspendLayout();
             ServiceVariables.SuspendLayout();
             ServiceScheduler.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             SuspendLayout();
             // 
-            // RuleDBConfig
+            // AlertServiceMaster
             // 
-            RuleDBConfig.AccessibleName = "Report";
-            RuleDBConfig.Controls.Add(DBConfig);
-            RuleDBConfig.Controls.Add(EmailConfig);
-            RuleDBConfig.Controls.Add(AlertServiceMaster);
-            RuleDBConfig.Controls.Add(SConfigClose);
-            RuleDBConfig.Controls.Add(ServiceVariables);
-            RuleDBConfig.Controls.Add(ServiceScheduler);
-            RuleDBConfig.Location = new Point(1, 2);
-            RuleDBConfig.Name = "RuleDBConfig";
-            RuleDBConfig.SelectedIndex = 0;
-            RuleDBConfig.Size = new Size(662, 468);
-            RuleDBConfig.TabIndex = 0;
-            RuleDBConfig.Tag = "";
+            AlertServiceMaster.AccessibleName = "Report";
+            AlertServiceMaster.Controls.Add(AlertServiceMaster1);
+            AlertServiceMaster.Controls.Add(DBConfig);
+            AlertServiceMaster.Controls.Add(EmailConfig);
+            AlertServiceMaster.Controls.Add(SConfigClose);
+            AlertServiceMaster.Controls.Add(ServiceVariables);
+            AlertServiceMaster.Controls.Add(ServiceScheduler);
+            AlertServiceMaster.Location = new Point(-4, 2);
+            AlertServiceMaster.Name = "AlertServiceMaster";
+            AlertServiceMaster.SelectedIndex = 0;
+            AlertServiceMaster.Size = new Size(667, 468);
+            AlertServiceMaster.TabIndex = 0;
+            AlertServiceMaster.Tag = "";
+            // 
+            // AlertServiceMaster1
+            // 
+            AlertServiceMaster1.Controls.Add(ASMTitle);
+            AlertServiceMaster1.Controls.Add(ASMPostDataSrv);
+            AlertServiceMaster1.Controls.Add(ASMPostSrcDef);
+            AlertServiceMaster1.Controls.Add(ASMOutputFileName);
+            AlertServiceMaster1.Controls.Add(ASMDatasourceDef);
+            AlertServiceMaster1.Controls.Add(ASMBody);
+            AlertServiceMaster1.Controls.Add(ASMSubject);
+            AlertServiceMaster1.Controls.Add(ASMBcc);
+            AlertServiceMaster1.Controls.Add(ASMCC);
+            AlertServiceMaster1.Controls.Add(ASMEmail);
+            AlertServiceMaster1.Controls.Add(label17);
+            AlertServiceMaster1.Controls.Add(label16);
+            AlertServiceMaster1.Controls.Add(label15);
+            AlertServiceMaster1.Controls.Add(button1);
+            AlertServiceMaster1.Controls.Add(label12);
+            AlertServiceMaster1.Controls.Add(label11);
+            AlertServiceMaster1.Controls.Add(label10);
+            AlertServiceMaster1.Controls.Add(label9);
+            AlertServiceMaster1.Controls.Add(label8);
+            AlertServiceMaster1.Controls.Add(label7);
+            AlertServiceMaster1.Controls.Add(ASMOutsource);
+            AlertServiceMaster1.Controls.Add(label6);
+            AlertServiceMaster1.Controls.Add(ASMFileType);
+            AlertServiceMaster1.Controls.Add(label5);
+            AlertServiceMaster1.Controls.Add(ASMBrowse);
+            AlertServiceMaster1.Controls.Add(label4);
+            AlertServiceMaster1.Controls.Add(ASMAttachment);
+            AlertServiceMaster1.Controls.Add(label3);
+            AlertServiceMaster1.Controls.Add(ASMType);
+            AlertServiceMaster1.Controls.Add(label2);
+            AlertServiceMaster1.Controls.Add(label1);
+            AlertServiceMaster1.Location = new Point(4, 24);
+            AlertServiceMaster1.Name = "AlertServiceMaster1";
+            AlertServiceMaster1.Size = new Size(659, 440);
+            AlertServiceMaster1.TabIndex = 6;
+            AlertServiceMaster1.Text = "AlertServiceMaster";
+            AlertServiceMaster1.UseVisualStyleBackColor = true;
+            // 
+            // ASMTitle
+            // 
+            ASMTitle.Location = new Point(138, 17);
+            ASMTitle.Name = "ASMTitle";
+            ASMTitle.Size = new Size(167, 23);
+            ASMTitle.TabIndex = 77;
+            // 
+            // ASMPostDataSrv
+            // 
+            ASMPostDataSrv.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
+            ASMPostDataSrv.FormattingEnabled = true;
+            ASMPostDataSrv.Items.AddRange(new object[] { "Crystal Report", "SQL Queries" });
+            ASMPostDataSrv.Location = new Point(454, 51);
+            ASMPostDataSrv.Name = "ASMPostDataSrv";
+            ASMPostDataSrv.Size = new Size(167, 23);
+            ASMPostDataSrv.TabIndex = 76;
+            ASMPostDataSrv.Text = "SQL Queries";
+            // 
+            // ASMPostSrcDef
+            // 
+            ASMPostSrcDef.Location = new Point(454, 84);
+            ASMPostSrcDef.Multiline = true;
+            ASMPostSrcDef.Name = "ASMPostSrcDef";
+            ASMPostSrcDef.Size = new Size(192, 68);
+            ASMPostSrcDef.TabIndex = 75;
+            // 
+            // ASMOutputFileName
+            // 
+            ASMOutputFileName.Location = new Point(454, 18);
+            ASMOutputFileName.Name = "ASMOutputFileName";
+            ASMOutputFileName.Size = new Size(167, 23);
+            ASMOutputFileName.TabIndex = 72;
+            // 
+            // ASMDatasourceDef
+            // 
+            ASMDatasourceDef.Location = new Point(454, 187);
+            ASMDatasourceDef.Multiline = true;
+            ASMDatasourceDef.Name = "ASMDatasourceDef";
+            ASMDatasourceDef.Size = new Size(192, 56);
+            ASMDatasourceDef.TabIndex = 69;
+            // 
+            // ASMBody
+            // 
+            ASMBody.Location = new Point(138, 351);
+            ASMBody.Multiline = true;
+            ASMBody.Name = "ASMBody";
+            ASMBody.Size = new Size(167, 72);
+            ASMBody.TabIndex = 67;
+            // 
+            // ASMSubject
+            // 
+            ASMSubject.Location = new Point(138, 322);
+            ASMSubject.Name = "ASMSubject";
+            ASMSubject.Size = new Size(167, 23);
+            ASMSubject.TabIndex = 65;
+            // 
+            // ASMBcc
+            // 
+            ASMBcc.Location = new Point(138, 289);
+            ASMBcc.Name = "ASMBcc";
+            ASMBcc.Size = new Size(167, 23);
+            ASMBcc.TabIndex = 63;
+            // 
+            // ASMCC
+            // 
+            ASMCC.Location = new Point(138, 256);
+            ASMCC.Name = "ASMCC";
+            ASMCC.Size = new Size(167, 23);
+            ASMCC.TabIndex = 61;
+            // 
+            // ASMEmail
+            // 
+            ASMEmail.Location = new Point(138, 225);
+            ASMEmail.Name = "ASMEmail";
+            ASMEmail.Size = new Size(167, 23);
+            ASMEmail.TabIndex = 59;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label17.Location = new Point(329, 84);
+            label17.Name = "label17";
+            label17.Size = new Size(109, 18);
+            label17.TabIndex = 74;
+            label17.Text = "Post SourceDef :";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label16.Location = new Point(329, 51);
+            label16.Name = "label16";
+            label16.Size = new Size(115, 18);
+            label16.TabIndex = 73;
+            label16.Text = "Post DataSource :";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Location = new Point(329, 18);
+            label15.Name = "label15";
+            label15.Size = new Size(119, 18);
+            label15.TabIndex = 71;
+            label15.Text = "Output FileName:";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(571, 400);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 70;
+            button1.Text = "Confirm";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_2;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(329, 192);
+            label12.Name = "label12";
+            label12.Size = new Size(110, 18);
+            label12.TabIndex = 68;
+            label12.Text = "DataSource Def :";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(13, 351);
+            label11.Name = "label11";
+            label11.Size = new Size(46, 18);
+            label11.TabIndex = 66;
+            label11.Text = "Body :";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(13, 322);
+            label10.Name = "label10";
+            label10.Size = new Size(61, 18);
+            label10.TabIndex = 64;
+            label10.Text = "Subject :";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(13, 289);
+            label9.Name = "label9";
+            label9.Size = new Size(52, 18);
+            label9.TabIndex = 62;
+            label9.Text = "Bcc To :";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(13, 256);
+            label8.Name = "label8";
+            label8.Size = new Size(48, 18);
+            label8.TabIndex = 60;
+            label8.Text = "CC To :";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(13, 225);
+            label7.Name = "label7";
+            label7.Size = new Size(66, 18);
+            label7.TabIndex = 58;
+            label7.Text = "Email To :";
+            // 
+            // ASMOutsource
+            // 
+            ASMOutsource.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
+            ASMOutsource.FormattingEnabled = true;
+            ASMOutsource.Items.AddRange(new object[] { "Crystal Report", "SQL Queries" });
+            ASMOutsource.Location = new Point(138, 192);
+            ASMOutsource.Name = "ASMOutsource";
+            ASMOutsource.Size = new Size(167, 23);
+            ASMOutsource.TabIndex = 57;
+            ASMOutsource.Text = "SQL Queries";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(13, 192);
+            label6.Name = "label6";
+            label6.Size = new Size(111, 18);
+            label6.TabIndex = 56;
+            label6.Text = "Outsource Type :";
+            // 
+            // ASMFileType
+            // 
+            ASMFileType.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
+            ASMFileType.FormattingEnabled = true;
+            ASMFileType.Items.AddRange(new object[] { "PDF", "Excel" });
+            ASMFileType.Location = new Point(138, 157);
+            ASMFileType.Name = "ASMFileType";
+            ASMFileType.Size = new Size(167, 23);
+            ASMFileType.TabIndex = 55;
+            ASMFileType.Text = "PDF";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(13, 157);
+            label5.Name = "label5";
+            label5.Size = new Size(70, 18);
+            label5.TabIndex = 54;
+            label5.Text = "File Type :";
+            // 
+            // ASMBrowse
+            // 
+            ASMBrowse.Location = new Point(138, 118);
+            ASMBrowse.Name = "ASMBrowse";
+            ASMBrowse.Size = new Size(87, 27);
+            ASMBrowse.TabIndex = 53;
+            ASMBrowse.Text = "Browse";
+            ASMBrowse.UseVisualStyleBackColor = true;
+            ASMBrowse.Click += ASMBrowse_Click_1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(13, 118);
+            label4.Name = "label4";
+            label4.Size = new Size(119, 18);
+            label4.TabIndex = 52;
+            label4.Text = "Attachment Path :";
+            // 
+            // ASMAttachment
+            // 
+            ASMAttachment.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
+            ASMAttachment.FormattingEnabled = true;
+            ASMAttachment.Items.AddRange(new object[] { "Crystal Report", "HTML" });
+            ASMAttachment.Location = new Point(138, 84);
+            ASMAttachment.Name = "ASMAttachment";
+            ASMAttachment.Size = new Size(167, 23);
+            ASMAttachment.TabIndex = 51;
+            ASMAttachment.Text = "Crystal Report";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(13, 84);
+            label3.Name = "label3";
+            label3.Size = new Size(120, 18);
+            label3.TabIndex = 50;
+            label3.Text = "Attachment Type :";
+            // 
+            // ASMType
+            // 
+            ASMType.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
+            ASMType.FormattingEnabled = true;
+            ASMType.Items.AddRange(new object[] { "Email", "SMS", "Whatsapp" });
+            ASMType.Location = new Point(138, 51);
+            ASMType.Name = "ASMType";
+            ASMType.Size = new Size(167, 23);
+            ASMType.TabIndex = 49;
+            ASMType.Text = "Email";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(13, 51);
+            label2.Name = "label2";
+            label2.Size = new Size(78, 18);
+            label2.TabIndex = 48;
+            label2.Text = "Alert Type :";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(13, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(43, 18);
+            label1.TabIndex = 46;
+            label1.Text = "Title :";
             // 
             // DBConfig
             // 
+            DBConfig.Controls.Add(button7);
             DBConfig.Controls.Add(DBConfigPassword);
-            DBConfig.Controls.Add(textBox10);
-            DBConfig.Controls.Add(textBox9);
-            DBConfig.Controls.Add(textBox8);
-            DBConfig.Controls.Add(textBox7);
-            DBConfig.Controls.Add(textBox6);
+            DBConfig.Controls.Add(Passwrd);
+            DBConfig.Controls.Add(DBName);
+            DBConfig.Controls.Add(UserName);
+            DBConfig.Controls.Add(ServerName);
+            DBConfig.Controls.Add(ConName);
             DBConfig.Controls.Add(IsActiveCheckBox);
             DBConfig.Controls.Add(DBConfigName);
             DBConfig.Controls.Add(DBConfigUser);
@@ -175,11 +511,21 @@
             DBConfig.Location = new Point(4, 24);
             DBConfig.Name = "DBConfig";
             DBConfig.Padding = new Padding(3);
-            DBConfig.Size = new Size(654, 440);
+            DBConfig.Size = new Size(659, 440);
             DBConfig.TabIndex = 1;
             DBConfig.Text = "DBConfig";
             DBConfig.UseVisualStyleBackColor = true;
             DBConfig.Click += DBConfig_Click;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(554, 394);
+            button7.Name = "button7";
+            button7.Size = new Size(75, 23);
+            button7.TabIndex = 71;
+            button7.Text = "Confirm";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // DBConfigPassword
             // 
@@ -191,42 +537,42 @@
             DBConfigPassword.TabIndex = 20;
             DBConfigPassword.Text = "Password";
             // 
-            // textBox10
+            // Passwrd
             // 
-            textBox10.Location = new Point(146, 159);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(265, 26);
-            textBox10.TabIndex = 19;
+            Passwrd.Location = new Point(146, 159);
+            Passwrd.Name = "Passwrd";
+            Passwrd.Size = new Size(265, 26);
+            Passwrd.TabIndex = 19;
             // 
-            // textBox9
+            // DBName
             // 
-            textBox9.Location = new Point(146, 127);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(265, 26);
-            textBox9.TabIndex = 18;
-            textBox9.TextChanged += textBox9_TextChanged;
+            DBName.Location = new Point(146, 127);
+            DBName.Name = "DBName";
+            DBName.Size = new Size(265, 26);
+            DBName.TabIndex = 18;
+            DBName.TextChanged += textBox9_TextChanged;
             // 
-            // textBox8
+            // UserName
             // 
-            textBox8.Location = new Point(146, 95);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(265, 26);
-            textBox8.TabIndex = 17;
+            UserName.Location = new Point(146, 95);
+            UserName.Name = "UserName";
+            UserName.Size = new Size(265, 26);
+            UserName.TabIndex = 17;
             // 
-            // textBox7
+            // ServerName
             // 
-            textBox7.Location = new Point(146, 63);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(265, 26);
-            textBox7.TabIndex = 16;
+            ServerName.Location = new Point(146, 63);
+            ServerName.Name = "ServerName";
+            ServerName.Size = new Size(265, 26);
+            ServerName.TabIndex = 16;
             // 
-            // textBox6
+            // ConName
             // 
-            textBox6.Location = new Point(146, 31);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(265, 26);
-            textBox6.TabIndex = 15;
-            textBox6.TextChanged += textBox6_TextChanged;
+            ConName.Location = new Point(146, 31);
+            ConName.Name = "ConName";
+            ConName.Size = new Size(265, 26);
+            ConName.TabIndex = 15;
+            ConName.TextChanged += textBox6_TextChanged;
             // 
             // IsActiveCheckBox
             // 
@@ -301,7 +647,7 @@
             EmailConfig.Location = new Point(4, 24);
             EmailConfig.Name = "EmailConfig";
             EmailConfig.Padding = new Padding(3);
-            EmailConfig.Size = new Size(654, 440);
+            EmailConfig.Size = new Size(659, 440);
             EmailConfig.TabIndex = 0;
             EmailConfig.Text = "EmailConfig";
             EmailConfig.UseVisualStyleBackColor = true;
@@ -459,320 +805,6 @@
             RuleTitle.TabIndex = 0;
             RuleTitle.Text = "Connection Name";
             // 
-            // AlertServiceMaster
-            // 
-            AlertServiceMaster.Controls.Add(button1);
-            AlertServiceMaster.Controls.Add(textBox1);
-            AlertServiceMaster.Controls.Add(label14);
-            AlertServiceMaster.Controls.Add(comboBox4);
-            AlertServiceMaster.Controls.Add(label13);
-            AlertServiceMaster.Controls.Add(ASMDatasourceDef);
-            AlertServiceMaster.Controls.Add(label12);
-            AlertServiceMaster.Controls.Add(ASMBody);
-            AlertServiceMaster.Controls.Add(label11);
-            AlertServiceMaster.Controls.Add(ASMSubject);
-            AlertServiceMaster.Controls.Add(label10);
-            AlertServiceMaster.Controls.Add(ASMBcc);
-            AlertServiceMaster.Controls.Add(label9);
-            AlertServiceMaster.Controls.Add(ASMCC);
-            AlertServiceMaster.Controls.Add(label8);
-            AlertServiceMaster.Controls.Add(ASMEmail);
-            AlertServiceMaster.Controls.Add(label7);
-            AlertServiceMaster.Controls.Add(ASMOutsource);
-            AlertServiceMaster.Controls.Add(label6);
-            AlertServiceMaster.Controls.Add(ASMFileType);
-            AlertServiceMaster.Controls.Add(label5);
-            AlertServiceMaster.Controls.Add(ASMBrowse);
-            AlertServiceMaster.Controls.Add(label4);
-            AlertServiceMaster.Controls.Add(ASMAttachment);
-            AlertServiceMaster.Controls.Add(label3);
-            AlertServiceMaster.Controls.Add(ASMType);
-            AlertServiceMaster.Controls.Add(label2);
-            AlertServiceMaster.Controls.Add(ASMTitle);
-            AlertServiceMaster.Controls.Add(label1);
-            AlertServiceMaster.Location = new Point(4, 24);
-            AlertServiceMaster.Name = "AlertServiceMaster";
-            AlertServiceMaster.Size = new Size(654, 440);
-            AlertServiceMaster.TabIndex = 6;
-            AlertServiceMaster.Text = "AlertServiceMaster";
-            AlertServiceMaster.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(565, 398);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 38;
-            button1.Text = "Confirm";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(448, 82);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(192, 68);
-            textBox1.TabIndex = 37;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.Location = new Point(323, 82);
-            label14.Name = "label14";
-            label14.Size = new Size(99, 18);
-            label14.TabIndex = 36;
-            label14.Text = "SendData Def :";
-            // 
-            // comboBox4
-            // 
-            comboBox4.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Items.AddRange(new object[] { "Crystal Report", "SQL Queries" });
-            comboBox4.Location = new Point(448, 16);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(167, 23);
-            comboBox4.TabIndex = 35;
-            comboBox4.Text = "SQL Queries";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label13.Location = new Point(323, 16);
-            label13.Name = "label13";
-            label13.Size = new Size(119, 18);
-            label13.TabIndex = 34;
-            label13.Text = "SendData Source :";
-            // 
-            // ASMDatasourceDef
-            // 
-            ASMDatasourceDef.Location = new Point(448, 190);
-            ASMDatasourceDef.Multiline = true;
-            ASMDatasourceDef.Name = "ASMDatasourceDef";
-            ASMDatasourceDef.Size = new Size(192, 56);
-            ASMDatasourceDef.TabIndex = 33;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label12.Location = new Point(323, 190);
-            label12.Name = "label12";
-            label12.Size = new Size(110, 18);
-            label12.TabIndex = 32;
-            label12.Text = "DataSource Def :";
-            // 
-            // ASMBody
-            // 
-            ASMBody.Location = new Point(132, 349);
-            ASMBody.Multiline = true;
-            ASMBody.Name = "ASMBody";
-            ASMBody.Size = new Size(167, 72);
-            ASMBody.TabIndex = 28;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label11.Location = new Point(7, 349);
-            label11.Name = "label11";
-            label11.Size = new Size(46, 18);
-            label11.TabIndex = 27;
-            label11.Text = "Body :";
-            // 
-            // ASMSubject
-            // 
-            ASMSubject.Location = new Point(132, 320);
-            ASMSubject.Name = "ASMSubject";
-            ASMSubject.Size = new Size(167, 23);
-            ASMSubject.TabIndex = 26;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(7, 320);
-            label10.Name = "label10";
-            label10.Size = new Size(61, 18);
-            label10.TabIndex = 25;
-            label10.Text = "Subject :";
-            // 
-            // ASMBcc
-            // 
-            ASMBcc.Location = new Point(132, 287);
-            ASMBcc.Name = "ASMBcc";
-            ASMBcc.Size = new Size(167, 23);
-            ASMBcc.TabIndex = 24;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(7, 287);
-            label9.Name = "label9";
-            label9.Size = new Size(52, 18);
-            label9.TabIndex = 23;
-            label9.Text = "Bcc To :";
-            // 
-            // ASMCC
-            // 
-            ASMCC.Location = new Point(132, 254);
-            ASMCC.Name = "ASMCC";
-            ASMCC.Size = new Size(167, 23);
-            ASMCC.TabIndex = 22;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(7, 254);
-            label8.Name = "label8";
-            label8.Size = new Size(48, 18);
-            label8.TabIndex = 21;
-            label8.Text = "CC To :";
-            // 
-            // ASMEmail
-            // 
-            ASMEmail.Location = new Point(132, 223);
-            ASMEmail.Name = "ASMEmail";
-            ASMEmail.Size = new Size(167, 23);
-            ASMEmail.TabIndex = 20;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(7, 223);
-            label7.Name = "label7";
-            label7.Size = new Size(66, 18);
-            label7.TabIndex = 19;
-            label7.Text = "Email To :";
-            // 
-            // ASMOutsource
-            // 
-            ASMOutsource.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
-            ASMOutsource.FormattingEnabled = true;
-            ASMOutsource.Items.AddRange(new object[] { "Crystal Report", "SQL Queries" });
-            ASMOutsource.Location = new Point(132, 190);
-            ASMOutsource.Name = "ASMOutsource";
-            ASMOutsource.Size = new Size(167, 23);
-            ASMOutsource.TabIndex = 18;
-            ASMOutsource.Text = "SQL Queries";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(7, 190);
-            label6.Name = "label6";
-            label6.Size = new Size(111, 18);
-            label6.TabIndex = 17;
-            label6.Text = "Outsource Type :";
-            // 
-            // ASMFileType
-            // 
-            ASMFileType.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
-            ASMFileType.FormattingEnabled = true;
-            ASMFileType.Items.AddRange(new object[] { "PDF", "Excel" });
-            ASMFileType.Location = new Point(132, 155);
-            ASMFileType.Name = "ASMFileType";
-            ASMFileType.Size = new Size(167, 23);
-            ASMFileType.TabIndex = 16;
-            ASMFileType.Text = "PDF";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(7, 155);
-            label5.Name = "label5";
-            label5.Size = new Size(70, 18);
-            label5.TabIndex = 15;
-            label5.Text = "File Type :";
-            // 
-            // ASMBrowse
-            // 
-            ASMBrowse.Location = new Point(132, 116);
-            ASMBrowse.Name = "ASMBrowse";
-            ASMBrowse.Size = new Size(87, 27);
-            ASMBrowse.TabIndex = 14;
-            ASMBrowse.Text = "Browse";
-            ASMBrowse.UseVisualStyleBackColor = true;
-            ASMBrowse.Click += ASMBrowse_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(7, 116);
-            label4.Name = "label4";
-            label4.Size = new Size(119, 18);
-            label4.TabIndex = 13;
-            label4.Text = "Attachment Path :";
-            // 
-            // ASMAttachment
-            // 
-            ASMAttachment.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
-            ASMAttachment.FormattingEnabled = true;
-            ASMAttachment.Items.AddRange(new object[] { "Crystal Report", "HTML" });
-            ASMAttachment.Location = new Point(132, 82);
-            ASMAttachment.Name = "ASMAttachment";
-            ASMAttachment.Size = new Size(167, 23);
-            ASMAttachment.TabIndex = 12;
-            ASMAttachment.Text = "Crystal Report";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(7, 82);
-            label3.Name = "label3";
-            label3.Size = new Size(120, 18);
-            label3.TabIndex = 11;
-            label3.Text = "Attachment Type :";
-            // 
-            // ASMType
-            // 
-            ASMType.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
-            ASMType.FormattingEnabled = true;
-            ASMType.Items.AddRange(new object[] { "Email", "SMS", "Whatsapp" });
-            ASMType.Location = new Point(132, 49);
-            ASMType.Name = "ASMType";
-            ASMType.Size = new Size(167, 23);
-            ASMType.TabIndex = 10;
-            ASMType.Text = "Email";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(7, 49);
-            label2.Name = "label2";
-            label2.Size = new Size(78, 18);
-            label2.TabIndex = 9;
-            label2.Text = "Alert Type :";
-            // 
-            // ASMTitle
-            // 
-            ASMTitle.FormattingEnabled = true;
-            ASMTitle.Items.AddRange(new object[] { "KDPL-Invoices", "RDPL", "Cosmic" });
-            ASMTitle.Location = new Point(132, 16);
-            ASMTitle.Name = "ASMTitle";
-            ASMTitle.Size = new Size(167, 23);
-            ASMTitle.TabIndex = 8;
-            ASMTitle.Text = "KDPL-Invoices";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(7, 16);
-            label1.Name = "label1";
-            label1.Size = new Size(43, 18);
-            label1.TabIndex = 1;
-            label1.Text = "Title :";
-            // 
             // SConfigClose
             // 
             SConfigClose.Controls.Add(button2);
@@ -791,7 +823,7 @@
             SConfigClose.Location = new Point(4, 24);
             SConfigClose.Name = "SConfigClose";
             SConfigClose.Padding = new Padding(3);
-            SConfigClose.Size = new Size(654, 440);
+            SConfigClose.Size = new Size(659, 440);
             SConfigClose.TabIndex = 3;
             SConfigClose.Text = "SchedulerConfig";
             SConfigClose.UseVisualStyleBackColor = true;
@@ -811,13 +843,11 @@
             // 
             SConfigType.AutoCompleteCustomSource.AddRange(new string[] { "Email", "SMS", "Whatsapp" });
             SConfigType.FormattingEnabled = true;
-            SConfigType.Items.AddRange(new object[] { "Recurring", "Single Time" });
+            SConfigType.Items.AddRange(new object[] { "Recurring", "SingleTime" });
             SConfigType.Location = new Point(175, 204);
             SConfigType.Name = "SConfigType";
             SConfigType.Size = new Size(251, 26);
             SConfigType.TabIndex = 28;
-            SConfigType.Text = "Recurring";
-            SConfigType.SelectedIndexChanged += SConfigType_SelectedIndexChanged;
             // 
             // SchedulerIsActive
             // 
@@ -887,7 +917,7 @@
             // 
             // SchedularCodeTxt
             // 
-            SchedularCodeTxt.ForeColor = SystemColors.Window;
+            SchedularCodeTxt.ForeColor = SystemColors.InactiveCaptionText;
             SchedularCodeTxt.Location = new Point(175, 72);
             SchedularCodeTxt.Name = "SchedularCodeTxt";
             SchedularCodeTxt.Size = new Size(251, 26);
@@ -913,68 +943,70 @@
             // 
             // ServiceVariables
             // 
+            ServiceVariables.Controls.Add(checkBox1);
             ServiceVariables.Controls.Add(button5);
-            ServiceVariables.Controls.Add(comboBox1);
-            ServiceVariables.Controls.Add(textBox14);
-            ServiceVariables.Controls.Add(textBox13);
-            ServiceVariables.Controls.Add(textBox12);
+            ServiceVariables.Controls.Add(VarTypeTextBox);
+            ServiceVariables.Controls.Add(VarValueTextBox);
+            ServiceVariables.Controls.Add(VarInstanceTextBox);
             ServiceVariables.Controls.Add(VarType);
             ServiceVariables.Controls.Add(VarValue);
             ServiceVariables.Controls.Add(VarInstance);
-            ServiceVariables.Controls.Add(ServiceName);
             ServiceVariables.Location = new Point(4, 24);
             ServiceVariables.Name = "ServiceVariables";
             ServiceVariables.Padding = new Padding(3);
-            ServiceVariables.Size = new Size(654, 440);
+            ServiceVariables.Size = new Size(659, 440);
             ServiceVariables.TabIndex = 4;
             ServiceVariables.Text = "ServiceVariables";
             ServiceVariables.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox1.Location = new Point(6, 280);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(65, 22);
+            checkBox1.TabIndex = 26;
+            checkBox1.Text = "Active";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
             // button5
             // 
-            button5.Location = new Point(6, 356);
+            button5.Location = new Point(6, 324);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
             button5.TabIndex = 25;
             button5.Text = "Confirm";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
-            // comboBox1
+            // VarTypeTextBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "KDPL-Invoices", "RDPL", "Cosmic" });
-            comboBox1.Location = new Point(140, 35);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(243, 23);
-            comboBox1.TabIndex = 7;
-            comboBox1.Text = "KDPL-Invoices";
+            VarTypeTextBox.Location = new Point(140, 126);
+            VarTypeTextBox.Name = "VarTypeTextBox";
+            VarTypeTextBox.Size = new Size(243, 23);
+            VarTypeTextBox.TabIndex = 6;
             // 
-            // textBox14
+            // VarValueTextBox
             // 
-            textBox14.Location = new Point(140, 148);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(243, 23);
-            textBox14.TabIndex = 6;
+            VarValueTextBox.Location = new Point(140, 88);
+            VarValueTextBox.Name = "VarValueTextBox";
+            VarValueTextBox.Size = new Size(243, 23);
+            VarValueTextBox.TabIndex = 5;
             // 
-            // textBox13
+            // VarInstanceTextBox
             // 
-            textBox13.Location = new Point(140, 109);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(243, 23);
-            textBox13.TabIndex = 5;
-            // 
-            // textBox12
-            // 
-            textBox12.Location = new Point(140, 72);
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(243, 23);
-            textBox12.TabIndex = 4;
+            VarInstanceTextBox.Location = new Point(140, 49);
+            VarInstanceTextBox.Name = "VarInstanceTextBox";
+            VarInstanceTextBox.Size = new Size(243, 23);
+            VarInstanceTextBox.TabIndex = 4;
+            VarInstanceTextBox.TextChanged += textBox12_TextChanged;
             // 
             // VarType
             // 
             VarType.AutoSize = true;
             VarType.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            VarType.Location = new Point(6, 148);
+            VarType.Location = new Point(6, 126);
             VarType.Name = "VarType";
             VarType.Size = new Size(57, 18);
             VarType.TabIndex = 3;
@@ -984,7 +1016,7 @@
             // 
             VarValue.AutoSize = true;
             VarValue.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            VarValue.Location = new Point(6, 109);
+            VarValue.Location = new Point(6, 88);
             VarValue.Name = "VarValue";
             VarValue.Size = new Size(63, 18);
             VarValue.TabIndex = 2;
@@ -994,21 +1026,11 @@
             // 
             VarInstance.AutoSize = true;
             VarInstance.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            VarInstance.Location = new Point(6, 72);
+            VarInstance.Location = new Point(6, 49);
             VarInstance.Name = "VarInstance";
             VarInstance.Size = new Size(80, 18);
             VarInstance.TabIndex = 1;
             VarInstance.Text = "VarInstance";
-            // 
-            // ServiceName
-            // 
-            ServiceName.AutoSize = true;
-            ServiceName.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            ServiceName.Location = new Point(6, 35);
-            ServiceName.Name = "ServiceName";
-            ServiceName.Size = new Size(93, 18);
-            ServiceName.TabIndex = 0;
-            ServiceName.Text = "Service Name";
             // 
             // ServiceScheduler
             // 
@@ -1033,7 +1055,7 @@
             ServiceScheduler.Location = new Point(4, 24);
             ServiceScheduler.Name = "ServiceScheduler";
             ServiceScheduler.Padding = new Padding(3);
-            ServiceScheduler.Size = new Size(654, 440);
+            ServiceScheduler.Size = new Size(659, 440);
             ServiceScheduler.TabIndex = 5;
             ServiceScheduler.Text = "ServiceSchedular";
             ServiceScheduler.UseVisualStyleBackColor = true;
@@ -1235,36 +1257,42 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // fileSystemWatcher1
+            // 
+            fileSystemWatcher1.EnableRaisingEvents = true;
+            fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Rule
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(675, 510);
+            ClientSize = new Size(682, 510);
             Controls.Add(button4);
             Controls.Add(button3);
-            Controls.Add(RuleDBConfig);
+            Controls.Add(AlertServiceMaster);
             Name = "Rule";
             Text = "Rule";
             Load += Rule_Load;
-            RuleDBConfig.ResumeLayout(false);
+            AlertServiceMaster.ResumeLayout(false);
+            AlertServiceMaster1.ResumeLayout(false);
+            AlertServiceMaster1.PerformLayout();
             DBConfig.ResumeLayout(false);
             DBConfig.PerformLayout();
             EmailConfig.ResumeLayout(false);
             EmailConfig.PerformLayout();
-            AlertServiceMaster.ResumeLayout(false);
-            AlertServiceMaster.PerformLayout();
             SConfigClose.ResumeLayout(false);
             SConfigClose.PerformLayout();
             ServiceVariables.ResumeLayout(false);
             ServiceVariables.PerformLayout();
             ServiceScheduler.ResumeLayout(false);
             ServiceScheduler.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TabControl RuleDBConfig;
+        private TabControl AlertServiceMaster;
         private TabPage EmailConfig;
         private TabPage DBConfig;
         private TabPage SConfigClose;
@@ -1300,22 +1328,20 @@
         private TextBox HostConf;
         private RadioButton IsUnActRadio;
         private RadioButton IsActiveRadio;
-        private TextBox textBox9;
-        private TextBox textBox8;
-        private TextBox textBox7;
-        private TextBox textBox6;
-        private TextBox textBox10;
+        private TextBox DBName;
+        private TextBox UserName;
+        private TextBox ServerName;
+        private TextBox ConName;
+        private TextBox Passwrd;
         private Label DBConfigPassword;
         private TextBox SchedularFreq;
         private CheckBox SchedulerIsActive;
-        private ComboBox comboBox1;
-        private TextBox textBox14;
-        private TextBox textBox13;
-        private TextBox textBox12;
+        private TextBox VarTypeTextBox;
+        private TextBox VarValueTextBox;
+        private TextBox VarInstanceTextBox;
         private Label VarType;
         private Label VarValue;
         private Label VarInstance;
-        private Label ServiceName;
         private Label SchedularSchedularName;
         private Label SchedularServiceName;
         private ComboBox comboBox3;
@@ -1333,43 +1359,48 @@
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePicker6;
         private DateTimePicker dateTimePicker5;
-        private TabPage AlertServiceMaster;
-        private Label label1;
-        private ComboBox ASMType;
-        private Label label2;
-        private ComboBox ASMTitle;
-        private ComboBox ASMAttachment;
-        private Label label3;
-        private ComboBox ASMFileType;
-        private Label label5;
-        private Button ASMBrowse;
-        private Label label4;
-        private Label label9;
-        private TextBox ASMCC;
-        private Label label8;
-        private TextBox ASMEmail;
-        private Label label7;
-        private ComboBox ASMOutsource;
-        private Label label6;
-        private TextBox ASMBody;
-        private Label label11;
-        private TextBox ASMSubject;
-        private Label label10;
-        private TextBox ASMBcc;
-        private TextBox ASMDatasourceDef;
-        private Label label12;
         private ComboBox SConfigType;
         private Button button3;
         private Button button4;
         private OpenFileDialog openFileDialog1;
-        private TextBox textBox1;
-        private Label label14;
-        private ComboBox comboBox4;
-        private Label label13;
         private Button EmailConfirm;
-        private Button button1;
         private Button button2;
         private Button button5;
         private Button button6;
+        private TabPage AlertServiceMaster1;
+        private ComboBox ASMPostDataSrv;
+        private TextBox ASMPostSrcDef;
+        private TextBox ASMOutputFileName;
+        private TextBox ASMDatasourceDef;
+        private TextBox ASMBody;
+        private TextBox ASMSubject;
+        private TextBox ASMBcc;
+        private TextBox ASMCC;
+        private TextBox ASMEmail;
+        private Label label17;
+        private Label label16;
+        private Label label15;
+        private Button button1;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private ComboBox ASMOutsource;
+        private Label label6;
+        private ComboBox ASMFileType;
+        private Label label5;
+        private Button ASMBrowse;
+        private Label label4;
+        private ComboBox ASMAttachment;
+        private Label label3;
+        private ComboBox ASMType;
+        private Label label2;
+        private Label label1;
+        private TextBox ASMTitle;
+        private FileSystemWatcher fileSystemWatcher1;
+        private Button button7;
+        private CheckBox checkBox1;
     }
 }

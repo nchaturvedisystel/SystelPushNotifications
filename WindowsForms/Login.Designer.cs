@@ -138,7 +138,7 @@
             // 
             // dBConfigConnectionBindingSource
             // 
-            dBConfigConnectionBindingSource.DataSource = typeof(Model.DBConfigConnectionDTO);
+            //dBConfigConnectionBindingSource.DataSource = typeof(Model.DBConfigConnectionDTO);
             // 
             // Login
             // 

@@ -12,13 +12,8 @@ namespace PushNotification.Model
         public string SchedularName { get; set; }
         public string SchedularCode { get; set; }
         public string SchedularDesc { get; set; }
-        public SchedularType SchedularType { get; set; }
-        public string FrequencyInMins { get; set; }
+        public int FrequencyInMins { get; set; }
+        public string SchedularType { get; set; }
 
-    }
-    public enum SchedularType
-    {
-        Recurring,
-        SingleTime
     }
 }
