@@ -74,10 +74,9 @@
             DBConfigUser = new Label();
             DBConfigServer = new Label();
             DBConfigConn = new Label();
-            EmailConfig = new TabPage();
+            EmailConfigStatus = new TabPage();
+            checkBox2 = new CheckBox();
             EmailConfirm = new Button();
-            IsUnActRadio = new RadioButton();
-            IsActiveRadio = new RadioButton();
             PassConfig = new TextBox();
             FromConfig = new TextBox();
             PortConfig = new TextBox();
@@ -115,12 +114,12 @@
             VarInstance = new Label();
             ServiceScheduler = new TabPage();
             button6 = new Button();
-            dateTimePicker6 = new DateTimePicker();
-            dateTimePicker5 = new DateTimePicker();
+            DailyEndsOn = new DateTimePicker();
+            DailyStartsOn = new DateTimePicker();
             SchedularIsAct = new CheckBox();
-            dateTimePicker4 = new DateTimePicker();
-            dateTimePicker3 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
+            StartsFromDate = new DateTimePicker();
+            EndsOnDate = new DateTimePicker();
+            NextExecution = new DateTimePicker();
             dateTimePicker1 = new DateTimePicker();
             comboBox3 = new ComboBox();
             comboBox2 = new ComboBox();
@@ -139,7 +138,7 @@
             AlertServiceMaster.SuspendLayout();
             AlertServiceMaster1.SuspendLayout();
             DBConfig.SuspendLayout();
-            EmailConfig.SuspendLayout();
+            EmailConfigStatus.SuspendLayout();
             SConfigClose.SuspendLayout();
             ServiceVariables.SuspendLayout();
             ServiceScheduler.SuspendLayout();
@@ -151,7 +150,7 @@
             AlertServiceMaster.AccessibleName = "Report";
             AlertServiceMaster.Controls.Add(AlertServiceMaster1);
             AlertServiceMaster.Controls.Add(DBConfig);
-            AlertServiceMaster.Controls.Add(EmailConfig);
+            AlertServiceMaster.Controls.Add(EmailConfigStatus);
             AlertServiceMaster.Controls.Add(SConfigClose);
             AlertServiceMaster.Controls.Add(ServiceVariables);
             AlertServiceMaster.Controls.Add(ServiceScheduler);
@@ -201,6 +200,7 @@
             AlertServiceMaster1.TabIndex = 6;
             AlertServiceMaster1.Text = "AlertServiceMaster";
             AlertServiceMaster1.UseVisualStyleBackColor = true;
+            AlertServiceMaster1.Click += AlertServiceMaster1_Click;
             // 
             // ASMTitle
             // 
@@ -625,33 +625,41 @@
             DBConfigConn.TabIndex = 0;
             DBConfigConn.Text = "Connection Name";
             // 
-            // EmailConfig
+            // EmailConfigStatus
             // 
-            EmailConfig.AccessibleName = "";
-            EmailConfig.Controls.Add(EmailConfirm);
-            EmailConfig.Controls.Add(IsUnActRadio);
-            EmailConfig.Controls.Add(IsActiveRadio);
-            EmailConfig.Controls.Add(PassConfig);
-            EmailConfig.Controls.Add(FromConfig);
-            EmailConfig.Controls.Add(PortConfig);
-            EmailConfig.Controls.Add(HostConf);
-            EmailConfig.Controls.Add(EConfigPort);
-            EmailConfig.Controls.Add(DescText);
-            EmailConfig.Controls.Add(TitleText);
-            EmailConfig.Controls.Add(RuleStatus);
-            EmailConfig.Controls.Add(Password);
-            EmailConfig.Controls.Add(FromEmailId);
-            EmailConfig.Controls.Add(Host);
-            EmailConfig.Controls.Add(RuleDesc);
-            EmailConfig.Controls.Add(RuleTitle);
-            EmailConfig.Location = new Point(4, 24);
-            EmailConfig.Name = "EmailConfig";
-            EmailConfig.Padding = new Padding(3);
-            EmailConfig.Size = new Size(659, 440);
-            EmailConfig.TabIndex = 0;
-            EmailConfig.Text = "EmailConfig";
-            EmailConfig.UseVisualStyleBackColor = true;
-            EmailConfig.Click += EmailConfig_Click;
+            EmailConfigStatus.AccessibleName = "";
+            EmailConfigStatus.Controls.Add(checkBox2);
+            EmailConfigStatus.Controls.Add(EmailConfirm);
+            EmailConfigStatus.Controls.Add(PassConfig);
+            EmailConfigStatus.Controls.Add(FromConfig);
+            EmailConfigStatus.Controls.Add(PortConfig);
+            EmailConfigStatus.Controls.Add(HostConf);
+            EmailConfigStatus.Controls.Add(EConfigPort);
+            EmailConfigStatus.Controls.Add(DescText);
+            EmailConfigStatus.Controls.Add(TitleText);
+            EmailConfigStatus.Controls.Add(RuleStatus);
+            EmailConfigStatus.Controls.Add(Password);
+            EmailConfigStatus.Controls.Add(FromEmailId);
+            EmailConfigStatus.Controls.Add(Host);
+            EmailConfigStatus.Controls.Add(RuleDesc);
+            EmailConfigStatus.Controls.Add(RuleTitle);
+            EmailConfigStatus.Location = new Point(4, 24);
+            EmailConfigStatus.Name = "EmailConfigStatus";
+            EmailConfigStatus.Padding = new Padding(3);
+            EmailConfigStatus.Size = new Size(659, 440);
+            EmailConfigStatus.TabIndex = 0;
+            EmailConfigStatus.Text = "EmailConfig";
+            EmailConfigStatus.UseVisualStyleBackColor = true;
+            EmailConfigStatus.Click += EmailConfig_Click;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(140, 335);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(15, 14);
+            checkBox2.TabIndex = 25;
+            checkBox2.UseVisualStyleBackColor = true;
             // 
             // EmailConfirm
             // 
@@ -662,30 +670,6 @@
             EmailConfirm.Text = "Confirm";
             EmailConfirm.UseVisualStyleBackColor = true;
             EmailConfirm.Click += EmailConfirm_Click;
-            // 
-            // IsUnActRadio
-            // 
-            IsUnActRadio.AutoSize = true;
-            IsUnActRadio.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            IsUnActRadio.Location = new Point(240, 334);
-            IsUnActRadio.Name = "IsUnActRadio";
-            IsUnActRadio.Size = new Size(76, 22);
-            IsUnActRadio.TabIndex = 23;
-            IsUnActRadio.TabStop = true;
-            IsUnActRadio.Text = "InActive";
-            IsUnActRadio.UseVisualStyleBackColor = true;
-            // 
-            // IsActiveRadio
-            // 
-            IsActiveRadio.AutoSize = true;
-            IsActiveRadio.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            IsActiveRadio.Location = new Point(140, 334);
-            IsActiveRadio.Name = "IsActiveRadio";
-            IsActiveRadio.Size = new Size(64, 22);
-            IsActiveRadio.TabIndex = 22;
-            IsActiveRadio.TabStop = true;
-            IsActiveRadio.Text = "Active";
-            IsActiveRadio.UseVisualStyleBackColor = true;
             // 
             // PassConfig
             // 
@@ -751,9 +735,9 @@
             RuleStatus.Font = new Font("Calibri", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             RuleStatus.Location = new Point(7, 334);
             RuleStatus.Name = "RuleStatus";
-            RuleStatus.Size = new Size(46, 18);
+            RuleStatus.Size = new Size(56, 18);
             RuleStatus.TabIndex = 6;
-            RuleStatus.Text = "Status";
+            RuleStatus.Text = "IsActive";
             // 
             // Password
             // 
@@ -1035,12 +1019,12 @@
             // ServiceScheduler
             // 
             ServiceScheduler.Controls.Add(button6);
-            ServiceScheduler.Controls.Add(dateTimePicker6);
-            ServiceScheduler.Controls.Add(dateTimePicker5);
+            ServiceScheduler.Controls.Add(DailyEndsOn);
+            ServiceScheduler.Controls.Add(DailyStartsOn);
             ServiceScheduler.Controls.Add(SchedularIsAct);
-            ServiceScheduler.Controls.Add(dateTimePicker4);
-            ServiceScheduler.Controls.Add(dateTimePicker3);
-            ServiceScheduler.Controls.Add(dateTimePicker2);
+            ServiceScheduler.Controls.Add(StartsFromDate);
+            ServiceScheduler.Controls.Add(EndsOnDate);
+            ServiceScheduler.Controls.Add(NextExecution);
             ServiceScheduler.Controls.Add(dateTimePicker1);
             ServiceScheduler.Controls.Add(comboBox3);
             ServiceScheduler.Controls.Add(comboBox2);
@@ -1071,21 +1055,21 @@
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
-            // dateTimePicker6
+            // DailyEndsOn
             // 
-            dateTimePicker6.Location = new Point(382, 293);
-            dateTimePicker6.Name = "dateTimePicker6";
-            dateTimePicker6.Size = new Size(224, 23);
-            dateTimePicker6.TabIndex = 29;
-            dateTimePicker6.ValueChanged += dateTimePicker6_ValueChanged;
+            DailyEndsOn.Location = new Point(382, 293);
+            DailyEndsOn.Name = "DailyEndsOn";
+            DailyEndsOn.Size = new Size(224, 23);
+            DailyEndsOn.TabIndex = 29;
+            DailyEndsOn.ValueChanged += dateTimePicker6_ValueChanged;
             // 
-            // dateTimePicker5
+            // DailyStartsOn
             // 
-            dateTimePicker5.Location = new Point(382, 209);
-            dateTimePicker5.Name = "dateTimePicker5";
-            dateTimePicker5.Size = new Size(224, 23);
-            dateTimePicker5.TabIndex = 28;
-            dateTimePicker5.ValueChanged += dateTimePicker5_ValueChanged;
+            DailyStartsOn.Location = new Point(382, 209);
+            DailyStartsOn.Name = "DailyStartsOn";
+            DailyStartsOn.Size = new Size(224, 23);
+            DailyStartsOn.TabIndex = 28;
+            DailyStartsOn.ValueChanged += dateTimePicker5_ValueChanged;
             // 
             // SchedularIsAct
             // 
@@ -1098,28 +1082,29 @@
             SchedularIsAct.Text = "IsActive";
             SchedularIsAct.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker4
+            // StartsFromDate
             // 
-            dateTimePicker4.Location = new Point(382, 45);
-            dateTimePicker4.Name = "dateTimePicker4";
-            dateTimePicker4.Size = new Size(224, 23);
-            dateTimePicker4.TabIndex = 13;
+            StartsFromDate.Location = new Point(382, 45);
+            StartsFromDate.Name = "StartsFromDate";
+            StartsFromDate.Size = new Size(224, 23);
+            StartsFromDate.TabIndex = 13;
+            StartsFromDate.ValueChanged += StartsFromDate_ValueChanged;
             // 
-            // dateTimePicker3
+            // EndsOnDate
             // 
-            dateTimePicker3.Location = new Point(382, 126);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(224, 23);
-            dateTimePicker3.TabIndex = 12;
-            dateTimePicker3.ValueChanged += dateTimePicker3_ValueChanged;
+            EndsOnDate.Location = new Point(382, 126);
+            EndsOnDate.Name = "EndsOnDate";
+            EndsOnDate.Size = new Size(224, 23);
+            EndsOnDate.TabIndex = 12;
+            EndsOnDate.ValueChanged += dateTimePicker3_ValueChanged;
             // 
-            // dateTimePicker2
+            // NextExecution
             // 
-            dateTimePicker2.Location = new Point(15, 293);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(224, 23);
-            dateTimePicker2.TabIndex = 11;
-            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            NextExecution.Location = new Point(16, 293);
+            NextExecution.Name = "NextExecution";
+            NextExecution.Size = new Size(224, 23);
+            NextExecution.TabIndex = 11;
+            NextExecution.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // dateTimePicker1
             // 
@@ -1279,8 +1264,8 @@
             AlertServiceMaster1.PerformLayout();
             DBConfig.ResumeLayout(false);
             DBConfig.PerformLayout();
-            EmailConfig.ResumeLayout(false);
-            EmailConfig.PerformLayout();
+            EmailConfigStatus.ResumeLayout(false);
+            EmailConfigStatus.PerformLayout();
             SConfigClose.ResumeLayout(false);
             SConfigClose.PerformLayout();
             ServiceVariables.ResumeLayout(false);
@@ -1294,7 +1279,7 @@
         #endregion
 
         private TabControl AlertServiceMaster;
-        private TabPage EmailConfig;
+        private TabPage EmailConfigStatus;
         private TabPage DBConfig;
         private TabPage SConfigClose;
         private TabPage ServiceVariables;
@@ -1327,8 +1312,6 @@
         private TextBox FromConfig;
         private TextBox PortConfig;
         private TextBox HostConf;
-        private RadioButton IsUnActRadio;
-        private RadioButton IsActiveRadio;
         private TextBox DBName;
         private TextBox UserName;
         private TextBox ServerName;
@@ -1354,12 +1337,12 @@
         private Label SchedularNextExc;
         private Label SchedularLastExec;
         private CheckBox SchedularIsAct;
-        private DateTimePicker dateTimePicker4;
-        private DateTimePicker dateTimePicker3;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker StartsFromDate;
+        private DateTimePicker EndsOnDate;
+        private DateTimePicker NextExecution;
         private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker6;
-        private DateTimePicker dateTimePicker5;
+        private DateTimePicker DailyEndsOn;
+        private DateTimePicker DailyStartsOn;
         private ComboBox SConfigType;
         private Button button3;
         private Button button4;
@@ -1403,5 +1386,6 @@
         private FileSystemWatcher fileSystemWatcher1;
         private Button button7;
         private CheckBox checkBox1;
+        private CheckBox checkBox2;
     }
 }

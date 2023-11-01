@@ -14,7 +14,8 @@ namespace PushNotification.Model
         public string Port { get; set; }
         public string From { get; set; }
         public string Password { get; set; }
-        public string status { get; set; }
+        public bool IsActive { get; set; }
+
 
     }
 

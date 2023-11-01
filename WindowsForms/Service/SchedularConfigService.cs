@@ -13,7 +13,7 @@ namespace PushNotification.Service
 {
     public class SchedularService : ISchedularConfig
     {
-        public void CreateSchedular(SchedularConfig schedularDTO)
+        public void CreateSchedular(SchedularConfigDTO schedularDTO)
         {
             string ConnectionService = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
             SqlConnection connection = new SqlConnection(ConnectionService);

@@ -84,18 +84,18 @@ namespace PushNotification
         }
         private void ServicesSettings_Load(object sender, EventArgs e)
         {
-            LoadData();
+           LoadData();
 
         }
         private void LoadData()
         {
-            if (dataGridView1.Columns["Active"] == null)
+           /* if (dataGridView1.Columns["Active"] == null)
             {
                 DataGridViewCheckBoxColumn activeColumn = new DataGridViewCheckBoxColumn();
                 activeColumn.Name = "Active";
                 activeColumn.HeaderText = "Active";
                 dataGridView1.Columns.Add(activeColumn);
-            }
+            }*/
             string ServiceConnection = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
             SqlConnection connection = new SqlConnection(ServiceConnection);
 
@@ -110,11 +110,12 @@ namespace PushNotification
             dataGridView1.DataSource = dataSet.Tables["AlertsServiceMaster"];
 
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+         /*   foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 bool isDeleted = Convert.ToInt32(row.Cells["IsDeleted"].Value) == 1;
                 row.Cells["Active"].Value = !isDeleted;
             }
+         */
         }
 
         private void ServicesEdit_Click(object sender, EventArgs e)

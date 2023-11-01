@@ -6,12 +6,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Microsoft.VisualBasic;
 using PushNotification.Interface;
 using PushNotification.Model;
 using PushNotification.Service;
@@ -24,7 +26,7 @@ namespace PushNotification
         private int recordId;
         private string SelectedFilePath;
         private string SelectedFileName;
-
+        private readonly IServiceSchedular schedularService;
         public Rule(int selectedId = 0)
         {
 
@@ -32,6 +34,7 @@ namespace PushNotification
             recordId = selectedId;
             PopulateFormData();
             this.StartPosition = FormStartPosition.CenterScreen;
+            schedularService = new ServiceSchedularService();
 
         }
 
@@ -89,8 +92,8 @@ namespace PushNotification
 
         public void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
+            NextExecution.Format = DateTimePickerFormat.Custom;
+            NextExecution.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
         }
 
         public void DBConfigSave_Click(object sender, EventArgs e)
@@ -158,44 +161,25 @@ namespace PushNotification
 
         public void ServiceScheduler_Click(object sender, EventArgs e)
         {
-            PopulateServiceNameDropdown();
-        }
-        private void PopulateServiceNameDropdown()
-        {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
-            {
-                connection.Open();
-                string query = "SELECT Title FROM AlertServiceMaster";
 
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            comboBox2.Items.Add(reader["Title"].ToString());
-                        }
-                    }
-                }
-            }
         }
 
         public void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker3.Format = DateTimePickerFormat.Custom;
-            dateTimePicker3.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
+            EndsOnDate.Format = DateTimePickerFormat.Custom;
+            EndsOnDate.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
         }
 
         public void dateTimePicker5_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker5.Format = DateTimePickerFormat.Custom;
-            dateTimePicker5.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
+            DailyStartsOn.Format = DateTimePickerFormat.Custom;
+            DailyStartsOn.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
         }
 
         public void dateTimePicker6_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker6.Format = DateTimePickerFormat.Custom;
-            dateTimePicker6.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
+            DailyEndsOn.Format = DateTimePickerFormat.Custom;
+            DailyEndsOn.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
         }
 
         public void DBConfig_Click(object sender, EventArgs e)
@@ -224,9 +208,11 @@ namespace PushNotification
                 Port = PortConfig.Text.ToString(),
                 From = FromConfig.Text.ToString(),
                 Password = PassConfig.Text.ToString(),
+
             };
+            bool isActive = checkBox2.Checked;
             EmailConfigService emailConfigService = new EmailConfigService();
-            emailConfigService.InsertEmailConfig(emailConfig);
+            emailConfigService.InsertEmailConfig(emailConfig, isActive);
 
         }
 
@@ -249,7 +235,7 @@ namespace PushNotification
         {
             try
             {
-                SchedularConfig schedularDTO = new SchedularConfig
+                Model.SchedularConfigDTO schedularDTO = new Model.SchedularConfigDTO
                 {
                     SchedularName = SchedulerName.Text,
                     SchedularCode = SchedularCodeTxt.Text,
@@ -258,14 +244,14 @@ namespace PushNotification
                     FrequencyInMins = Convert.ToInt32(SchedularFreq.Text),
                 };
 
-                SchedularService schedularService = new SchedularService();
+                Service.SchedularService schedularService = new Service.SchedularService();
                 schedularService.CreateSchedular(schedularDTO);
 
                 MessageBox.Show("Data Saved Successfully");
             }
             catch (Exception ex)
             {
-                // Handle and log the exception, or show an error message
+
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
 
@@ -332,14 +318,14 @@ namespace PushNotification
 
                     if (recordId > 0)
                     {
-                        // Update the existing record
+
                         command.Parameters.AddWithValue("@ServiceId", recordId);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Data Updated");
                     }
                     else
                     {
-                        // This is an insert operation
+
                         command.ExecuteNonQuery();
                         MessageBox.Show("Data Saved");
                     }
@@ -361,7 +347,7 @@ namespace PushNotification
                 }
             }
         }
-        private void FillFormFromDatabase()
+        private void FillFormFromDatabase(int recordId)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
             {
@@ -369,7 +355,7 @@ namespace PushNotification
 
                 using (SqlCommand command = new SqlCommand("SELECT * FROM DBConnectionMaster WHERE DBConnId = @DBConnId", connection))
                 {
-                    command.Parameters.Add(new SqlParameter("@DBConnId", SqlDbType.Int)).Value = 1;
+                    command.Parameters.Add(new SqlParameter("@DBConnId", SqlDbType.Int)).Value = recordId;
 
                     SqlDataReader reader = command.ExecuteReader();
 
@@ -380,15 +366,17 @@ namespace PushNotification
                         UserName.Text = reader["UserName"].ToString();
                         Passwrd.Text = reader["Passwrd"].ToString();
                         DBName.Text = reader["DBName"].ToString();
-
-                        // Set other controls as needed
                     }
                 }
             }
         }
-        private void DBConfigTab_Load(object sender, EventArgs e)
+        private void EditRecord(int recordId)
         {
-            FillFormFromDatabase();
+            // Set your form in edit mode
+            FillFormFromDatabase(recordId);
+
+            // Show the form to the user
+            ShowDialog();
         }
         private void PopulateServiceVariablesData()
         {
@@ -431,7 +419,6 @@ namespace PushNotification
                     {
                         if (reader.Read())
                         {
-                            // Populate the form's controls with data from the database
                             ASMTitle.Text = reader["Title"].ToString();
                             ASMType.Text = reader["AlertType"].ToString();
                             ASMAttachment.Text = reader["AttachmentType"].ToString();
@@ -459,7 +446,6 @@ namespace PushNotification
             {
                 connection.Open();
 
-                // Check for duplicate Connection Name
                 using (SqlCommand checkCommand = new SqlCommand("SELECT COUNT(*) FROM DBConnectionMaster WHERE ConnName = @ConnName AND DBConnId != @DBConnId", connection))
                 {
                     checkCommand.Parameters.Add(new SqlParameter("@ConnName", SqlDbType.VarChar, 100)).Value = ConName.Text;
@@ -508,7 +494,7 @@ namespace PushNotification
                 using (SqlCommand checkCommand = new SqlCommand("SELECT COUNT(*) FROM AlertsServiceVariables WHERE VarInstance = @VarInstance AND ServiceId = @ServiceId", connection))
                 {
                     checkCommand.Parameters.Add(new SqlParameter("@VarInstance", SqlDbType.VarChar, 100)).Value = VarInstanceTextBox.Text;
-                    checkCommand.Parameters.Add(new SqlParameter("@ServiceId", SqlDbType.Int)).Value = 1; // Provide the correct ServiceId
+                    checkCommand.Parameters.Add(new SqlParameter("@ServiceId", SqlDbType.Int)).Value = 1;
 
                     int count = (int)checkCommand.ExecuteScalar();
 
@@ -522,14 +508,14 @@ namespace PushNotification
                 using (SqlCommand command = new SqlCommand("AlertsServiceVariables_CRUD", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add(new SqlParameter("@VariableId", SqlDbType.Int)).Value = 0; // Set this based on your requirements
-                    command.Parameters.Add(new SqlParameter("@ServiceId", SqlDbType.Int)).Value = 2; // Provide the correct ServiceId
+                    command.Parameters.Add(new SqlParameter("@VariableId", SqlDbType.Int)).Value = 0;
+                    command.Parameters.Add(new SqlParameter("@ServiceId", SqlDbType.Int)).Value = 2;
                     command.Parameters.Add(new SqlParameter("@VarInstance", SqlDbType.VarChar, 100)).Value = VarInstanceTextBox.Text;
                     command.Parameters.Add(new SqlParameter("@VarValue", SqlDbType.VarChar, 100)).Value = VarValueTextBox.Text;
                     command.Parameters.Add(new SqlParameter("@VarType", SqlDbType.VarChar, 50)).Value = VarTypeTextBox.Text;
-                    command.Parameters.AddWithValue("@IsActive", 1); // You may need to adjust this based on your requirements
-                    command.Parameters.AddWithValue("@IsDeleted", 0); // You may need to adjust this based on your requirements
-                    command.Parameters.Add(new SqlParameter("@ActionUser", SqlDbType.Int)).Value = 1; // You may need to adjust this based on your requirements
+                    command.Parameters.AddWithValue("@IsActive", 1);
+                    command.Parameters.AddWithValue("@IsDeleted", 0);
+                    command.Parameters.Add(new SqlParameter("@ActionUser", SqlDbType.Int)).Value = 1;
 
                     command.ExecuteNonQuery();
                     MessageBox.Show(5 > 0 ? "Data Updated" : "Data Saved");
@@ -539,7 +525,47 @@ namespace PushNotification
 
         private void button6_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string dateFormat = "HH:mm:ss MMMM dd, yyyy";
 
+                ServiceSchedularDTO schedularDTO = new ServiceSchedularDTO
+                {
+
+                    ServiceId = 2,
+                    SchedularId = 1,
+                    LastExecutionTime = DateTime.ParseExact(dateTimePicker1.Text, dateFormat, CultureInfo.InvariantCulture),
+                    NextExecutionTime = DateTime.ParseExact(NextExecution.Text, dateFormat, CultureInfo.InvariantCulture),
+                    StartsFrom = DateTime.ParseExact(StartsFromDate.Text, dateFormat, CultureInfo.InvariantCulture),
+                    EndsOn = DateTime.ParseExact(EndsOnDate.Text, dateFormat, CultureInfo.InvariantCulture),
+                    DailyStartOn = DateTime.ParseExact(DailyStartsOn.Text, dateFormat, CultureInfo.InvariantCulture),
+                    DailyEndsOn = DateTime.ParseExact(DailyEndsOn.Text, dateFormat, CultureInfo.InvariantCulture),
+
+                    IsActive = 1,
+                    IsDeleted = 0,
+                    ActionUser = 0
+
+                };
+                ServiceSchedularService schedularService = new ServiceSchedularService();
+                schedularService.CreateSchedular(schedularDTO);
+                MessageBox.Show("Data Saved Successfully");
+            }
+            catch (Exception ex)
+            {
+                // Handle and log the exception, or show an error message
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
+        private void AlertServiceMaster1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void StartsFromDate_ValueChanged(object sender, EventArgs e)
+        {
+            StartsFromDate.Format = DateTimePickerFormat.Custom;
+            StartsFromDate.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
         }
     }
 }

@@ -9,6 +9,6 @@ namespace PushNotification.Interface
 {
     public interface IEmailConfig
     {
-        void InsertEmailConfig(EmailConfigDTO emailConfig);
+        void InsertEmailConfig(EmailConfigDTO emailConfig, bool isActive);
     }
 }
