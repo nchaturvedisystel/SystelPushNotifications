@@ -136,3 +136,37 @@ WHERE T0."U_EmailSent"=''N'' AND T0."DocType"=''I'' AND T0.DocCur=''INR''',
 'This email is not monitered. Please contact on santosh@khemanigroup.com or sandip@khemanigroup.com in case of query.',
 1, 1, 1, '2023-09-27 11:58:35.083',	NULL, 1, 0, 'SYSTEM','2023-09-27 11:58:35.083',NULL, '2023-09-27 11:58:35.083')
 */
+
+
+
+
+
+
+
+
+SELECT TOP 1(T0.DocEntry), T0.DocNum, T0.CardCode,ISNULL(T1.E_Mail,'noreply@khemanigroup.com') AS 'Email' 
+FROM OINV T0 LEFT JOIN OCRD T1 ON T0.CardCode = T1.CardCode    WHERE T0.U_EmailSent = 'N' AND T0.DocType = 'I'    AND T0.DocCur = 'INR' AND T0.CardCode NOT IN ('C0000276','C0000212')
+
+
+/*
+(SELECT Top 1(T0.DocEntry),T0.DocNum,T0.CardCode,T0.CardName,ISNULL(T1.E_Mail,'noreply@khemanigroup.com') AS 'Email'
+FROM ORIN T0
+LEFT JOIN OCRD T1 ON T0.CardCode=T1.CardCode
+WHERE T0.U_EmailSent=''N'' AND T0.DocType=''I'' AND T0.DocCur=''INR''')
+
+
+
+DataSourceDef
+'SELECT Top 1(T0.DocEntry),T0.DocNum,T0.CardCode,T0.CardName, ISNULL(T1.E_Mail,''noreply@khemanigroup.com'') AS ''Email''
+FROM ORPC T0 LEFT JOIN OCRD T1 ON T0.CardCode=T1.CardCode  WHERE T0.U_EmailSent=''N'' AND T0.DocType=''S'' AND T0.DocCur=''INR'''
+
+
+
+UPDATE AlertsServiceMaster
+SET DataSourceDef = 'SELECT TOP 1 T0.DocEntry, T0.DocNum, T0.CardCode, ISNULL(T1.E_Mail, ''noreply@khemanigroup.com'') AS Email
+FROM OVPM T0
+LEFT JOIN OCRD T1 ON T0.CardCode = T1.CardCode
+LEFT JOIN JDT1 T2 ON T0.TransId = T2.TransId
+WHERE T2.U_BankDate IS NOT NULL AND T0.DocType IN (''C'', ''S'') AND T0.U_EmailSent = ''N'''
+WHERE ServiceId = 2;
+*/

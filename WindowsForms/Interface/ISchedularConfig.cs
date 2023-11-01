@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +7,9 @@ using PushNotification.Model;
 
 namespace PushNotification.Interface
 {
-    public interface IDBConfig
+    public interface ISchedularConfig
     {
-        ConfigConnectionList GetDBConfigConnectionDTO();
+        // void CreateSchedular(ServiceSchedularDTO schedularDTO);
+        void CreateSchedular(SchedularConfigDTO schedularConfig);
     }
 }
