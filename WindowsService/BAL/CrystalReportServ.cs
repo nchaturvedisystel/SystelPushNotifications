@@ -29,7 +29,7 @@ namespace NotificationService
                 {
                     string inputParamName = keyValue.Key;
                     string inputParamValue = keyValue.Value;
-                    rpt.SetParameterValue(0, inputParamValue);/*inputParamName*/
+                    rpt.SetParameterValue(0, inputParamValue);
                 }
                 rpt.ExportToDisk(ExportFormatType.PortableDocFormat, pdfPath);
             }

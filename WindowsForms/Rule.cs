@@ -293,9 +293,23 @@ namespace PushNotification
                     command.Parameters.Add(new SqlParameter("@Title", SqlDbType.VarChar, 100)).Value = ASMTitle.Text;
                     command.Parameters.AddWithValue("@SDesc", "This is New Email");
                     command.Parameters.AddWithValue("@HasAttachment", 1);
-                    command.Parameters.AddWithValue("@DBConnid", 1);
-                    command.Parameters.AddWithValue("@AlertConfigId", 1);
-                    command.Parameters.AddWithValue("@SchedularId", 1);
+
+                    if (recordId > 0)
+                    {
+                        // If it's an update, don't change DBConnid, AlertConfigId, and SchedularId
+                        command.Parameters.AddWithValue("@DBConnid", GetExistingValue(connection, "DBConnid", recordId));
+                        command.Parameters.AddWithValue("@AlertConfigId", GetExistingValue(connection, "AlertConfigId", recordId));
+                        command.Parameters.AddWithValue("@SchedularId", GetExistingValue(connection, "SchedularId", recordId));
+                    }
+                    else
+                    {
+                        // If it's a new record, get the latest identity values
+                        command.Parameters.AddWithValue("@DBConnid", GetLatestIdentityValue(connection, "DBConnid"));
+                        command.Parameters.AddWithValue("@AlertConfigId", GetLatestIdentityValue(connection, "AlertConfigId"));
+                        command.Parameters.AddWithValue("@SchedularId", GetLatestIdentityValue(connection, "SchedularId"));
+                    }
+
+                    // Rest of the code remains the same...
                     command.Parameters.AddWithValue("@LastExecutedOn", 1);
                     command.Parameters.AddWithValue("@NextExecutionTime", 1);
                     command.Parameters.AddWithValue("@IsActive", 1);
@@ -316,24 +330,58 @@ namespace PushNotification
                     command.Parameters.Add(new SqlParameter("@PostSendDataSourceDef", SqlDbType.VarChar, 100)).Value = ASMPostSrcDef.Text;
                     command.Parameters.Add(new SqlParameter("@DataSourceDef", SqlDbType.VarChar, 100)).Value = ASMDatasourceDef.Text;
 
+             
+
                     if (recordId > 0)
                     {
-
+                        // Update an existing record...
                         command.Parameters.AddWithValue("@ServiceId", recordId);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Data Updated");
                     }
                     else
                     {
-
+                        // Insert a new record...
                         command.ExecuteNonQuery();
-                        MessageBox.Show("Data Saved");
+                        int newServiceId = GetLatestIdentityValue(connection, "ServiceId");
+                        MessageBox.Show("Data Saved with ServiceId: " + newServiceId);
                     }
                 }
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private int GetExistingValue(SqlConnection connection, string columnName, int serviceId)
+        {
+            // Fetch the existing value from the database
+            using (SqlCommand command = new SqlCommand($"SELECT {columnName} FROM AlertsServiceMaster WHERE ServiceId = @ServiceId", connection))
+            {
+                command.Parameters.Add(new SqlParameter("@ServiceId", SqlDbType.Int)).Value = serviceId;
+                object result = command.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+                return 1; // Default value if no records exist
+            }
+        }
+
+        private int GetLatestIdentityValue(SqlConnection connection, string columnName)
+        {
+            // Execute a query to get the latest identity value
+            using (SqlCommand command = new SqlCommand($"SELECT MAX({columnName}) FROM AlertsServiceMaster", connection))
+            {
+                object result = command.ExecuteScalar();
+                if (result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result) + 1; // Increment the latest identity value
+                }
+                return 1; // Default value if no records exist
+            }
+        }
+
+
         public void ASMBrowse_Click_1(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -472,10 +520,10 @@ namespace PushNotification
                     command.Parameters.AddWithValue("@IsActive", 1);
                     command.Parameters.AddWithValue("@IsDeleted", 0);
                     command.Parameters.Add(new SqlParameter("@ActionUser", SqlDbType.Int)).Value = 1;
-
                     command.ExecuteNonQuery();
                     MessageBox.Show(recordId > 0 ? "Data Updated" : "Data Saved");
                 }
+
             }
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -485,7 +533,7 @@ namespace PushNotification
         {
 
         }
-
+       
         private void button5_Click(object sender, EventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))

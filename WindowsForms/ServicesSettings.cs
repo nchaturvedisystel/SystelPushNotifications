@@ -110,12 +110,6 @@ namespace PushNotification
             dataGridView1.DataSource = dataSet.Tables["AlertsServiceMaster"];
 
 
-         /*   foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                bool isDeleted = Convert.ToInt32(row.Cells["IsDeleted"].Value) == 1;
-                row.Cells["Active"].Value = !isDeleted;
-            }
-         */
         }
 
         private void ServicesEdit_Click(object sender, EventArgs e)
@@ -129,6 +123,7 @@ namespace PushNotification
                     LoadData();
                 };
                 editForm.ShowDialog();
+
             }
             else
             {
