@@ -32,7 +32,12 @@ namespace PushNotification
 
             InitializeComponent();
             recordId = selectedId;
+            PopulateDBConfig();
             PopulateFormData();
+            PopulateEmailConfig();
+            PopulateAlertSchedular();
+            PopulateServiceVariablesData();
+            PopulateServiceSchedular();
             this.StartPosition = FormStartPosition.CenterScreen;
             schedularService = new ServiceSchedularService();
 
@@ -329,9 +334,6 @@ namespace PushNotification
                     command.Parameters.Add(new SqlParameter("@OutputFileName", SqlDbType.VarChar, 100)).Value = ASMOutputFileName.Text;
                     command.Parameters.Add(new SqlParameter("@PostSendDataSourceDef", SqlDbType.VarChar, 100)).Value = ASMPostSrcDef.Text;
                     command.Parameters.Add(new SqlParameter("@DataSourceDef", SqlDbType.VarChar, 100)).Value = ASMDatasourceDef.Text;
-
-             
-
                     if (recordId > 0)
                     {
                         // Update an existing record...
@@ -395,47 +397,17 @@ namespace PushNotification
                 }
             }
         }
-        private void FillFormFromDatabase(int recordId)
-        {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
-            {
-                connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM DBConnectionMaster WHERE DBConnId = @DBConnId", connection))
-                {
-                    command.Parameters.Add(new SqlParameter("@DBConnId", SqlDbType.Int)).Value = recordId;
-
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        ConName.Text = reader["ConnName"].ToString();
-                        ServerName.Text = reader["ServerName"].ToString();
-                        UserName.Text = reader["UserName"].ToString();
-                        Passwrd.Text = reader["Passwrd"].ToString();
-                        DBName.Text = reader["DBName"].ToString();
-                    }
-                }
-            }
-        }
-        private void EditRecord(int recordId)
-        {
-            // Set your form in edit mode
-            FillFormFromDatabase(recordId);
-
-            // Show the form to the user
-            ShowDialog();
-        }
         private void PopulateServiceVariablesData()
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
             {
                 connection.Open();
-                string query = "SELECT VarInstance, VarValue, VarType FROM AlertsServiceVariables WHERE VariableId = @VariableId";
+                string query = "SELECT VarInstance, VarValue, VarType FROM AlertsServiceVariables WHERE VariableId = @RecordID";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    cmd.Parameters.Add(new SqlParameter("@VariableId", SqlDbType.Int)).Value = 1;
+                    cmd.Parameters.Add(new SqlParameter("@RecordID", SqlDbType.Int)).Value = recordId;
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -446,6 +418,32 @@ namespace PushNotification
                             VarValueTextBox.Text = reader["VarValue"].ToString();
                             VarTypeTextBox.Text = reader["VarType"].ToString();
 
+                            reader.Close();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void PopulateServiceSchedular()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT LastExecutionTime,NextExecutionTime,StartsFrom,EndsOn,DailyStartOn,DailyEndsOn from AlertsServiceSchedular where ServiceId=@RecordId";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@RecordID", SqlDbType.Int)).Value = recordId;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            dateTimePicker1.Text = reader["LastExecutionTime"].ToString();
+                            NextExecution.Text = reader["NextExecutionTime"].ToString();
+                            StartsFromDate.Text = reader["StartsFrom"].ToString();
+                            EndsOnDate.Text = reader["EndsOn"].ToString();
+                            DailyStartsOn.Text = reader["DailyStartOn"].ToString();
+                            DailyEndsOn.Text = reader["DailyEndsOn"].ToString();
                             reader.Close();
                         }
                     }
@@ -487,7 +485,83 @@ namespace PushNotification
                 }
             }
         }
+        public void PopulateDBConfig()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT ConnName,ServerName, UserName,Passwrd, DBName from DBConnectionMaster where DBConnId = @RecordID";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@RecordID", SqlDbType.Int)).Value = recordId;
 
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ConName.Text = reader["ConnName"].ToString();
+                            ServerName.Text = reader["ServerName"].ToString();
+                            UserName.Text = reader["UserName"].ToString();
+                            DBName.Text = reader["DBName"].ToString();
+                            Passwrd.Text = reader["Passwrd"].ToString();
+                            reader.Close();
+
+                        }
+                    }
+                }
+            }
+        }
+        public void PopulateEmailConfig()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
+            {
+                connection.Open();
+                string query = "Select IName,IDesc,IHost,IPort,IFrom,IPassword from EmailConfig where EmailConfigId = @RecordId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@RecordId",SqlDbType.Int)).Value = recordId;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if(reader.Read())
+                        {
+                            TitleText.Text = reader["IName"].ToString();
+                            DescText.Text= reader["IDesc"].ToString() ;
+                            HostConf.Text = reader["IHost"].ToString();
+                            PortConfig.Text = reader["IPort"].ToString();
+                            FromConfig.Text = reader["IFrom"].ToString();
+                            PassConfig.Text = reader["IPassword"].ToString();
+                            reader.Close();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void PopulateAlertSchedular()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT IName,ICode,IDesc,FrequencyInMinutes,SchedularType from AlertsSchedular where SchedularId=@RecordId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@RecordID", SqlDbType.Int)).Value = recordId;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            SchedulerName.Text = reader["IName"].ToString();
+                            SchedularCodeTxt.Text = reader["ICode"].ToString();
+                            SchedularDescText.Text = reader["IDesc"].ToString();
+                            SchedularFreq.Text = reader["FrequencyInMinutes"].ToString();
+                            SConfigType.Text = reader["SchedularType"].ToString();
+                            reader.Close();
+                        }
+                    }
+                }
+            }
+
+        }
         private void button7_Click(object sender, EventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
@@ -533,7 +607,7 @@ namespace PushNotification
         {
 
         }
-       
+
         private void button5_Click(object sender, EventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString))
@@ -614,6 +688,11 @@ namespace PushNotification
         {
             StartsFromDate.Format = DateTimePickerFormat.Custom;
             StartsFromDate.CustomFormat = "hh:mm:ss MMMM dd, yyyy";
+        }
+
+        private void Passwrd_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -57,18 +57,14 @@ namespace PushNotification
                         cmd.ExecuteNonQuery();
                     }
                 }
-
             }
             LoadData();
-
         }
 
         private void SMTPCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -85,17 +81,9 @@ namespace PushNotification
         private void ServicesSettings_Load(object sender, EventArgs e)
         {
            LoadData();
-
         }
         private void LoadData()
         {
-           /* if (dataGridView1.Columns["Active"] == null)
-            {
-                DataGridViewCheckBoxColumn activeColumn = new DataGridViewCheckBoxColumn();
-                activeColumn.Name = "Active";
-                activeColumn.HeaderText = "Active";
-                dataGridView1.Columns.Add(activeColumn);
-            }*/
             string ServiceConnection = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
             SqlConnection connection = new SqlConnection(ServiceConnection);
 
@@ -108,6 +96,16 @@ namespace PushNotification
             adapter.Fill(dataSet, "AlertsServiceMaster");
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = dataSet.Tables["AlertsServiceMaster"];
+            //--this is for DBconfig
+            DataSet dataset2 = new DataSet();
+            adapter.Fill(dataset2, "DBConnectionMaster");
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = dataset2.Tables["DBConnectionMaster"];
+            //--this is for Schedular
+            DataSet dataset3 = new DataSet();
+            adapter.Fill(dataset3, "AlertsSchedular");
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = dataset3.Tables["AlertsSchedular"];
 
 
         }
@@ -116,7 +114,7 @@ namespace PushNotification
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                int selectedId = (int)dataGridView1.SelectedRows[0].Cells["ServiceId"].Value; 
+                int selectedId = (int)dataGridView1.SelectedRows[0].Cells["ServiceId"].Value;
                 Rule editForm = new Rule(selectedId);
                 editForm.FormClosed += (s, args) => 
                 {
@@ -131,6 +129,7 @@ namespace PushNotification
             }
 
         }
+     
 
         private void ServiceDelete_Click(object sender, EventArgs e)
         {
