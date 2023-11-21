@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
-using System.Configuration;
 using NotificationService.BAL;
 using NotificationService.Common;
-using NotificationService;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
 using Systel.Notification.BAL;
 using MyFirstService.Common;
+using System.Configuration;
 
 namespace MyFirstService
 {
@@ -81,7 +71,7 @@ namespace MyFirstService
 
         public void OnServiceStart()
         {
-             //string Passwrd = encryptDecryptService.EncryptValue("@dmin@1234");
+             string Passwrd = encryptDecryptService.EncryptValue("P@ssw0rd#3");
             try
             {
                 logging.LogInfo("Get Service Data Process Start " + DateTime.Now);

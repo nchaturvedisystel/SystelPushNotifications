@@ -36,6 +36,7 @@ namespace NotificationService
             catch (Exception ex)
             {
                 logging.LogError("NotificationService.CrystalReportServ/GeneratePDFReport : " + ex.Message);
+                Environment.Exit(1);
                 throw ex;
             }
         }
