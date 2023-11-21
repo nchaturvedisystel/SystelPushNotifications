@@ -543,9 +543,11 @@
             Passwrd.Name = "Passwrd";
             Passwrd.Size = new Size(265, 26);
             Passwrd.TabIndex = 19;
+            Passwrd.TextChanged += Passwrd_TextChanged;
             // 
             // DBName
             // 
+            DBName.ForeColor = Color.Black;
             DBName.Location = new Point(146, 127);
             DBName.Name = "DBName";
             DBName.Size = new Size(265, 26);
@@ -903,6 +905,7 @@
             // 
             SchedularCodeTxt.ForeColor = SystemColors.InactiveCaptionText;
             SchedularCodeTxt.Location = new Point(175, 72);
+            SchedularCodeTxt.Multiline = true;
             SchedularCodeTxt.Name = "SchedularCodeTxt";
             SchedularCodeTxt.Size = new Size(251, 26);
             SchedularCodeTxt.TabIndex = 2;
